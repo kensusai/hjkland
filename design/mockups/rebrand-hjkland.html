@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>HJKLAND — ホーム(リブランド案: テーマパーク)</title>
+    <style>
+      /* == デザイントークン(hjkland) ===================================== */
+      :root {
+        --bg-base: #bfe6f7;
+        --bg-surface: #fffdf4;
+        --bg-raised: #fff3d6;
+        --border-ink: #2b3a4a;
+        --text-primary: #253244;
+        --text-secondary: #5b6b7d;
+        --text-faint: #93a2b3;
+        --coaster-red: #ff5a5a;
+        --coaster-red-dark: #c22f3d;
+        --pop-yellow: #ffd23f;
+        --pop-green: #4fd06b;
+        --pop-purple: #9a6bff;
+        --sky-deep: #8fd0ee;
+        --font-ui:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
+          "Noto Sans JP", sans-serif;
+        --font-mono:
+          ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
+        --fs-sm: 13px;
+        --fs-md: 16px;
+        --fs-lg: 19px;
+        --fs-xl: 27px;
+        --fs-hero: 40px;
+        --drop: 6px 6px 0 rgba(43, 58, 74, 0.35);
+        --drop-sm: 3px 3px 0 rgba(43, 58, 74, 0.35);
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body {
+        background:
+          radial-gradient(700px 300px at 80% -6%, #fff8d9, transparent 65%),
+          linear-gradient(180deg, var(--sky-deep), var(--bg-base) 55%);
+        color: var(--text-primary);
+        font-family: var(--font-ui);
+        min-height: 100vh;
+      }
+      .frame { max-width: 1440px; margin: 0 auto; }
+      .panel { background: var(--bg-surface); border: 3px solid var(--border-ink); box-shadow: var(--drop); border-radius: 14px; }
+      .header { display: flex; justify-content: space-between; align-items: center; padding: 18px 48px; }
+      .logo { display: flex; align-items: center; gap: 14px; }
+      .gate {
+        display: flex; align-items: center; gap: 10px; padding: 8px 20px;
+        background: var(--coaster-red); color: #fff; border: 3px solid var(--border-ink);
+        border-radius: 999px; box-shadow: var(--drop-sm);
+        font-family: var(--font-mono); font-weight: 900; font-size: var(--fs-xl); letter-spacing: 0.1em;
+      }
+      .gate .balloon { font-size: 20px; }
+      .logo-sub { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.28em; color: var(--text-secondary); }
+      .hud { display: flex; gap: 14px; font-family: var(--font-mono); }
+      .hud-box { display: flex; align-items: center; gap: 10px; padding: 10px 18px; background: var(--bg-surface); border: 3px solid var(--border-ink); border-radius: 12px; box-shadow: var(--drop-sm); }
+      .hud-label { font-size: 11px; letter-spacing: 0.22em; color: var(--text-faint); }
+      .hud-value { font-size: var(--fs-lg); font-weight: 900; }
+      .passport { color: var(--pop-purple); }
+      .visits { color: var(--coaster-red); }
+      /* Hero: park entrance */
+      .hero { margin: 20px 48px 28px; padding: 36px 40px; position: relative; overflow: hidden; display: flex; gap: 36px; align-items: center; }
+      .cloud { position: absolute; background: #fff; border-radius: 999px; opacity: 0.9; }
+      .cloud.c1 { top: 18px; right: 80px; width: 90px; height: 26px; }
+      .cloud.c2 { top: 44px; right: 150px; width: 60px; height: 20px; }
+      .ferris { position: absolute; right: 40px; bottom: -30px; width: 150px; height: 150px; border: 6px solid var(--pop-purple); border-radius: 50%; opacity: 0.35; }
+      .ferris::after { content: ""; position: absolute; inset: 28px; border: 6px dotted var(--coaster-red); border-radius: 50%; }
+      /* Mascot: balloon cat */
+      .mascot { width: 150px; flex: none; text-align: center; }
+      .sprite { width: 110px; height: 128px; margin: 0 auto; position: relative; }
+      .px { position: absolute; }
+      .sprite .balloon-s { left: 76px; top: 0; width: 26px; height: 30px; background: var(--coaster-red); border-radius: 50%; }
+      .sprite .balloon-str { left: 88px; top: 30px; width: 2px; height: 34px; background: var(--border-ink); }
+      .sprite .ear-l { left: 18px; top: 26px; width: 14px; height: 14px; background: #ffb84d; clip-path: polygon(0 100%, 50% 0, 100% 100%); }
+      .sprite .ear-r { left: 58px; top: 26px; width: 14px; height: 14px; background: #ffb84d; clip-path: polygon(0 100%, 50% 0, 100% 100%); }
+      .sprite .head { left: 14px; top: 38px; width: 62px; height: 44px; background: #ffb84d; border-radius: 10px; }
+      .sprite .eye-l { left: 30px; top: 52px; width: 7px; height: 9px; background: #253244; border-radius: 3px; }
+      .sprite .eye-r { left: 54px; top: 52px; width: 7px; height: 9px; background: #253244; border-radius: 3px; }
+      .sprite .mouth { left: 42px; top: 66px; width: 8px; height: 5px; background: #c22f3d; border-radius: 0 0 4px 4px; }
+      .sprite .body { left: 22px; top: 82px; width: 46px; height: 34px; background: #ffd9a1; border-radius: 8px; }
+      .sprite .paw { left: 64px; top: 60px; width: 12px; height: 12px; background: #ffb84d; border-radius: 4px; }
+      .mascot-name { margin-top: 10px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.22em; color: var(--text-secondary); }
+      .speech { background: #fff; border: 3px solid var(--border-ink); border-radius: 12px; padding: 14px 20px; font-weight: 800; font-size: var(--fs-md); box-shadow: var(--drop-sm); display: inline-block; margin-bottom: 18px; }
+      .speech .accent { color: var(--coaster-red-dark); }
+      .next-label { font-family: var(--font-mono); font-size: var(--fs-sm); letter-spacing: 0.28em; color: var(--pop-green); margin-bottom: 8px; font-weight: 900; }
+      .next-title { font-size: var(--fs-hero); font-weight: 900; margin-bottom: 22px; text-shadow: 3px 3px 0 rgba(255, 255, 255, 0.8); }
+      .cta {
+        display: inline-flex; align-items: center; gap: 14px;
+        background: var(--coaster-red); color: #fff; border: 3px solid var(--border-ink);
+        border-radius: 999px; padding: 16px 36px;
+        font-size: var(--fs-lg); font-weight: 900; letter-spacing: 0.14em;
+        box-shadow: 0 6px 0 var(--coaster-red-dark), var(--drop-sm); cursor: pointer;
+      }
+      .cta-key { font-family: var(--font-mono); font-size: 12px; background: rgba(0, 0, 0, 0.25); padding: 3px 10px; border-radius: 6px; }
+      /* Park map */
+      .park { margin: 0 48px 32px; padding: 30px 36px; }
+      .park-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 22px; font-family: var(--font-mono); }
+      .park-title { font-size: var(--fs-lg); font-weight: 900; letter-spacing: 0.18em; }
+      .park-note { font-size: var(--fs-sm); color: var(--text-faint); }
+      .park-row { display: flex; align-items: center; gap: 18px; margin-bottom: 20px; }
+      .area-card { width: 190px; flex: none; text-align: center; padding: 10px 0; border: 3px solid var(--border-ink); border-radius: 12px; font-family: var(--font-mono); font-weight: 900; font-size: var(--fs-sm); box-shadow: var(--drop-sm); }
+      .area-card.a1 { background: var(--pop-yellow); }
+      .area-card.a7 { background: var(--pop-purple); color: #fff; }
+      .area-card small { display: block; font-weight: 700; font-size: 12px; opacity: 0.75; }
+      .rides { display: flex; gap: 10px; flex-wrap: wrap; }
+      .ride-cell { display: flex; flex-direction: column; align-items: center; }
+      .ride { width: 46px; height: 46px; display: grid; place-items: center; font-family: var(--font-mono); font-weight: 900; border: 3px solid var(--border-ink); border-radius: 12px; box-shadow: var(--drop-sm); background: #fff; }
+      .ride.done { background: var(--pop-green); color: #fff; }
+      .ride.next { background: var(--pop-yellow); }
+      .ride.rest { background: #fff; color: var(--text-faint); border-style: dashed; box-shadow: none; }
+      .ride-label { font-family: var(--font-mono); font-size: var(--fs-sm); color: var(--text-secondary); margin-top: 4px; font-weight: 700; }
+      .shouts { display: flex; gap: 18px; margin: 0 48px 48px; }
+      .shout { flex: 1; text-align: center; padding: 18px; }
+      .shout-word { font-size: var(--fs-xl); font-weight: 900; }
+      .shout.gold .shout-word { color: var(--coaster-red); text-shadow: 2px 2px 0 var(--pop-yellow); }
+      .shout.silver .shout-word { color: var(--pop-purple); }
+      .shout.bronze .shout-word { color: var(--text-secondary); }
+      .shout-note { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); margin-top: 6px; letter-spacing: 0.1em; }
+    </style>
+  </head>
+  <body>
+    <div class="frame">
+      <header class="header">
+        <div class="logo">
+          <div class="gate"><span class="balloon">🎈</span> HJKLAND</div>
+          <div class="logo-sub">THE CURSOR AMUSEMENT PARK</div>
+        </div>
+        <div class="hud">
+          <div class="hud-box"><span class="hud-label">パスポート</span><span class="hud-value passport">年間パス</span></div>
+          <div class="hud-box"><span class="hud-label">連続来園</span><span class="hud-value visits">12</span><span class="hud-label">日</span></div>
+        </div>
+      </header>
+
+      <section class="hero panel">
+        <div class="cloud c1"></div>
+        <div class="cloud c2"></div>
+        <div class="ferris"></div>
+        <div class="mascot">
+          <div class="sprite">
+            <span class="px balloon-s"></span><span class="px balloon-str"></span>
+            <span class="px ear-l"></span><span class="px ear-r"></span>
+            <span class="px head"></span><span class="px eye-l"></span><span class="px eye-r"></span>
+            <span class="px mouth"></span><span class="px body"></span><span class="px paw"></span>
+          </div>
+          <div class="mascot-name">案内係 モーション君</div>
+        </div>
+        <div>
+          <div class="speech">ようこそ!! 今日は<span class="accent">どのアトラクションから乗る?</span></div>
+          <div class="next-label">▶ NEXT RIDE — おすすめのアトラクション</div>
+          <div class="next-title">V d p — 行を切って移動</div>
+          <button type="button" class="cta">乗りにいく 🎢 <span class="cta-key">Enter</span></button>
+        </div>
+      </section>
+
+      <section class="park panel">
+        <div class="park-head">
+          <div class="park-title">🗺 PARK MAP — 全アトラクション制覇を目指せ</div>
+          <div class="park-note">✓ 乗車済み / ▶ おすすめ / ? 未体験(どれでも乗れる)</div>
+        </div>
+        <div class="park-row">
+          <div class="area-card a1">はじまり広場<small>基本移動エリア</small></div>
+          <div class="rides">
+            <div class="ride-cell"><div class="ride done">✓</div><div class="ride-label">x</div></div>
+            <div class="ride-cell"><div class="ride done">✓</div><div class="ride-label">h l</div></div>
+            <div class="ride-cell"><div class="ride next">▶</div><div class="ride-label">j k</div></div>
+            <div class="ride-cell"><div class="ride rest">?</div><div class="ride-label">w</div></div>
+            <div class="ride-cell"><div class="ride rest">?</div><div class="ride-label">b</div></div>
+          </div>
+        </div>
+        <div class="park-row">
+          <div class="area-card a7">ビジュアル遊覧エリア<small>visual mode</small></div>
+          <div class="rides">
+            <div class="ride-cell"><div class="ride rest">?</div><div class="ride-label">v</div></div>
+            <div class="ride-cell"><div class="ride rest">?</div><div class="ride-label">V</div></div>
+            <div class="ride-cell"><div class="ride rest">?</div><div class="ride-label">Ctrl-v</div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="shouts">
+        <div class="shout panel gold"><div class="shout-word">パーフェクトライド!!</div><div class="shout-note">パー以内 = 両手を離して乗れた</div></div>
+        <div class="shout panel silver"><div class="shout-word">ナイスライド!</div><div class="shout-note">銀 = いい笑顔で写真に写った</div></div>
+        <div class="shout panel bronze"><div class="shout-word">完走</div><div class="shout-note">銅 = ちゃんとゴールまで乗った</div></div>
+      </section>
+    </div>
+  </body>
+</html>

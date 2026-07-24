@@ -2,23 +2,22 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
-    <title>MOTION PIT — ホーム(リブランド案: パンク/ライブハウス)</title>
+    <title>MOTION PIT — ホーム(リブランド案: ハードコア)</title>
     <style>
-      /* == デザイントークン(motion-pit) ================================== */
+      /* == デザイントークン(motion-pit / hardcore) ======================= */
       :root {
-        --bg-base: #0d0d0d;
-        --bg-surface: #171717;
-        --bg-raised: #242424;
-        --border-ink: #3d3d3d;
-        --border-bold: #5c5c5c;
-        --text-primary: #f4f4ef;
-        --text-secondary: #b5b5a8;
-        --text-faint: #6e6e64;
-        --pit-pink: #ff2e88;
-        --pit-pink-dark: #99114c;
-        --pit-green: #b7ff2e;
-        --pit-cyan: #2ee6ff;
-        --tape: #f3e9cd;
+        --bg-base: #0a0a0a;
+        --bg-surface: #121212;
+        --bg-raised: #1c1c1c;
+        --border-ink: #333333;
+        --border-bold: #4d4d4d;
+        --text-primary: #e8e6e1;
+        --text-secondary: #a3a19a;
+        --text-faint: #63615b;
+        --blood: #b3202a;
+        --blood-dark: #6d0f16;
+        --bone: #e8e6e1;
+        --steel: #8a949e;
         --font-ui:
           -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
           "Noto Sans JP", sans-serif;
@@ -28,92 +27,108 @@
         --fs-md: 16px;
         --fs-lg: 19px;
         --fs-xl: 27px;
-        --fs-hero: 40px;
-        --sp-4: 16px;
-        --drop: 6px 6px 0 rgba(0, 0, 0, 0.7);
-        --drop-sm: 3px 3px 0 rgba(0, 0, 0, 0.7);
+        --fs-hero: 42px;
+        --drop: 6px 6px 0 rgba(0, 0, 0, 0.8);
+        --drop-sm: 3px 3px 0 rgba(0, 0, 0, 0.8);
       }
       * { margin: 0; padding: 0; box-sizing: border-box; }
       body {
         background:
-          repeating-linear-gradient(0deg, transparent 0 2px, rgba(0, 0, 0, 0.25) 2px 3px),
-          radial-gradient(900px 500px at 20% -5%, #1f1330, var(--bg-base) 65%);
+          repeating-linear-gradient(0deg, transparent 0 2px, rgba(0, 0, 0, 0.3) 2px 3px),
+          radial-gradient(1000px 520px at 50% -10%, #191919, var(--bg-base) 70%);
         color: var(--text-primary);
         font-family: var(--font-ui);
         min-height: 100vh;
       }
       .frame { max-width: 1440px; margin: 0 auto; }
       .panel { background: var(--bg-surface); border: 3px solid var(--border-ink); box-shadow: var(--drop); }
+      .tape {
+        height: 14px;
+        background: repeating-linear-gradient(-45deg, var(--blood) 0 16px, #0a0a0a 16px 32px);
+        border-top: 2px solid #000; border-bottom: 2px solid #000;
+      }
       .header {
         display: flex; justify-content: space-between; align-items: center;
         padding: 18px 48px; border-bottom: 3px solid var(--border-ink);
-        background: rgba(0, 0, 0, 0.35);
+        background: rgba(0, 0, 0, 0.4);
       }
-      .logo { display: flex; align-items: center; gap: 14px; }
-      .logo-sticker {
-        font-family: var(--font-mono); font-weight: 900; font-size: var(--fs-xl);
-        letter-spacing: 0.06em; color: #101010; background: var(--pit-pink);
-        padding: 6px 14px; transform: rotate(-3deg); box-shadow: var(--drop-sm);
+      .logo { display: flex; align-items: center; gap: 16px; }
+      .logo-stencil {
+        font-family: var(--font-mono); font-weight: 900; font-size: 30px;
+        letter-spacing: 0.04em; color: var(--bone);
+        text-transform: uppercase; line-height: 0.95;
+        text-shadow: 4px 4px 0 var(--blood-dark);
       }
-      .logo-sticker span { color: var(--tape); }
-      .logo-sub { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.3em; color: var(--text-faint); }
+      .logo-stencil .pit { color: var(--blood); }
+      .logo-x { font-family: var(--font-mono); font-weight: 900; color: var(--blood); font-size: 20px; letter-spacing: 0.2em; }
+      .logo-sub { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.34em; color: var(--text-faint); margin-top: 4px; }
       .hud { display: flex; gap: 14px; font-family: var(--font-mono); }
       .hud-box { display: flex; align-items: center; gap: 10px; padding: 10px 16px; background: var(--bg-raised); border: 3px solid var(--border-ink); box-shadow: var(--drop-sm); }
-      .hud-label { font-size: 11px; letter-spacing: 0.25em; color: var(--text-faint); }
+      .hud-label { font-size: 10px; letter-spacing: 0.28em; color: var(--text-faint); }
       .hud-value { font-size: var(--fs-lg); font-weight: 900; }
-      .pos { color: var(--pit-cyan); }
-      .streak { color: var(--pit-green); }
-      /* Hero: flyer wall */
-      .hero { margin: 28px 48px; padding: 36px 40px; position: relative; display: flex; gap: 36px; align-items: center; overflow: hidden; }
-      .flyer {
-        position: absolute; font-family: var(--font-mono); font-weight: 900;
-        padding: 6px 12px; box-shadow: var(--drop-sm); font-size: 12px;
+      .pos { color: var(--bone); }
+      .streak { color: var(--blood); }
+      /* Hero */
+      .hero { margin: 28px 48px; padding: 38px 42px; position: relative; overflow: hidden; display: flex; gap: 40px; align-items: center; }
+      .wall-x { position: absolute; font-family: var(--font-mono); font-weight: 900; color: #1f1f1f; user-select: none; }
+      .wall-x.x1 { top: -14px; right: 30px; font-size: 130px; }
+      .wall-x.x2 { bottom: -30px; right: 210px; font-size: 90px; }
+      .wall-x.x3 { top: 40px; right: 330px; font-size: 60px; }
+      /* Crowd: fists up silhouettes */
+      .crowd { width: 180px; flex: none; }
+      .crowd-row { display: flex; align-items: flex-end; gap: 6px; height: 116px; }
+      .figure { position: relative; width: 26px; background: #232323; border: 2px solid #000; }
+      .figure::before { content: ""; position: absolute; top: -14px; left: 6px; width: 11px; height: 11px; background: #232323; border: 2px solid #000; }
+      .figure::after { content: ""; position: absolute; top: -30px; width: 7px; height: 20px; background: #232323; border: 2px solid #000; }
+      .figure.f1 { height: 60px; } .figure.f1::after { right: -4px; }
+      .figure.f2 { height: 86px; background: var(--blood); } .figure.f2::before { background: var(--blood); } .figure.f2::after { left: -5px; background: var(--blood); }
+      .figure.f3 { height: 50px; } .figure.f3::after { display: none; }
+      .figure.f4 { height: 74px; } .figure.f4::after { right: -5px; }
+      .figure.f5 { height: 64px; } .figure.f5::after { left: -4px; }
+      .crowd-label { margin-top: 14px; text-align: center; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.3em; color: var(--text-faint); }
+      .speech {
+        background: var(--bone); color: #0f0f0f; padding: 14px 20px;
+        font-weight: 900; font-size: var(--fs-md);
+        box-shadow: var(--drop-sm); display: inline-block; margin-bottom: 18px;
       }
-      .flyer.a { top: 20px; right: 60px; background: var(--pit-green); color: #101010; transform: rotate(6deg); }
-      .flyer.b { bottom: 24px; right: 170px; background: var(--pit-cyan); color: #101010; transform: rotate(-5deg); }
-      .flyer.c { top: 70px; right: 240px; background: var(--tape); color: #101010; transform: rotate(2deg); }
-      /* Crowd sprite: pogo silhouettes */
-      .crowd { width: 170px; flex: none; }
-      .crowd-row { display: flex; align-items: flex-end; gap: 8px; height: 110px; }
-      .pogo { width: 26px; background: #2c2c2c; border: 2px solid #000; position: relative; }
-      .pogo::after { content: ""; position: absolute; top: -16px; left: 5px; width: 12px; height: 12px; background: #2c2c2c; border: 2px solid #000; }
-      .pogo.p1 { height: 58px; } .pogo.p2 { height: 82px; background: var(--pit-pink); }
-      .pogo.p3 { height: 46px; } .pogo.p4 { height: 70px; } .pogo.p5 { height: 60px; background: #3a3a3a; }
-      .crowd-label { margin-top: 12px; text-align: center; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.22em; color: var(--text-faint); }
-      .speech { background: var(--tape); color: #171310; padding: 14px 20px; font-weight: 800; font-size: var(--fs-md); box-shadow: var(--drop-sm); display: inline-block; margin-bottom: 18px; transform: rotate(-1deg); }
-      .speech .accent { color: var(--pit-pink-dark); }
-      .next-label { font-family: var(--font-mono); font-size: var(--fs-sm); letter-spacing: 0.28em; color: var(--pit-green); margin-bottom: 8px; }
-      .next-title { font-size: var(--fs-hero); font-weight: 900; text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.55); margin-bottom: 22px; }
+      .speech .accent { color: var(--blood-dark); }
+      .next-label { font-family: var(--font-mono); font-size: var(--fs-sm); letter-spacing: 0.3em; color: var(--steel); margin-bottom: 8px; font-weight: 700; }
+      .next-title { font-size: var(--fs-hero); font-weight: 900; text-transform: none; text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.7); margin-bottom: 24px; }
       .cta {
         display: inline-flex; align-items: center; gap: 14px;
-        background: var(--pit-pink); color: #fff;
-        border: 3px solid #000; padding: 15px 32px;
-        font-size: var(--fs-lg); font-weight: 900; letter-spacing: 0.18em;
-        box-shadow: 0 6px 0 var(--pit-pink-dark), var(--drop-sm); cursor: pointer;
-        transform: rotate(-1deg);
+        background: var(--blood); color: var(--bone);
+        border: 3px solid #000; padding: 16px 34px;
+        font-size: var(--fs-lg); font-weight: 900; letter-spacing: 0.22em;
+        box-shadow: 0 6px 0 var(--blood-dark), var(--drop-sm); cursor: pointer;
+        text-transform: uppercase;
       }
-      .cta-key { font-family: var(--font-mono); font-size: 12px; background: rgba(0, 0, 0, 0.35); padding: 3px 10px; }
-      /* Setlist wall */
+      .cta-key { font-family: var(--font-mono); font-size: 12px; background: rgba(0, 0, 0, 0.4); padding: 3px 10px; }
+      /* Pit list */
       .setlist { margin: 0 48px 40px; padding: 30px 36px; }
       .set-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 22px; font-family: var(--font-mono); }
-      .set-title { font-size: var(--fs-lg); font-weight: 900; letter-spacing: 0.22em; }
+      .set-title { font-size: var(--fs-lg); font-weight: 900; letter-spacing: 0.24em; }
       .set-note { font-size: var(--fs-sm); color: var(--text-faint); }
       .set-row { display: flex; align-items: center; gap: 18px; margin-bottom: 20px; }
-      .set-card { width: 170px; flex: none; text-align: center; padding: 10px 0; background: var(--bg-raised); border: 3px solid var(--border-ink); font-family: var(--font-mono); font-weight: 900; font-size: var(--fs-sm); box-shadow: var(--drop-sm); transform: rotate(-1deg); }
-      .set-card small { display: block; font-weight: 400; color: var(--text-secondary); font-size: 12px; }
-      .stickers { display: flex; gap: 10px; flex-wrap: wrap; }
-      .sticker-cell { display: flex; flex-direction: column; align-items: center; }
-      .sticker { width: 46px; height: 46px; display: grid; place-items: center; font-family: var(--font-mono); font-weight: 900; border: 3px solid var(--border-bold); box-shadow: var(--drop-sm); }
-      .sticker.done { border-color: var(--pit-green); color: var(--pit-green); background: #182408; transform: rotate(-4deg); }
-      .sticker.next { border-color: var(--pit-pink); color: var(--pit-pink); background: #17070f; transform: rotate(3deg); }
-      .sticker.rest { border-style: dashed; color: var(--text-faint); box-shadow: none; }
-      .sticker-label { font-family: var(--font-mono); font-size: var(--fs-sm); color: var(--text-secondary); margin-top: 4px; }
+      .set-card {
+        width: 175px; flex: none; text-align: center; padding: 10px 0;
+        background: var(--bg-raised); border: 3px solid var(--border-ink);
+        font-family: var(--font-mono); font-weight: 900; font-size: var(--fs-sm);
+        box-shadow: var(--drop-sm); text-transform: uppercase; letter-spacing: 0.1em;
+      }
+      .set-card small { display: block; font-weight: 400; color: var(--text-secondary); font-size: 12px; letter-spacing: 0; }
+      .marks { display: flex; gap: 10px; flex-wrap: wrap; }
+      .mark-cell { display: flex; flex-direction: column; align-items: center; }
+      .mark { width: 46px; height: 46px; display: grid; place-items: center; font-family: var(--font-mono); font-weight: 900; font-size: var(--fs-lg); border: 3px solid var(--border-bold); box-shadow: var(--drop-sm); }
+      .mark.done { border-color: var(--bone); color: var(--bone); background: #1a1a1a; }
+      .mark.next { border-color: var(--blood); color: var(--blood); background: #170a0b; }
+      .mark.rest { border-style: dashed; color: var(--text-faint); box-shadow: none; }
+      .mark-label { font-family: var(--font-mono); font-size: var(--fs-sm); color: var(--text-secondary); margin-top: 4px; }
       .shouts { display: flex; gap: 18px; margin: 0 48px 48px; }
       .shout { flex: 1; text-align: center; padding: 18px; }
-      .shout-word { font-size: var(--fs-xl); font-weight: 900; }
-      .shout.gold .shout-word { color: var(--pit-pink); text-shadow: 3px 3px 0 #000; }
-      .shout.silver .shout-word { color: var(--pit-cyan); }
-      .shout.bronze .shout-word { color: var(--text-secondary); }
+      .shout-word { font-size: var(--fs-xl); font-weight: 900; letter-spacing: 0.06em; }
+      .shout.gold .shout-word { color: var(--blood); text-shadow: 3px 3px 0 #000; }
+      .shout.silver .shout-word { color: var(--bone); }
+      .shout.bronze .shout-word { color: var(--steel); }
       .shout-note { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); margin-top: 6px; letter-spacing: 0.12em; }
     </style>
   </head>
@@ -121,63 +136,68 @@
     <div class="frame">
       <header class="header">
         <div class="logo">
-          <div class="logo-sticker">MOTION <span>PIT</span></div>
-          <div class="logo-sub">DIVE INTO THE MOTIONS</div>
+          <div>
+            <div class="logo-stencil">MOTION <span class="pit">PIT</span></div>
+            <div class="logo-sub">NO THINKING. ONLY MOTIONS.</div>
+          </div>
+          <div class="logo-x">✕✕✕</div>
         </div>
         <div class="hud">
-          <div class="hud-box"><span class="hud-label">PIT POSITION</span><span class="hud-value pos">最前列</span></div>
+          <div class="hud-box"><span class="hud-label">PIT</span><span class="hud-value pos">最前線</span></div>
           <div class="hud-box"><span class="hud-label">連続参戦</span><span class="hud-value streak">12</span><span class="hud-label">日</span></div>
         </div>
       </header>
+      <div class="tape"></div>
 
       <section class="hero panel">
-        <div class="flyer a">TONIGHT!!</div>
-        <div class="flyer b">w/ hjkl</div>
-        <div class="flyer c">SOLD OUT</div>
+        <div class="wall-x x1">✕</div>
+        <div class="wall-x x2">✕</div>
+        <div class="wall-x x3">✕</div>
         <div class="crowd">
           <div class="crowd-row">
-            <div class="pogo p1"></div><div class="pogo p2"></div><div class="pogo p3"></div><div class="pogo p4"></div><div class="pogo p5"></div>
+            <div class="figure f1"></div><div class="figure f2"></div><div class="figure f3"></div><div class="figure f4"></div><div class="figure f5"></div>
           </div>
           <div class="crowd-label">THE PIT</div>
         </div>
         <div>
-          <div class="speech">考えるな、<span class="accent">体が動くまで飛べ!!</span></div>
-          <div class="next-label">▶ NEXT DIVE — 今日のモッシュ</div>
+          <div class="speech">考えるな。<span class="accent">指が動くまで、ただ叩き込め。</span></div>
+          <div class="next-label">▶ NEXT SET — 今日の一本</div>
           <div class="next-title">V d p — 行を切って移動</div>
-          <button type="button" class="cta">ピットに飛び込む <span class="cta-key">Enter</span></button>
+          <button type="button" class="cta">ピットへ <span class="cta-key">Enter</span></button>
         </div>
       </section>
 
       <section class="setlist panel">
         <div class="set-head">
-          <div class="set-title">📌 SETLIST WALL — ステッカーを貼り尽くせ</div>
-          <div class="set-note">✓ 参戦済 / ▶ 今夜のフロア / ? 未参戦(どこからでも飛び込める)</div>
+          <div class="set-title">✕ HARDCORE SESSIONS — 全セットを踏破しろ</div>
+          <div class="set-note">✕ 踏破 / ▶ 今日のセット / ? 未踏(どこからでも入れる)</div>
         </div>
         <div class="set-row">
           <div class="set-card">STAGE 1<small>基本移動</small></div>
-          <div class="stickers">
-            <div class="sticker-cell"><div class="sticker done">✓</div><div class="sticker-label">x</div></div>
-            <div class="sticker-cell"><div class="sticker done">✓</div><div class="sticker-label">h l</div></div>
-            <div class="sticker-cell"><div class="sticker next">▶</div><div class="sticker-label">j k</div></div>
-            <div class="sticker-cell"><div class="sticker rest">?</div><div class="sticker-label">w</div></div>
-            <div class="sticker-cell"><div class="sticker rest">?</div><div class="sticker-label">b</div></div>
+          <div class="marks">
+            <div class="mark-cell"><div class="mark done">✕</div><div class="mark-label">x</div></div>
+            <div class="mark-cell"><div class="mark done">✕</div><div class="mark-label">h l</div></div>
+            <div class="mark-cell"><div class="mark next">▶</div><div class="mark-label">j k</div></div>
+            <div class="mark-cell"><div class="mark rest">?</div><div class="mark-label">w</div></div>
+            <div class="mark-cell"><div class="mark rest">?</div><div class="mark-label">b</div></div>
           </div>
         </div>
         <div class="set-row">
           <div class="set-card">STAGE 7<small>ビジュアルの型</small></div>
-          <div class="stickers">
-            <div class="sticker-cell"><div class="sticker rest">?</div><div class="sticker-label">v</div></div>
-            <div class="sticker-cell"><div class="sticker rest">?</div><div class="sticker-label">V</div></div>
-            <div class="sticker-cell"><div class="sticker rest">?</div><div class="sticker-label">Ctrl-v</div></div>
+          <div class="marks">
+            <div class="mark-cell"><div class="mark rest">?</div><div class="mark-label">v</div></div>
+            <div class="mark-cell"><div class="mark rest">?</div><div class="mark-label">V</div></div>
+            <div class="mark-cell"><div class="mark rest">?</div><div class="mark-label">Ctrl-v</div></div>
           </div>
         </div>
       </section>
 
       <section class="shouts">
-        <div class="shout panel gold"><div class="shout-word">STAGE DIVE!!</div><div class="shout-note">パー以内 = 完璧なダイブ</div></div>
-        <div class="shout panel silver"><div class="shout-word">ナイスモッシュ!</div><div class="shout-note">銀 = フロアを沸かせた</div></div>
+        <div class="shout panel gold"><div class="shout-word">BREAKDOWN!!</div><div class="shout-note">パー以内 = フロア崩壊</div></div>
+        <div class="shout panel silver"><div class="shout-word">ナイス2ステップ!</div><div class="shout-note">銀 = 体が覚えてきた</div></div>
         <div class="shout panel bronze"><div class="shout-word">生還</div><div class="shout-note">銅 = ピットから帰ってきた</div></div>
       </section>
+      <div class="tape" style="margin: 0 48px 48px"></div>
     </div>
   </body>
 </html>

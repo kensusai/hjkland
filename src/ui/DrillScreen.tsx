@@ -71,13 +71,13 @@ export function DrillScreen() {
   if (state.status === "unavailable") {
     return (
       <main className="flex min-h-screen flex-col items-center justify-center gap-4 font-mono">
-        <p>ドリルは最初のレッスンをクリアすると開放される。</p>
+        <p>ドリルは最初のレッスンをクリアするとオープンする。</p>
         <button
           type="button"
           className="btn-chunky border-b-[6px] border-shu-dark bg-shu px-8 py-3 font-black text-[#fff6ec]"
           onClick={() => navigate({ screen: "home" })}
         >
-          ホームへ
+          パークへ
         </button>
       </main>
     );
@@ -114,7 +114,7 @@ export function DrillScreen() {
             ← MAP
           </button>
           <span className="border-2 border-ink px-2 text-[0.625rem] tracking-widest text-shu">
-            DRILL · 5本勝負
+            DRILL · 5連続ライド
           </span>
         </>
       }
@@ -126,8 +126,8 @@ export function DrillScreen() {
         return (
           <div className="pixel-panel p-4">
             <div className="mb-3 font-mono text-xs font-black tracking-[0.2em] text-shu">
-              ⚔️ WANTED — 賞金首 {bounty.filter(Boolean).length}/
-              {state.exercises.length} 撃破
+              🎫 スタンプラリー — {bounty.filter(Boolean).length}/
+              {state.exercises.length} 個
             </div>
             <div className="flex flex-col gap-2">
               {state.exercises.map((ex, i) => {
@@ -152,7 +152,7 @@ export function DrillScreen() {
                     </span>
                     {isCurrent && (
                       <span className="blink ml-auto text-[0.625rem] text-gold">
-                        ◀ いまの相手
+                        ◀ いまここ
                       </span>
                     )}
                     {result && (
@@ -213,7 +213,7 @@ function DrillResult({
       {info.isLastExercise && (
         <>
           <div className="mt-3 font-mono font-black text-matcha">
-            5本勝負、完!! 戦績:
+            5連続ライド、完走!! 記録:
           </div>
           <div className="mt-1 text-2xl tracking-widest">
             {bounty
@@ -232,7 +232,7 @@ function DrillResult({
       )}
       <ResultFooter
         xpGained={xpGained}
-        primaryLabel={info.isLastExercise ? "ホームへ ▶" : "次のお題 ▶"}
+        primaryLabel={info.isLastExercise ? "パークへ ▶" : "次のお題 ▶"}
         onPrimary={onNext}
         onRetry={onRetry}
         extraChips={info.isLastExercise ? <StreakChip /> : undefined}

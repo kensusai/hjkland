@@ -128,7 +128,7 @@ export function BackupPanel() {
             value={tokenInput}
             onChange={(e) => setTokenInput(e.target.value)}
             placeholder="GitHub トークン(gist 権限のみ)"
-            className="border-2 border-ink bg-editor px-3 py-2 font-mono text-sm text-cream"
+            className="border-2 border-ink bg-editor px-3 py-2 font-mono text-sm text-editor-text"
           />
           <button
             type="button"

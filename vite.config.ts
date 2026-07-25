@@ -15,12 +15,12 @@ export default defineConfig({
     VitePWA({
       registerType: "autoUpdate",
       manifest: {
-        name: "vim-dojo",
-        short_name: "vim-dojo",
+        name: "hjkland",
+        short_name: "hjkland",
         description:
-          "vim が苦手な人が、楽しく・飽きずに・継続的に vim 操作を鍛えられるブラウザゲーム",
-        theme_color: "#12100b",
-        background_color: "#12100b",
+          "vim のカーソルを乗りこなす遊園地 — 楽しく・飽きずに・継続的に vim 操作を鍛えるブラウザゲーム",
+        theme_color: "#bfe6f7",
+        background_color: "#bfe6f7",
         display: "standalone",
         icons: [
           { src: "icon-192.png", sizes: "192x192", type: "image/png" },

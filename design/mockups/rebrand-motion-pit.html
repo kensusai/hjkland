@@ -31,105 +31,395 @@
         --drop: 6px 6px 0 rgba(0, 0, 0, 0.8);
         --drop-sm: 3px 3px 0 rgba(0, 0, 0, 0.8);
       }
-      * { margin: 0; padding: 0; box-sizing: border-box; }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
       body {
         background:
-          repeating-linear-gradient(0deg, transparent 0 2px, rgba(0, 0, 0, 0.3) 2px 3px),
+          repeating-linear-gradient(
+            0deg,
+            transparent 0 2px,
+            rgba(0, 0, 0, 0.3) 2px 3px
+          ),
           radial-gradient(1000px 520px at 50% -10%, #191919, var(--bg-base) 70%);
         color: var(--text-primary);
         font-family: var(--font-ui);
         min-height: 100vh;
       }
-      .frame { max-width: 1440px; margin: 0 auto; }
-      .panel { background: var(--bg-surface); border: 3px solid var(--border-ink); box-shadow: var(--drop); }
+      .frame {
+        max-width: 1440px;
+        margin: 0 auto;
+      }
+      .panel {
+        background: var(--bg-surface);
+        border: 3px solid var(--border-ink);
+        box-shadow: var(--drop);
+      }
       .tape {
         height: 14px;
-        background: repeating-linear-gradient(-45deg, var(--blood) 0 16px, #0a0a0a 16px 32px);
-        border-top: 2px solid #000; border-bottom: 2px solid #000;
+        background: repeating-linear-gradient(
+          -45deg,
+          var(--blood) 0 16px,
+          #0a0a0a 16px 32px
+        );
+        border-top: 2px solid #000;
+        border-bottom: 2px solid #000;
       }
       .header {
-        display: flex; justify-content: space-between; align-items: center;
-        padding: 18px 48px; border-bottom: 3px solid var(--border-ink);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 48px;
+        border-bottom: 3px solid var(--border-ink);
         background: rgba(0, 0, 0, 0.4);
       }
-      .logo { display: flex; align-items: center; gap: 16px; }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
       .logo-stencil {
-        font-family: var(--font-mono); font-weight: 900; font-size: 30px;
-        letter-spacing: 0.04em; color: var(--bone);
-        text-transform: uppercase; line-height: 0.95;
+        font-family: var(--font-mono);
+        font-weight: 900;
+        font-size: 30px;
+        letter-spacing: 0.04em;
+        color: var(--bone);
+        text-transform: uppercase;
+        line-height: 0.95;
         text-shadow: 4px 4px 0 var(--blood-dark);
       }
-      .logo-stencil .pit { color: var(--blood); }
-      .logo-x { font-family: var(--font-mono); font-weight: 900; color: var(--blood); font-size: 20px; letter-spacing: 0.2em; }
-      .logo-sub { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.34em; color: var(--text-faint); margin-top: 4px; }
-      .hud { display: flex; gap: 14px; font-family: var(--font-mono); }
-      .hud-box { display: flex; align-items: center; gap: 10px; padding: 10px 16px; background: var(--bg-raised); border: 3px solid var(--border-ink); box-shadow: var(--drop-sm); }
-      .hud-label { font-size: 10px; letter-spacing: 0.28em; color: var(--text-faint); }
-      .hud-value { font-size: var(--fs-lg); font-weight: 900; }
-      .pos { color: var(--bone); }
-      .streak { color: var(--blood); }
-      /* Hero */
-      .hero { margin: 28px 48px; padding: 38px 42px; position: relative; overflow: hidden; display: flex; gap: 40px; align-items: center; }
-      .wall-x { position: absolute; font-family: var(--font-mono); font-weight: 900; color: #1f1f1f; user-select: none; }
-      .wall-x.x1 { top: -14px; right: 30px; font-size: 130px; }
-      .wall-x.x2 { bottom: -30px; right: 210px; font-size: 90px; }
-      .wall-x.x3 { top: 40px; right: 330px; font-size: 60px; }
-      /* Crowd: fists up silhouettes */
-      .crowd { width: 180px; flex: none; }
-      .crowd-row { display: flex; align-items: flex-end; gap: 6px; height: 116px; }
-      .figure { position: relative; width: 26px; background: #232323; border: 2px solid #000; }
-      .figure::before { content: ""; position: absolute; top: -14px; left: 6px; width: 11px; height: 11px; background: #232323; border: 2px solid #000; }
-      .figure::after { content: ""; position: absolute; top: -30px; width: 7px; height: 20px; background: #232323; border: 2px solid #000; }
-      .figure.f1 { height: 60px; } .figure.f1::after { right: -4px; }
-      .figure.f2 { height: 86px; background: var(--blood); } .figure.f2::before { background: var(--blood); } .figure.f2::after { left: -5px; background: var(--blood); }
-      .figure.f3 { height: 50px; } .figure.f3::after { display: none; }
-      .figure.f4 { height: 74px; } .figure.f4::after { right: -5px; }
-      .figure.f5 { height: 64px; } .figure.f5::after { left: -4px; }
-      .crowd-label { margin-top: 14px; text-align: center; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.3em; color: var(--text-faint); }
-      .speech {
-        background: var(--bone); color: #0f0f0f; padding: 14px 20px;
-        font-weight: 900; font-size: var(--fs-md);
-        box-shadow: var(--drop-sm); display: inline-block; margin-bottom: 18px;
+      .logo-stencil .pit {
+        color: var(--blood);
       }
-      .speech .accent { color: var(--blood-dark); }
-      .next-label { font-family: var(--font-mono); font-size: var(--fs-sm); letter-spacing: 0.3em; color: var(--steel); margin-bottom: 8px; font-weight: 700; }
-      .next-title { font-size: var(--fs-hero); font-weight: 900; text-transform: none; text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.7); margin-bottom: 24px; }
+      .logo-x {
+        font-family: var(--font-mono);
+        font-weight: 900;
+        color: var(--blood);
+        font-size: 20px;
+        letter-spacing: 0.2em;
+      }
+      .logo-sub {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.34em;
+        color: var(--text-faint);
+        margin-top: 4px;
+      }
+      .hud {
+        display: flex;
+        gap: 14px;
+        font-family: var(--font-mono);
+      }
+      .hud-box {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 16px;
+        background: var(--bg-raised);
+        border: 3px solid var(--border-ink);
+        box-shadow: var(--drop-sm);
+      }
+      .hud-label {
+        font-size: 10px;
+        letter-spacing: 0.28em;
+        color: var(--text-faint);
+      }
+      .hud-value {
+        font-size: var(--fs-lg);
+        font-weight: 900;
+      }
+      .pos {
+        color: var(--bone);
+      }
+      .streak {
+        color: var(--blood);
+      }
+      /* Hero */
+      .hero {
+        margin: 28px 48px;
+        padding: 38px 42px;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        gap: 40px;
+        align-items: center;
+      }
+      .wall-x {
+        position: absolute;
+        font-family: var(--font-mono);
+        font-weight: 900;
+        color: #1f1f1f;
+        user-select: none;
+      }
+      .wall-x.x1 {
+        top: -14px;
+        right: 30px;
+        font-size: 130px;
+      }
+      .wall-x.x2 {
+        bottom: -30px;
+        right: 210px;
+        font-size: 90px;
+      }
+      .wall-x.x3 {
+        top: 40px;
+        right: 330px;
+        font-size: 60px;
+      }
+      /* Crowd: fists up silhouettes */
+      .crowd {
+        width: 180px;
+        flex: none;
+      }
+      .crowd-row {
+        display: flex;
+        align-items: flex-end;
+        gap: 6px;
+        height: 116px;
+      }
+      .figure {
+        position: relative;
+        width: 26px;
+        background: #232323;
+        border: 2px solid #000;
+      }
+      .figure::before {
+        content: "";
+        position: absolute;
+        top: -14px;
+        left: 6px;
+        width: 11px;
+        height: 11px;
+        background: #232323;
+        border: 2px solid #000;
+      }
+      .figure::after {
+        content: "";
+        position: absolute;
+        top: -30px;
+        width: 7px;
+        height: 20px;
+        background: #232323;
+        border: 2px solid #000;
+      }
+      .figure.f1 {
+        height: 60px;
+      }
+      .figure.f1::after {
+        right: -4px;
+      }
+      .figure.f2 {
+        height: 86px;
+        background: var(--blood);
+      }
+      .figure.f2::before {
+        background: var(--blood);
+      }
+      .figure.f2::after {
+        left: -5px;
+        background: var(--blood);
+      }
+      .figure.f3 {
+        height: 50px;
+      }
+      .figure.f3::after {
+        display: none;
+      }
+      .figure.f4 {
+        height: 74px;
+      }
+      .figure.f4::after {
+        right: -5px;
+      }
+      .figure.f5 {
+        height: 64px;
+      }
+      .figure.f5::after {
+        left: -4px;
+      }
+      .crowd-label {
+        margin-top: 14px;
+        text-align: center;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: 0.3em;
+        color: var(--text-faint);
+      }
+      .speech {
+        background: var(--bone);
+        color: #0f0f0f;
+        padding: 14px 20px;
+        font-weight: 900;
+        font-size: var(--fs-md);
+        box-shadow: var(--drop-sm);
+        display: inline-block;
+        margin-bottom: 18px;
+      }
+      .speech .accent {
+        color: var(--blood-dark);
+      }
+      .next-label {
+        font-family: var(--font-mono);
+        font-size: var(--fs-sm);
+        letter-spacing: 0.3em;
+        color: var(--steel);
+        margin-bottom: 8px;
+        font-weight: 700;
+      }
+      .next-title {
+        font-size: var(--fs-hero);
+        font-weight: 900;
+        text-transform: none;
+        text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.7);
+        margin-bottom: 24px;
+      }
       .cta {
-        display: inline-flex; align-items: center; gap: 14px;
-        background: var(--blood); color: var(--bone);
-        border: 3px solid #000; padding: 16px 34px;
-        font-size: var(--fs-lg); font-weight: 900; letter-spacing: 0.22em;
-        box-shadow: 0 6px 0 var(--blood-dark), var(--drop-sm); cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
+        background: var(--blood);
+        color: var(--bone);
+        border: 3px solid #000;
+        padding: 16px 34px;
+        font-size: var(--fs-lg);
+        font-weight: 900;
+        letter-spacing: 0.22em;
+        box-shadow:
+          0 6px 0 var(--blood-dark),
+          var(--drop-sm);
+        cursor: pointer;
         text-transform: uppercase;
       }
-      .cta-key { font-family: var(--font-mono); font-size: 12px; background: rgba(0, 0, 0, 0.4); padding: 3px 10px; }
-      /* Pit list */
-      .setlist { margin: 0 48px 40px; padding: 30px 36px; }
-      .set-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 22px; font-family: var(--font-mono); }
-      .set-title { font-size: var(--fs-lg); font-weight: 900; letter-spacing: 0.24em; }
-      .set-note { font-size: var(--fs-sm); color: var(--text-faint); }
-      .set-row { display: flex; align-items: center; gap: 18px; margin-bottom: 20px; }
-      .set-card {
-        width: 175px; flex: none; text-align: center; padding: 10px 0;
-        background: var(--bg-raised); border: 3px solid var(--border-ink);
-        font-family: var(--font-mono); font-weight: 900; font-size: var(--fs-sm);
-        box-shadow: var(--drop-sm); text-transform: uppercase; letter-spacing: 0.1em;
+      .cta-key {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        background: rgba(0, 0, 0, 0.4);
+        padding: 3px 10px;
       }
-      .set-card small { display: block; font-weight: 400; color: var(--text-secondary); font-size: 12px; letter-spacing: 0; }
-      .marks { display: flex; gap: 10px; flex-wrap: wrap; }
-      .mark-cell { display: flex; flex-direction: column; align-items: center; }
-      .mark { width: 46px; height: 46px; display: grid; place-items: center; font-family: var(--font-mono); font-weight: 900; font-size: var(--fs-lg); border: 3px solid var(--border-bold); box-shadow: var(--drop-sm); }
-      .mark.done { border-color: var(--bone); color: var(--bone); background: #1a1a1a; }
-      .mark.next { border-color: var(--blood); color: var(--blood); background: #170a0b; }
-      .mark.rest { border-style: dashed; color: var(--text-faint); box-shadow: none; }
-      .mark-label { font-family: var(--font-mono); font-size: var(--fs-sm); color: var(--text-secondary); margin-top: 4px; }
-      .shouts { display: flex; gap: 18px; margin: 0 48px 48px; }
-      .shout { flex: 1; text-align: center; padding: 18px; }
-      .shout-word { font-size: var(--fs-xl); font-weight: 900; letter-spacing: 0.06em; }
-      .shout.gold .shout-word { color: var(--blood); text-shadow: 3px 3px 0 #000; }
-      .shout.silver .shout-word { color: var(--bone); }
-      .shout.bronze .shout-word { color: var(--steel); }
-      .shout-note { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); margin-top: 6px; letter-spacing: 0.12em; }
+      /* Pit list */
+      .setlist {
+        margin: 0 48px 40px;
+        padding: 30px 36px;
+      }
+      .set-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 22px;
+        font-family: var(--font-mono);
+      }
+      .set-title {
+        font-size: var(--fs-lg);
+        font-weight: 900;
+        letter-spacing: 0.24em;
+      }
+      .set-note {
+        font-size: var(--fs-sm);
+        color: var(--text-faint);
+      }
+      .set-row {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        margin-bottom: 20px;
+      }
+      .set-card {
+        width: 175px;
+        flex: none;
+        text-align: center;
+        padding: 10px 0;
+        background: var(--bg-raised);
+        border: 3px solid var(--border-ink);
+        font-family: var(--font-mono);
+        font-weight: 900;
+        font-size: var(--fs-sm);
+        box-shadow: var(--drop-sm);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+      .set-card small {
+        display: block;
+        font-weight: 400;
+        color: var(--text-secondary);
+        font-size: 12px;
+        letter-spacing: 0;
+      }
+      .marks {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .mark-cell {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .mark {
+        width: 46px;
+        height: 46px;
+        display: grid;
+        place-items: center;
+        font-family: var(--font-mono);
+        font-weight: 900;
+        font-size: var(--fs-lg);
+        border: 3px solid var(--border-bold);
+        box-shadow: var(--drop-sm);
+      }
+      .mark.done {
+        border-color: var(--bone);
+        color: var(--bone);
+        background: #1a1a1a;
+      }
+      .mark.next {
+        border-color: var(--blood);
+        color: var(--blood);
+        background: #170a0b;
+      }
+      .mark.rest {
+        border-style: dashed;
+        color: var(--text-faint);
+        box-shadow: none;
+      }
+      .mark-label {
+        font-family: var(--font-mono);
+        font-size: var(--fs-sm);
+        color: var(--text-secondary);
+        margin-top: 4px;
+      }
+      .shouts {
+        display: flex;
+        gap: 18px;
+        margin: 0 48px 48px;
+      }
+      .shout {
+        flex: 1;
+        text-align: center;
+        padding: 18px;
+      }
+      .shout-word {
+        font-size: var(--fs-xl);
+        font-weight: 900;
+        letter-spacing: 0.06em;
+      }
+      .shout.gold .shout-word {
+        color: var(--blood);
+        text-shadow: 3px 3px 0 #000;
+      }
+      .shout.silver .shout-word {
+        color: var(--bone);
+      }
+      .shout.bronze .shout-word {
+        color: var(--steel);
+      }
+      .shout-note {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        color: var(--text-faint);
+        margin-top: 6px;
+        letter-spacing: 0.12em;
+      }
     </style>
   </head>
   <body>
@@ -143,8 +433,15 @@
           <div class="logo-x">✕✕✕</div>
         </div>
         <div class="hud">
-          <div class="hud-box"><span class="hud-label">PIT</span><span class="hud-value pos">最前線</span></div>
-          <div class="hud-box"><span class="hud-label">連続参戦</span><span class="hud-value streak">12</span><span class="hud-label">日</span></div>
+          <div class="hud-box">
+            <span class="hud-label">PIT</span
+            ><span class="hud-value pos">最前線</span>
+          </div>
+          <div class="hud-box">
+            <span class="hud-label">連続参戦</span
+            ><span class="hud-value streak">12</span
+            ><span class="hud-label">日</span>
+          </div>
         </div>
       </header>
       <div class="tape"></div>
@@ -155,47 +452,90 @@
         <div class="wall-x x3">✕</div>
         <div class="crowd">
           <div class="crowd-row">
-            <div class="figure f1"></div><div class="figure f2"></div><div class="figure f3"></div><div class="figure f4"></div><div class="figure f5"></div>
+            <div class="figure f1"></div>
+            <div class="figure f2"></div>
+            <div class="figure f3"></div>
+            <div class="figure f4"></div>
+            <div class="figure f5"></div>
           </div>
           <div class="crowd-label">THE PIT</div>
         </div>
         <div>
-          <div class="speech">考えるな。<span class="accent">指が動くまで、ただ叩き込め。</span></div>
+          <div class="speech">
+            考えるな。<span class="accent">指が動くまで、ただ叩き込め。</span>
+          </div>
           <div class="next-label">▶ NEXT SET — 今日の一本</div>
           <div class="next-title">V d p — 行を切って移動</div>
-          <button type="button" class="cta">ピットへ <span class="cta-key">Enter</span></button>
+          <button type="button" class="cta">
+            ピットへ <span class="cta-key">Enter</span>
+          </button>
         </div>
       </section>
 
       <section class="setlist panel">
         <div class="set-head">
           <div class="set-title">✕ HARDCORE SESSIONS — 全セットを踏破しろ</div>
-          <div class="set-note">✕ 踏破 / ▶ 今日のセット / ? 未踏(どこからでも入れる)</div>
+          <div class="set-note">
+            ✕ 踏破 / ▶ 今日のセット / ? 未踏(どこからでも入れる)
+          </div>
         </div>
         <div class="set-row">
           <div class="set-card">STAGE 1<small>基本移動</small></div>
           <div class="marks">
-            <div class="mark-cell"><div class="mark done">✕</div><div class="mark-label">x</div></div>
-            <div class="mark-cell"><div class="mark done">✕</div><div class="mark-label">h l</div></div>
-            <div class="mark-cell"><div class="mark next">▶</div><div class="mark-label">j k</div></div>
-            <div class="mark-cell"><div class="mark rest">?</div><div class="mark-label">w</div></div>
-            <div class="mark-cell"><div class="mark rest">?</div><div class="mark-label">b</div></div>
+            <div class="mark-cell">
+              <div class="mark done">✕</div>
+              <div class="mark-label">x</div>
+            </div>
+            <div class="mark-cell">
+              <div class="mark done">✕</div>
+              <div class="mark-label">h l</div>
+            </div>
+            <div class="mark-cell">
+              <div class="mark next">▶</div>
+              <div class="mark-label">j k</div>
+            </div>
+            <div class="mark-cell">
+              <div class="mark rest">?</div>
+              <div class="mark-label">w</div>
+            </div>
+            <div class="mark-cell">
+              <div class="mark rest">?</div>
+              <div class="mark-label">b</div>
+            </div>
           </div>
         </div>
         <div class="set-row">
           <div class="set-card">STAGE 7<small>ビジュアルの型</small></div>
           <div class="marks">
-            <div class="mark-cell"><div class="mark rest">?</div><div class="mark-label">v</div></div>
-            <div class="mark-cell"><div class="mark rest">?</div><div class="mark-label">V</div></div>
-            <div class="mark-cell"><div class="mark rest">?</div><div class="mark-label">Ctrl-v</div></div>
+            <div class="mark-cell">
+              <div class="mark rest">?</div>
+              <div class="mark-label">v</div>
+            </div>
+            <div class="mark-cell">
+              <div class="mark rest">?</div>
+              <div class="mark-label">V</div>
+            </div>
+            <div class="mark-cell">
+              <div class="mark rest">?</div>
+              <div class="mark-label">Ctrl-v</div>
+            </div>
           </div>
         </div>
       </section>
 
       <section class="shouts">
-        <div class="shout panel gold"><div class="shout-word">BREAKDOWN!!</div><div class="shout-note">パー以内 = フロア崩壊</div></div>
-        <div class="shout panel silver"><div class="shout-word">ナイス2ステップ!</div><div class="shout-note">銀 = 体が覚えてきた</div></div>
-        <div class="shout panel bronze"><div class="shout-word">生還</div><div class="shout-note">銅 = ピットから帰ってきた</div></div>
+        <div class="shout panel gold">
+          <div class="shout-word">BREAKDOWN!!</div>
+          <div class="shout-note">パー以内 = フロア崩壊</div>
+        </div>
+        <div class="shout panel silver">
+          <div class="shout-word">ナイス2ステップ!</div>
+          <div class="shout-note">銀 = 体が覚えてきた</div>
+        </div>
+        <div class="shout panel bronze">
+          <div class="shout-word">生還</div>
+          <div class="shout-note">銅 = ピットから帰ってきた</div>
+        </div>
       </section>
       <div class="tape" style="margin: 0 48px 48px"></div>
     </div>

@@ -9,7 +9,7 @@ let ctx = await browser.newContext();
 let page = await ctx.newPage();
 const t0 = Date.now();
 await page.goto(URL, { waitUntil: "load" });
-await page.waitForSelector("text=WORLD MAP");
+await page.waitForSelector("text=PARK MAP");
 const coldInteractive = Date.now() - t0;
 const paint = await page.evaluate(() => {
   const fcp = performance.getEntriesByName("first-contentful-paint")[0];
@@ -32,7 +32,7 @@ const lcp = await page.evaluate(
     }),
 );
 console.log(
-  `[cold] TTFB ${paint.ttfb}ms | FCP ${paint.fcp}ms | LCP ${lcp}ms | WORLD MAP interactive ${coldInteractive}ms`,
+  `[cold] TTFB ${paint.ttfb}ms | FCP ${paint.fcp}ms | LCP ${lcp}ms | PARK MAP interactive ${coldInteractive}ms`,
 );
 // wait for SW to install before warm run
 await page.waitForTimeout(2500);
@@ -42,11 +42,11 @@ await ctx.close();
 ctx = await browser.newContext();
 page = await ctx.newPage();
 await page.goto(URL, { waitUntil: "load" });
-await page.waitForSelector("text=WORLD MAP");
+await page.waitForSelector("text=PARK MAP");
 await page.waitForTimeout(2500); // SW takes over after first load in this ctx
 const t1 = Date.now();
 await page.reload({ waitUntil: "load" });
-await page.waitForSelector("text=WORLD MAP");
+await page.waitForSelector("text=PARK MAP");
 console.log(`[warm] reload → interactive ${Date.now() - t1}ms (SW cache)`);
 
 // --- 3. typing burst: long tasks while playing ------------------------------
@@ -58,8 +58,8 @@ await page.evaluate(
     }),
 );
 await page.reload();
-await page.waitForSelector("text=WORLD MAP");
-await page.getByRole("button", { name: /稽古をはじめる/ }).click();
+await page.waitForSelector("text=PARK MAP");
+await page.getByRole("button", { name: /乗りにいく/ }).click();
 await page.waitForSelector(".editor-host .cm-content");
 await page.waitForTimeout(400);
 await page.evaluate(() => {

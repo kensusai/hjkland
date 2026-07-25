@@ -37,16 +37,27 @@
         --drop: 6px 6px 0 rgba(0, 0, 0, 0.65);
         --drop-sm: 3px 3px 0 rgba(0, 0, 0, 0.65);
       }
-      * { margin: 0; padding: 0; box-sizing: border-box; }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
       body {
         background:
-          repeating-linear-gradient(0deg, transparent 0 2px, rgba(0, 0, 0, 0.22) 2px 3px),
+          repeating-linear-gradient(
+            0deg,
+            transparent 0 2px,
+            rgba(0, 0, 0, 0.22) 2px 3px
+          ),
           radial-gradient(1100px 560px at 50% -8%, #241b33, var(--bg-base) 70%);
         color: var(--text-primary);
         font-family: var(--font-ui);
         min-height: 100vh;
       }
-      .frame { max-width: 1440px; margin: 0 auto; }
+      .frame {
+        max-width: 1440px;
+        margin: 0 auto;
+      }
       .panel {
         background: var(--bg-surface);
         border: 3px solid var(--border-ink);
@@ -54,108 +65,394 @@
       }
       /* Header */
       .header {
-        display: flex; justify-content: space-between; align-items: center;
-        padding: 18px 48px; border-bottom: 3px solid var(--border-ink);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 48px;
+        border-bottom: 3px solid var(--border-ink);
         background: rgba(0, 0, 0, 0.3);
       }
-      .logo { display: flex; align-items: center; gap: 12px; font-family: var(--font-mono); }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-family: var(--font-mono);
+      }
       .logo-mark {
-        width: 40px; height: 40px; display: grid; place-items: center;
+        width: 40px;
+        height: 40px;
+        display: grid;
+        place-items: center;
         background: linear-gradient(180deg, var(--flame), var(--flame-dark));
-        color: #fff; font-size: 24px; font-weight: 900;
+        color: #fff;
+        font-size: 24px;
+        font-weight: 900;
         clip-path: polygon(50% 0, 100% 25%, 88% 100%, 12% 100%, 0 25%);
         box-shadow: var(--drop-sm);
       }
-      .logo-word { font-size: var(--fs-xl); font-weight: 900; letter-spacing: 0.14em; }
-      .logo-word .umlaut { color: var(--flame); }
-      .logo-sub { font-size: var(--fs-sm); color: var(--text-faint); letter-spacing: 0.3em; }
-      .hud { display: flex; gap: 16px; font-family: var(--font-mono); }
+      .logo-word {
+        font-size: var(--fs-xl);
+        font-weight: 900;
+        letter-spacing: 0.14em;
+      }
+      .logo-word .umlaut {
+        color: var(--flame);
+      }
+      .logo-sub {
+        font-size: var(--fs-sm);
+        color: var(--text-faint);
+        letter-spacing: 0.3em;
+      }
+      .hud {
+        display: flex;
+        gap: 16px;
+        font-family: var(--font-mono);
+      }
       .hud-box {
-        display: flex; align-items: center; gap: 12px; padding: 10px 16px;
-        background: var(--bg-raised); border: 3px solid var(--border-ink);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 16px;
+        background: var(--bg-raised);
+        border: 3px solid var(--border-ink);
         box-shadow: var(--drop-sm);
       }
-      .hud-label { font-size: 11px; letter-spacing: 0.25em; color: var(--text-faint); }
-      .hud-value { font-size: var(--fs-lg); font-weight: 900; }
-      .venue { color: var(--chrome); }
-      .tour-count { color: var(--gold); }
-      .amp-meter { display: flex; gap: 3px; }
-      .amp-cell { width: 10px; height: 18px; border: 1px solid var(--border-bold); background: #0d0b12; }
-      .amp-cell.on { background: var(--amp-green); border-color: #2c5c14; }
+      .hud-label {
+        font-size: 11px;
+        letter-spacing: 0.25em;
+        color: var(--text-faint);
+      }
+      .hud-value {
+        font-size: var(--fs-lg);
+        font-weight: 900;
+      }
+      .venue {
+        color: var(--chrome);
+      }
+      .tour-count {
+        color: var(--gold);
+      }
+      .amp-meter {
+        display: flex;
+        gap: 3px;
+      }
+      .amp-cell {
+        width: 10px;
+        height: 18px;
+        border: 1px solid var(--border-bold);
+        background: #0d0b12;
+      }
+      .amp-cell.on {
+        background: var(--amp-green);
+        border-color: #2c5c14;
+      }
       /* Hero: backstage board */
       .hero {
-        margin: 28px 48px; padding: 36px 40px; position: relative; overflow: hidden;
-        display: flex; align-items: center; gap: 36px;
+        margin: 28px 48px;
+        padding: 36px 40px;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        gap: 36px;
         background:
-          radial-gradient(500px 220px at 82% 0%, rgba(255, 59, 46, 0.25), transparent 70%),
+          radial-gradient(
+            500px 220px at 82% 0%,
+            rgba(255, 59, 46, 0.25),
+            transparent 70%
+          ),
           var(--bg-surface);
       }
       .spotlight {
-        position: absolute; top: -40px; left: 30%; width: 340px; height: 260px;
-        background: linear-gradient(195deg, rgba(255, 210, 94, 0.16), transparent 65%);
+        position: absolute;
+        top: -40px;
+        left: 30%;
+        width: 340px;
+        height: 260px;
+        background: linear-gradient(
+          195deg,
+          rgba(255, 210, 94, 0.16),
+          transparent 65%
+        );
         clip-path: polygon(40% 0, 60% 0, 100% 100%, 0 100%);
       }
       /* Bandmate sprite: pixel guitarist */
-      .bandmate { position: relative; width: 150px; flex: none; text-align: center; }
-      .sprite { width: 120px; height: 130px; margin: 0 auto; position: relative; }
-      .px { position: absolute; }
-      .sprite .hair { left: 14px; top: 0; width: 92px; height: 58px; background: #1c1622; clip-path: polygon(0 100%, 8% 20%, 25% 0, 75% 0, 92% 20%, 100% 100%, 82% 70%, 65% 100%, 50% 66%, 35% 100%, 18% 70%); }
-      .sprite .face { left: 34px; top: 18px; width: 52px; height: 34px; background: #e8c49a; }
-      .sprite .eye-l { left: 44px; top: 30px; width: 7px; height: 7px; background: #14101a; }
-      .sprite .eye-r { left: 68px; top: 30px; width: 7px; height: 7px; background: #14101a; }
-      .sprite .body { left: 28px; top: 52px; width: 64px; height: 46px; background: #241f30; }
-      .sprite .guitar { left: 8px; top: 70px; width: 104px; height: 14px; background: linear-gradient(90deg, var(--chrome) 0 26%, var(--flame) 26% 100%); clip-path: polygon(0 40%, 22% 0, 100% 20%, 100% 80%, 22% 100%, 0 60%); }
-      .sprite .horns { left: 96px; top: 44px; width: 22px; height: 22px; background: #e8c49a; clip-path: polygon(0 100%, 0 30%, 25% 30%, 25% 0, 45% 0, 45% 55%, 60% 55%, 60% 0, 80% 0, 80% 30%, 100% 30%, 100% 100%); }
-      .bandmate-name { margin-top: 10px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.22em; color: var(--text-faint); }
+      .bandmate {
+        position: relative;
+        width: 150px;
+        flex: none;
+        text-align: center;
+      }
+      .sprite {
+        width: 120px;
+        height: 130px;
+        margin: 0 auto;
+        position: relative;
+      }
+      .px {
+        position: absolute;
+      }
+      .sprite .hair {
+        left: 14px;
+        top: 0;
+        width: 92px;
+        height: 58px;
+        background: #1c1622;
+        clip-path: polygon(
+          0 100%,
+          8% 20%,
+          25% 0,
+          75% 0,
+          92% 20%,
+          100% 100%,
+          82% 70%,
+          65% 100%,
+          50% 66%,
+          35% 100%,
+          18% 70%
+        );
+      }
+      .sprite .face {
+        left: 34px;
+        top: 18px;
+        width: 52px;
+        height: 34px;
+        background: #e8c49a;
+      }
+      .sprite .eye-l {
+        left: 44px;
+        top: 30px;
+        width: 7px;
+        height: 7px;
+        background: #14101a;
+      }
+      .sprite .eye-r {
+        left: 68px;
+        top: 30px;
+        width: 7px;
+        height: 7px;
+        background: #14101a;
+      }
+      .sprite .body {
+        left: 28px;
+        top: 52px;
+        width: 64px;
+        height: 46px;
+        background: #241f30;
+      }
+      .sprite .guitar {
+        left: 8px;
+        top: 70px;
+        width: 104px;
+        height: 14px;
+        background: linear-gradient(
+          90deg,
+          var(--chrome) 0 26%,
+          var(--flame) 26% 100%
+        );
+        clip-path: polygon(0 40%, 22% 0, 100% 20%, 100% 80%, 22% 100%, 0 60%);
+      }
+      .sprite .horns {
+        left: 96px;
+        top: 44px;
+        width: 22px;
+        height: 22px;
+        background: #e8c49a;
+        clip-path: polygon(
+          0 100%,
+          0 30%,
+          25% 30%,
+          25% 0,
+          45% 0,
+          45% 55%,
+          60% 55%,
+          60% 0,
+          80% 0,
+          80% 30%,
+          100% 30%,
+          100% 100%
+        );
+      }
+      .bandmate-name {
+        margin-top: 10px;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: 0.22em;
+        color: var(--text-faint);
+      }
       .speech {
-        position: relative; background: var(--text-primary); color: #14101a;
-        padding: 14px 20px; font-weight: 800; font-size: var(--fs-md);
-        box-shadow: var(--drop-sm); display: inline-block; margin-bottom: 18px;
+        position: relative;
+        background: var(--text-primary);
+        color: #14101a;
+        padding: 14px 20px;
+        font-weight: 800;
+        font-size: var(--fs-md);
+        box-shadow: var(--drop-sm);
+        display: inline-block;
+        margin-bottom: 18px;
       }
-      .speech .accent { color: var(--flame-dark); }
-      .hero-body { position: relative; }
-      .next-label { font-family: var(--font-mono); font-size: var(--fs-sm); letter-spacing: 0.28em; color: var(--amp-green); margin-bottom: 8px; }
-      .next-title { font-size: var(--fs-hero); font-weight: 900; text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5); margin-bottom: 22px; }
+      .speech .accent {
+        color: var(--flame-dark);
+      }
+      .hero-body {
+        position: relative;
+      }
+      .next-label {
+        font-family: var(--font-mono);
+        font-size: var(--fs-sm);
+        letter-spacing: 0.28em;
+        color: var(--amp-green);
+        margin-bottom: 8px;
+      }
+      .next-title {
+        font-size: var(--fs-hero);
+        font-weight: 900;
+        text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
+        margin-bottom: 22px;
+      }
       .cta {
-        display: inline-flex; align-items: center; gap: 14px;
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
         background: linear-gradient(180deg, var(--flame), var(--flame-dark));
-        color: #fff6ec; border: none; padding: 16px 34px;
-        font-size: var(--fs-lg); font-weight: 900; letter-spacing: 0.2em;
-        box-shadow: 0 6px 0 var(--flame-dark), var(--drop-sm); cursor: pointer;
+        color: #fff6ec;
+        border: none;
+        padding: 16px 34px;
+        font-size: var(--fs-lg);
+        font-weight: 900;
+        letter-spacing: 0.2em;
+        box-shadow:
+          0 6px 0 var(--flame-dark),
+          var(--drop-sm);
+        cursor: pointer;
       }
-      .cta-key { font-family: var(--font-mono); font-size: 12px; background: rgba(0, 0, 0, 0.35); padding: 3px 10px; }
+      .cta-key {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        background: rgba(0, 0, 0, 0.35);
+        padding: 3px 10px;
+      }
       /* Tour map */
-      .tour { margin: 0 48px 40px; padding: 30px 36px; }
-      .tour-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 22px; font-family: var(--font-mono); }
-      .tour-title { font-size: var(--fs-lg); font-weight: 900; letter-spacing: 0.25em; }
-      .tour-note { font-size: var(--fs-sm); color: var(--text-faint); }
-      .tour-row { display: flex; align-items: center; gap: 18px; margin-bottom: 20px; }
+      .tour {
+        margin: 0 48px 40px;
+        padding: 30px 36px;
+      }
+      .tour-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 22px;
+        font-family: var(--font-mono);
+      }
+      .tour-title {
+        font-size: var(--fs-lg);
+        font-weight: 900;
+        letter-spacing: 0.25em;
+      }
+      .tour-note {
+        font-size: var(--fs-sm);
+        color: var(--text-faint);
+      }
+      .tour-row {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        margin-bottom: 20px;
+      }
       .venue-card {
-        width: 170px; flex: none; text-align: center; padding: 10px 0;
-        background: var(--bg-raised); border: 3px solid var(--border-ink);
-        font-family: var(--font-mono); font-weight: 900; font-size: var(--fs-sm);
+        width: 170px;
+        flex: none;
+        text-align: center;
+        padding: 10px 0;
+        background: var(--bg-raised);
+        border: 3px solid var(--border-ink);
+        font-family: var(--font-mono);
+        font-weight: 900;
+        font-size: var(--fs-sm);
         box-shadow: var(--drop-sm);
       }
-      .venue-card small { display: block; font-weight: 400; color: var(--text-secondary); font-size: 12px; }
-      .tracks { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-      .track {
-        width: 46px; height: 46px; display: grid; place-items: center;
-        font-family: var(--font-mono); font-weight: 900; font-size: var(--fs-md);
-        border: 3px solid var(--border-bold); box-shadow: var(--drop-sm);
+      .venue-card small {
+        display: block;
+        font-weight: 400;
+        color: var(--text-secondary);
+        font-size: 12px;
       }
-      .track.done { border-color: var(--amp-green); color: var(--amp-green); background: #17260d; }
-      .track.next { border-color: var(--gold); color: var(--gold); background: #0d0b07; }
-      .track.rest { border-style: dashed; color: var(--text-faint); box-shadow: none; }
-      .track-label { font-family: var(--font-mono); font-size: var(--fs-sm); color: var(--text-secondary); text-align: center; margin-top: 4px; }
-      .track-cell { display: flex; flex-direction: column; align-items: center; }
+      .tracks {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .track {
+        width: 46px;
+        height: 46px;
+        display: grid;
+        place-items: center;
+        font-family: var(--font-mono);
+        font-weight: 900;
+        font-size: var(--fs-md);
+        border: 3px solid var(--border-bold);
+        box-shadow: var(--drop-sm);
+      }
+      .track.done {
+        border-color: var(--amp-green);
+        color: var(--amp-green);
+        background: #17260d;
+      }
+      .track.next {
+        border-color: var(--gold);
+        color: var(--gold);
+        background: #0d0b07;
+      }
+      .track.rest {
+        border-style: dashed;
+        color: var(--text-faint);
+        box-shadow: none;
+      }
+      .track-label {
+        font-family: var(--font-mono);
+        font-size: var(--fs-sm);
+        color: var(--text-secondary);
+        text-align: center;
+        margin-top: 4px;
+      }
+      .track-cell {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
       /* Shout legend */
-      .shouts { display: flex; gap: 18px; margin: 0 48px 48px; }
-      .shout { flex: 1; text-align: center; padding: 18px; }
-      .shout-word { font-size: var(--fs-xl); font-weight: 900; }
-      .shout.gold .shout-word { color: var(--gold); text-shadow: 3px 3px 0 var(--flame-dark); }
-      .shout.silver .shout-word { color: var(--chrome); }
-      .shout.bronze .shout-word { color: #d98c5f; }
-      .shout-note { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); margin-top: 6px; letter-spacing: 0.15em; }
+      .shouts {
+        display: flex;
+        gap: 18px;
+        margin: 0 48px 48px;
+      }
+      .shout {
+        flex: 1;
+        text-align: center;
+        padding: 18px;
+      }
+      .shout-word {
+        font-size: var(--fs-xl);
+        font-weight: 900;
+      }
+      .shout.gold .shout-word {
+        color: var(--gold);
+        text-shadow: 3px 3px 0 var(--flame-dark);
+      }
+      .shout.silver .shout-word {
+        color: var(--chrome);
+      }
+      .shout.bronze .shout-word {
+        color: #d98c5f;
+      }
+      .shout-note {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        color: var(--text-faint);
+        margin-top: 6px;
+        letter-spacing: 0.15em;
+      }
     </style>
   </head>
   <body>
@@ -173,7 +470,10 @@
             <span class="hud-label">VENUE</span>
             <span class="hud-value venue">ライブハウス</span>
             <span class="amp-meter">
-              <span class="amp-cell on"></span><span class="amp-cell on"></span><span class="amp-cell on"></span><span class="amp-cell on"></span><span class="amp-cell"></span><span class="amp-cell"></span><span class="amp-cell"></span>
+              <span class="amp-cell on"></span><span class="amp-cell on"></span
+              ><span class="amp-cell on"></span><span class="amp-cell on"></span
+              ><span class="amp-cell"></span><span class="amp-cell"></span
+              ><span class="amp-cell"></span>
             </span>
           </div>
           <div class="hud-box">
@@ -196,42 +496,83 @@
           <div class="bandmate-name">相棒 "GAIN" (Gt.)</div>
         </div>
         <div class="hero-body">
-          <div class="speech">今夜もいくぞ!! <span class="accent">リフは指が覚えるまで</span>だ!!</div>
+          <div class="speech">
+            今夜もいくぞ!! <span class="accent">リフは指が覚えるまで</span>だ!!
+          </div>
           <div class="next-label">▶ NEXT RIFF — 今日の練習曲</div>
           <div class="next-title">V d p — 行を切って移動</div>
-          <button type="button" class="cta">リフを鳴らす <span class="cta-key">Enter</span></button>
+          <button type="button" class="cta">
+            リフを鳴らす <span class="cta-key">Enter</span>
+          </button>
         </div>
       </section>
 
       <section class="tour panel">
         <div class="tour-head">
-          <div class="tour-title">🔥 WORLD TOUR — セットリストを制覇して会場を大きくしろ</div>
-          <div class="tour-note">✓ 完奏 / ▶ 今夜の一曲 / ? 未演奏(どれでも弾ける)</div>
+          <div class="tour-title">
+            🔥 WORLD TOUR — セットリストを制覇して会場を大きくしろ
+          </div>
+          <div class="tour-note">
+            ✓ 完奏 / ▶ 今夜の一曲 / ? 未演奏(どれでも弾ける)
+          </div>
         </div>
         <div class="tour-row">
           <div class="venue-card">STAGE 1<small>基本移動</small></div>
           <div class="tracks">
-            <div class="track-cell"><div class="track done">✓</div><div class="track-label">x</div></div>
-            <div class="track-cell"><div class="track done">✓</div><div class="track-label">h l</div></div>
-            <div class="track-cell"><div class="track next">▶</div><div class="track-label">j k</div></div>
-            <div class="track-cell"><div class="track rest">?</div><div class="track-label">w</div></div>
-            <div class="track-cell"><div class="track rest">?</div><div class="track-label">b</div></div>
+            <div class="track-cell">
+              <div class="track done">✓</div>
+              <div class="track-label">x</div>
+            </div>
+            <div class="track-cell">
+              <div class="track done">✓</div>
+              <div class="track-label">h l</div>
+            </div>
+            <div class="track-cell">
+              <div class="track next">▶</div>
+              <div class="track-label">j k</div>
+            </div>
+            <div class="track-cell">
+              <div class="track rest">?</div>
+              <div class="track-label">w</div>
+            </div>
+            <div class="track-cell">
+              <div class="track rest">?</div>
+              <div class="track-label">b</div>
+            </div>
           </div>
         </div>
         <div class="tour-row">
           <div class="venue-card">STAGE 7<small>ビジュアルの型</small></div>
           <div class="tracks">
-            <div class="track-cell"><div class="track rest">?</div><div class="track-label">v</div></div>
-            <div class="track-cell"><div class="track rest">?</div><div class="track-label">V</div></div>
-            <div class="track-cell"><div class="track rest">?</div><div class="track-label">Ctrl-v</div></div>
+            <div class="track-cell">
+              <div class="track rest">?</div>
+              <div class="track-label">v</div>
+            </div>
+            <div class="track-cell">
+              <div class="track rest">?</div>
+              <div class="track-label">V</div>
+            </div>
+            <div class="track-cell">
+              <div class="track rest">?</div>
+              <div class="track-label">Ctrl-v</div>
+            </div>
           </div>
         </div>
       </section>
 
       <section class="shouts">
-        <div class="shout panel gold"><div class="shout-word">ENCORE!!</div><div class="shout-note">パー以内 = 完璧なテイク</div></div>
-        <div class="shout panel silver"><div class="shout-word">ナイスリフ!</div><div class="shout-note">銀 = あと少しでキマる</div></div>
-        <div class="shout panel bronze"><div class="shout-word">完奏</div><div class="shout-note">銅 = 最後まで弾き切った</div></div>
+        <div class="shout panel gold">
+          <div class="shout-word">ENCORE!!</div>
+          <div class="shout-note">パー以内 = 完璧なテイク</div>
+        </div>
+        <div class="shout panel silver">
+          <div class="shout-word">ナイスリフ!</div>
+          <div class="shout-note">銀 = あと少しでキマる</div>
+        </div>
+        <div class="shout panel bronze">
+          <div class="shout-word">完奏</div>
+          <div class="shout-note">銅 = 最後まで弾き切った</div>
+        </div>
       </section>
     </div>
   </body>

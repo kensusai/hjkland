@@ -4,10 +4,10 @@ const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
 await page.goto("https://kensusai.github.io/vim-dojo/", {
   waitUntil: "networkidle",
 });
-await page.waitForSelector("text=WORLD MAP", { timeout: 15000 });
+await page.waitForSelector("text=PARK MAP", { timeout: 15000 });
 console.log("[live] home rendered");
 // play lesson 1 exercise 1 on production
-await page.getByRole("button", { name: /稽古をはじめる/ }).click();
+await page.getByRole("button", { name: /乗りにいく/ }).click();
 await page.waitForSelector(".editor-host .cm-content", { timeout: 15000 });
 await page.locator(".editor-host .cm-content").click();
 for (const k of ["Escape", "g", "g", "0", "x"]) {

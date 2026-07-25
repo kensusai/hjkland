@@ -1,32 +1,41 @@
 @import "tailwindcss";
 
 /*
- * Design tokens — the canonical values live in design/mockups/practice-c.html
- * (案C). Keep both in sync when tuning the look.
+ * Design tokens — hjkland (theme park) rebrand, 2026-07-25. The canonical
+ * values live in design/mockups/rebrand-hjkland.html / -practice.html (案A:
+ * bright park frame, DARK editor pane). Keep both in sync when tuning.
+ *
+ * NOTE ON NAMES: token names are legacy from the dojo palette and are kept so
+ * hundreds of Tailwind classes don't churn — read them by ROLE, not by hue:
+ *   ink      = borders (now navy)      cream* = text (now dark navy scale)
+ *   matcha   = success green (pop)     shu    = action red (coaster)
+ *   gold     = reward yellow           paper  = speech-bubble surface
  */
 @theme {
   /* CAUTION: naming this color "base" makes Tailwind's `text-base` resolve to
-     this COLOR (near-black), not the font-size utility. For 1rem type, use no
+     this COLOR, not the font-size utility. For 1rem type, use no
      size utility at all (1rem is the default) — never `text-base`. */
-  --color-base: #12100b;
-  --color-surface: #1d1912;
-  --color-raised: #2b2517;
-  --color-editor: #0e0c08;
-  --color-ink: #4a3f26;
-  --color-ink-bold: #6b5c36;
-  --color-cream: #f5efdd;
-  --color-cream-dim: #b3a988;
-  --color-cream-faint: #746a4e;
-  --color-matcha: #9ee34f;
-  --color-matcha-dim: #3f5f1f;
-  --color-shu: #ff5a3c;
-  --color-shu-dark: #a83318;
-  --color-gold: #ffd25e;
-  --color-silver: #cdd6e4;
-  --color-bronze: #d98c5f;
-  --color-freeze: #7cc7ff;
-  --color-paper: #f3e9cd;
-  --color-paper-ink: #2b241a;
+  --color-base: #bfe6f7;
+  --color-surface: #fffdf4;
+  --color-raised: #fff3d6;
+  --color-editor: #1d2431;
+  --color-editor-text: #eef3f9;
+  --color-ink: #2b3a4a;
+  --color-ink-bold: #55677a;
+  --color-cream: #253244;
+  --color-cream-dim: #5b6b7d;
+  --color-cream-faint: #93a2b3;
+  --color-matcha: #4fd06b;
+  --color-matcha-dim: #2b8f45;
+  --color-shu: #ff5a5a;
+  --color-shu-dark: #c22f3d;
+  --color-gold: #e8a013;
+  --color-silver: #8fa3bd;
+  --color-bronze: #b0713a;
+  --color-freeze: #2f9bd6;
+  --color-paper: #ffffff;
+  --color-paper-ink: #253244;
+  --color-sky-deep: #8fd0ee;
 
   --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
   --font-sans:
@@ -44,48 +53,30 @@
 
   body {
     background:
-      repeating-linear-gradient(
-        0deg,
-        transparent 0 2px,
-        rgb(0 0 0 / 0.18) 2px 3px
-      ),
-      radial-gradient(1200px 600px at 50% -10%, #1c1810, var(--color-base) 70%);
+      radial-gradient(700px 300px at 80% -6%, #fff8d9, transparent 65%),
+      linear-gradient(180deg, var(--color-sky-deep), var(--color-base) 55%);
     color: var(--color-cream);
     font-family: var(--font-sans);
   }
 }
 
 @layer components {
-  /* Retro panel: clipped pixel corners + hard drop shadow (案C) */
+  /* Park panel: rounded card with a soft navy drop (rebrand-hjkland.html).
+     Class name kept from the dojo era (was pixel-clipped corners). */
   .pixel-panel {
     background: var(--color-surface);
     border: 3px solid var(--color-ink);
-    box-shadow:
-      6px 6px 0 rgb(0 0 0 / 0.6),
-      inset 0 0 0 2px rgb(0 0 0 / 0.35);
-    clip-path: polygon(
-      0 8px,
-      8px 8px,
-      8px 0,
-      calc(100% - 8px) 0,
-      calc(100% - 8px) 8px,
-      100% 8px,
-      100% calc(100% - 8px),
-      calc(100% - 8px) calc(100% - 8px),
-      calc(100% - 8px) 100%,
-      8px 100%,
-      8px calc(100% - 8px),
-      0 calc(100% - 8px)
-    );
+    border-radius: 14px;
+    box-shadow: 6px 6px 0 rgb(43 58 74 / 0.35);
   }
 
   .btn-chunky {
-    box-shadow: 3px 3px 0 rgb(0 0 0 / 0.6);
+    box-shadow: 3px 3px 0 rgb(43 58 74 / 0.35);
     cursor: pointer;
   }
   .btn-chunky:active {
     translate: 2px 2px;
-    box-shadow: 1px 1px 0 rgb(0 0 0 / 0.6);
+    box-shadow: 1px 1px 0 rgb(43 58 74 / 0.35);
   }
 
   @keyframes blink-step {
@@ -97,26 +88,30 @@
     animation: blink-step 1.2s steps(1) infinite;
   }
 
-  /* Night-sky scene for the home sensei board (design/mockups/home-c.html) */
+  /* Daytime park scene for the home mascot board (rebrand-hjkland.html) */
   .scene-sky {
     background:
-      linear-gradient(180deg, #0d1524 0%, #131b2c 58%, transparent 58%),
+      linear-gradient(180deg, #8fd0ee 0%, #bfe6f7 58%, transparent 58%),
       var(--color-surface);
   }
   .scene-star {
+    /* little clouds (name kept from the night-sky era) */
     position: absolute;
-    width: 3px;
-    height: 3px;
-    background: #cfe4ff;
+    width: 46px;
+    height: 14px;
+    border-radius: 999px;
+    background: #ffffff;
+    opacity: 0.9;
   }
   .scene-moon {
+    /* the sun now — same pixel shape, sunnier color */
     position: absolute;
     top: 26px;
     right: 64px;
     width: 36px;
     height: 36px;
-    background: var(--color-gold);
-    opacity: 0.9;
+    background: #ffd23f;
+    opacity: 0.95;
     clip-path: polygon(
       0 25%,
       25% 25%,
@@ -133,13 +128,14 @@
     );
   }
   .scene-mountains {
+    /* rolling green hills */
     position: absolute;
     left: 0;
     right: 0;
     top: 96px;
     height: 90px;
-    background: #1a2438;
-    opacity: 0.8;
+    background: #7fca8a;
+    opacity: 0.9;
     clip-path: polygon(
       0 100%,
       0 60%,
@@ -169,8 +165,8 @@
     height: 26px;
     background: repeating-linear-gradient(
       90deg,
-      #2f2818 0 14px,
-      #272112 14px 28px
+      #63bd72 0 14px,
+      #55ab64 14px 28px
     );
     border-top: 3px solid var(--color-ink);
   }
@@ -187,7 +183,7 @@
     pointer-events: none;
     background: radial-gradient(
       ellipse at center,
-      rgb(255 210 94 / 0.9),
+      rgb(255 210 63 / 0.9),
       transparent 70%
     );
     animation: clear-flash-fade 0.45s ease-out both;
@@ -210,8 +206,9 @@
     animation: pop-in 0.35s ease-out both;
   }
 
-  /* CodeMirror host (engine mounts here). Editor stays honest and quiet —
-     the game look lives around it, not inside it. */
+  /* CodeMirror host (engine mounts here). 案A: the buffer stays DARK inside
+     the bright park frame — practicing on the same colors as a real terminal
+     keeps the learned feel transferable. The game look lives around it. */
   .editor-host .cm-editor {
     background: var(--color-editor);
     font-family: var(--font-mono);
@@ -228,13 +225,13 @@
   }
   .editor-host .cm-gutters {
     background: var(--color-editor);
-    color: var(--color-cream-faint);
-    border-right: 1px solid var(--color-ink);
+    color: #5d6b80;
+    border-right: 1px solid #3a4657;
     padding-right: 8px;
   }
   .editor-host .cm-fat-cursor {
     background: var(--color-matcha) !important;
-    color: #17260a !important;
+    color: #10321b !important;
     border: none;
   }
   /* insert-mode caret: a bright bar so you always know where you are
@@ -244,21 +241,22 @@
   }
   .editor-host .cm-content {
     caret-color: var(--color-matcha);
-    color: var(--color-cream);
+    color: var(--color-editor-text);
   }
   .editor-host .cm-line ::selection,
   .editor-host .cm-selectionBackground {
-    background: rgb(158 227 79 / 0.25) !important;
+    background: rgb(79 208 107 / 0.3) !important;
   }
-  /* vim search/ex dialog rendered by the extension */
+  /* vim search/ex dialog rendered by the extension — stays on the dark side
+     of the fence with the editor */
   .editor-host .cm-vim-panel,
   .editor-host .cm-panels {
-    background: var(--color-raised);
-    color: var(--color-cream);
+    background: #2a3342;
+    color: var(--color-editor-text);
     font-family: var(--font-mono);
   }
   .editor-host .cm-vim-panel input {
-    color: var(--color-cream);
+    color: var(--color-editor-text);
     font-family: var(--font-mono);
   }
 }

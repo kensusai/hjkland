@@ -101,6 +101,10 @@ vi.mock("./sound", () => ({
   isMuted: () => true,
   toggleMuted: () => true,
   playClear: () => {},
+  isBgmMuted: () => true,
+  toggleBgm: () => true,
+  startBgm: () => {},
+  stopBgm: () => {},
 }));
 
 afterEach(() => {
@@ -157,7 +161,7 @@ describe("PracticePlayer session lifecycle", () => {
     const { engine, onAttemptFinished } = renderPlayer();
     // Retry before pressing any key: the first session must be torn down,
     // not left listening alongside the new one.
-    fireEvent.click(screen.getByRole("button", { name: "やり直す" }));
+    fireEvent.click(screen.getByRole("button", { name: "もう一回乗る" }));
     act(() => {
       engine.pressKey("x");
       engine.changeBuffer(exercise.targetBuffer);
@@ -180,8 +184,8 @@ describe("PracticePlayer session lifecycle", () => {
     act(() => {
       engine.pressKey("j");
     });
-    fireEvent.click(screen.getByRole("button", { name: "やり直す" })); // 1 key → recorded
-    fireEvent.click(screen.getByRole("button", { name: "やり直す" })); // 0 keys → discarded
+    fireEvent.click(screen.getByRole("button", { name: "もう一回乗る" })); // 1 key → recorded
+    fireEvent.click(screen.getByRole("button", { name: "もう一回乗る" })); // 0 keys → discarded
     expect(appended).toHaveLength(1);
     expect(appended[0]?.result).toBe("abandoned");
     act(() => {

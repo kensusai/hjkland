@@ -19,7 +19,7 @@ import { achievementDefs } from "../core/progression/achievements";
 import { DIFFICULTIES, configFor } from "../core/difficulty";
 import { beltForLevel } from "../core/progression/belt";
 import { BackupPanel } from "./BackupPanel";
-import { SenseiSprite, SpeechBubble } from "./Sensei";
+import { MascotSprite, SpeechBubble } from "./Mascot";
 import { useAppStore } from "./storeContext";
 
 export function HomeScreen() {
@@ -71,19 +71,19 @@ export function HomeScreen() {
 
   return (
     <div className="mx-auto flex min-h-screen max-w-[1440px] flex-col">
-      <header className="flex items-center justify-between border-b-3 border-ink bg-black/25 px-12 py-4">
+      <header className="flex items-center justify-between border-b-3 border-ink bg-white/40 px-12 py-4">
         <div className="flex items-center gap-3 font-mono text-xl font-black tracking-widest">
-          <span className="flex h-9 w-9 items-center justify-center bg-shu text-lg text-paper shadow-[3px_3px_0_rgb(0_0_0/0.6)]">
-            道
+          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-shu text-lg shadow-[3px_3px_0_rgb(43_58_74/0.35)]">
+            🎈
           </span>
-          VIM-DOJO<span className="blink text-matcha">▮</span>
+          HJKLAND<span className="blink text-matcha-dim">▮</span>
         </div>
         <div className="flex items-center gap-4 font-mono">
-          <div className="flex items-center gap-3 border-3 border-ink bg-raised px-4 py-2 shadow-[3px_3px_0_rgb(0_0_0/0.6)]">
-            <span className="relative inline-block h-3 w-10 border-2 border-[#3a2b1e] bg-[#8a5a2b] after:absolute after:left-[15px] after:top-[-4px] after:h-4 after:w-1.5 after:border-2 after:border-[#3a2b1e] after:bg-[#8a5a2b] after:content-['']" />
+          <div className="flex items-center gap-3 border-3 border-ink bg-raised px-4 py-2 shadow-[3px_3px_0_rgb(43_58_74/0.35)]">
+            <span className="text-xl">🎟</span>
             <div>
               <div className="text-[0.625rem] tracking-widest text-cream-faint">
-                RANK
+                パスポート
               </div>
               <b className="text-sm">{belt}</b>
             </div>
@@ -105,7 +105,7 @@ export function HomeScreen() {
               </div>
             </div>
           </div>
-          <div className="flex items-center gap-1 border-3 border-ink bg-raised px-2 py-2 shadow-[3px_3px_0_rgb(0_0_0/0.6)]">
+          <div className="flex items-center gap-1 border-3 border-ink bg-raised px-2 py-2 shadow-[3px_3px_0_rgb(43_58_74/0.35)]">
             <span className="mr-1 text-[0.625rem] tracking-widest text-cream-faint">
               難易度
             </span>
@@ -124,11 +124,11 @@ export function HomeScreen() {
               </button>
             ))}
           </div>
-          <div className="flex items-center gap-2 border-3 border-ink bg-raised px-4 py-2 shadow-[3px_3px_0_rgb(0_0_0/0.6)]">
+          <div className="flex items-center gap-2 border-3 border-ink bg-raised px-4 py-2 shadow-[3px_3px_0_rgb(43_58_74/0.35)]">
             <span className="text-xl">🔥</span>
             <div>
               <div className="text-[0.625rem] tracking-widest text-cream-faint">
-                STREAK
+                連続来園
               </div>
               <span className="text-xl font-black text-gold">
                 {profile.streak.current}
@@ -176,39 +176,41 @@ export function HomeScreen() {
           <div aria-hidden="true" className="scene-mountains" />
           <div aria-hidden="true" className="scene-ground" />
           <div className="relative flex flex-none flex-col items-center">
-            <SenseiSprite mood="hype" size={140} />
+            <MascotSprite mood="hype" size={140} />
             <div className="mt-2 font-mono text-[0.625rem] tracking-[0.2em] text-cream-faint">
-              SHIHAN &quot;GEKIATSU&quot;
+              案内係 モーション君
             </div>
           </div>
           <div className="relative flex-1">
             <SpeechBubble>
               {profile.streak.current > 0 ? (
                 <>
-                  {profile.streak.current}日連続、いい流れだ!!{" "}
-                  <span className="text-shu">今日も一本いくぞ!!</span>
+                  {profile.streak.current}日連続来園、いい流れ!!{" "}
+                  <span className="text-shu-dark">今日はどれに乗る?</span>
                 </>
               ) : (
                 <>
-                  よし、来たな!!{" "}
-                  <span className="text-shu">修行の時間だ!!</span>
+                  ようこそ!!{" "}
+                  <span className="text-shu-dark">
+                    今日はどのアトラクションから乗る?
+                  </span>
                 </>
               )}
             </SpeechBubble>
             {daily ? (
               <>
                 <div className="mb-1 font-mono text-xs font-black tracking-[0.3em] text-gold">
-                  ▶ TODAY&apos;S QUEST — {daily.date}
+                  ▶ TODAY&apos;S RIDE — {daily.date}
                 </div>
-                <h1 className="mb-3 text-3xl font-black [text-shadow:4px_4px_0_rgb(0_0_0/0.45)]">
+                <h1 className="mb-3 text-3xl font-black [text-shadow:3px_3px_0_rgb(255_255_255/0.85)]">
                   {daily.exercise.title}
                 </h1>
                 <div className="mb-4 flex gap-2 font-mono text-xs font-extrabold">
-                  <span className="border-2 border-ink bg-black/35 px-3 py-0.5">
+                  <span className="border-2 border-ink bg-white/55 px-3 py-0.5">
                     PAR {daily.exercise.par}
                   </span>
                   <span
-                    className={`border-2 border-ink bg-black/35 px-3 py-0.5 ${daily.xpGranted ? "text-matcha" : "text-gold"}`}
+                    className={`border-2 border-ink bg-white/55 px-3 py-0.5 ${daily.xpGranted ? "text-matcha" : "text-gold"}`}
                   >
                     {daily.xpGranted ? "本日クリア済 ✓" : "REWARD +15XP〜"}
                   </span>
@@ -235,7 +237,7 @@ export function HomeScreen() {
                         onClick={() => navigate({ screen: "daily" })}
                         className="btn-chunky border-2 border-b-[6px] border-ink-bold bg-raised px-6 py-3 text-left font-mono text-xs font-extrabold text-cream-dim"
                       >
-                        今日のお題にもう一度
+                        今日のライドにもう一度
                         <span className="block text-[0.625rem] font-normal text-cream-faint">
                           自己ベスト{" "}
                           {profile.exerciseBests[daily.exercise.id]
@@ -275,9 +277,9 @@ export function HomeScreen() {
             ) : next ? (
               <>
                 <div className="mb-1 font-mono text-xs font-black tracking-[0.3em] text-matcha">
-                  ▶ NEXT LESSON
+                  ▶ NEXT RIDE — おすすめのレッスン
                 </div>
-                <h1 className="mb-4 text-3xl font-black [text-shadow:4px_4px_0_rgb(0_0_0/0.45)]">
+                <h1 className="mb-4 text-3xl font-black [text-shadow:3px_3px_0_rgb(255_255_255/0.85)]">
                   {next.lesson.title}
                 </h1>
                 <button
@@ -291,15 +293,15 @@ export function HomeScreen() {
                   }
                   className="btn-chunky inline-flex items-center gap-3 border-b-8 border-shu-dark bg-shu px-11 py-4 text-xl font-black tracking-widest text-[#fff6ec]"
                 >
-                  稽古をはじめる
-                  <span className="bg-black/30 px-2 font-mono text-xs">
+                  乗りにいく 🎢
+                  <span className="bg-white/55 px-2 font-mono text-xs text-cream">
                     Enter
                   </span>
                 </button>
               </>
             ) : (
-              <p className="text-xl font-black text-matcha">
-                STAGE 1 皆伝!! 次のステージは近日追加だ。
+              <p className="text-xl font-black text-matcha-dim">
+                全アトラクション制覇!! 新エリアは近日オープン。
               </p>
             )}
           </div>
@@ -309,30 +311,30 @@ export function HomeScreen() {
         {daily && (
           <section className="pixel-panel flex items-center gap-6 p-6">
             <div className="font-mono text-sm font-black tracking-[0.15em]">
-              ⚔️ WANTED — 弱点ドリル
+              🎯 スタンプラリー — 弱点ドリル
             </div>
             <div className="flex flex-1 flex-wrap gap-2">
               {weak.length > 0 ? (
                 weak.slice(0, 5).map((command) => (
                   <span
                     key={command}
-                    className="border-2 border-shu-dark bg-[#241512] px-3 py-1 font-mono text-sm font-black text-shu"
+                    className="border-2 border-shu-dark bg-[#ffe9e4] px-3 py-1 font-mono text-sm font-black text-shu-dark"
                   >
                     👾 {command}
                   </span>
                 ))
               ) : (
                 <span className="font-mono text-xs text-cream-faint">
-                  いまのところ弱点なし。腕を落とすなよ。
+                  いまのところ苦手なし。この調子!
                 </span>
               )}
             </div>
             <button
               type="button"
               onClick={() => navigate({ screen: "drill" })}
-              className="btn-chunky border-2 border-b-[6px] border-[#567f2b] bg-matcha px-8 py-3 font-black tracking-widest text-[#17260a]"
+              className="btn-chunky rounded-full border-2 border-b-[6px] border-matcha-dim bg-matcha px-8 py-3 font-black tracking-widest text-[#10321b]"
             >
-              たたかう(5問)
+              まわりにいく(5問)
             </button>
           </section>
         )}
@@ -340,9 +342,9 @@ export function HomeScreen() {
         {/* World map */}
         <section className="pixel-panel p-8">
           <div className="mb-5 flex items-baseline gap-3 font-mono text-lg font-black tracking-widest">
-            WORLD MAP
+            PARK MAP
             <span className="text-xs font-normal text-cream-faint">
-              — レッスンをクリアして道を進め
+              — アトラクションを制覇して園内をまわろう
             </span>
             <span className="ml-auto flex items-center gap-3 text-xs font-normal text-cream-dim">
               <span>
@@ -368,7 +370,7 @@ export function HomeScreen() {
                   className={`flex items-center gap-4 ${empty ? "opacity-50" : ""}`}
                 >
                   <div
-                    className={`w-[150px] flex-none border-3 py-2 text-center font-mono text-sm font-black shadow-[3px_3px_0_rgb(0_0_0/0.6)] ${
+                    className={`w-[150px] flex-none border-3 py-2 text-center font-mono text-sm font-black shadow-[3px_3px_0_rgb(43_58_74/0.35)] ${
                       statuses.every((s) => s === "cleared") && !empty
                         ? "border-matcha-dim text-matcha"
                         : "border-ink"
@@ -381,7 +383,7 @@ export function HomeScreen() {
                   </div>
                   {empty ? (
                     <span className="font-mono text-xs text-cream-faint">
-                      🔒 近日追加
+                      🚧 近日オープン
                     </span>
                   ) : (
                     <div className="flex flex-wrap items-center gap-y-3">
@@ -426,7 +428,7 @@ export function HomeScreen() {
                   key={def.id}
                   className={`flex items-center gap-3 border-2 p-3 ${
                     unlocked
-                      ? "border-gold bg-black/30"
+                      ? "border-gold bg-white/55"
                       : "border-dashed border-ink-bold opacity-45"
                   }`}
                   title={def.description}
@@ -493,7 +495,7 @@ export function HomeScreen() {
     const url = URL.createObjectURL(blob);
     const anchor = document.createElement("a");
     anchor.href = url;
-    anchor.download = `vim-dojo-${localDateOf(clock.now())}.json`;
+    anchor.download = `hjkland-${localDateOf(clock.now())}.json`;
     anchor.click();
     URL.revokeObjectURL(url);
     setProfile({ ...profile, lastExportAt: clock.now() });
@@ -538,7 +540,7 @@ function LessonNode({
   onClick: () => void;
 }) {
   const base =
-    "flex h-11 w-11 flex-none items-center justify-center font-mono text-sm font-black border-3 shadow-[3px_3px_0_rgb(0_0_0/0.6)]";
+    "flex h-11 w-11 flex-none items-center justify-center font-mono text-sm font-black border-3 shadow-[3px_3px_0_rgb(43_58_74/0.35)]";
   const style =
     status === "cleared"
       ? "border-matcha bg-matcha-dim text-matcha"

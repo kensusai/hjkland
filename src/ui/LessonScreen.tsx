@@ -18,7 +18,7 @@ import {
   type FinishedInfo,
 } from "./PracticePlayer";
 import { BossPanel } from "./Boss";
-import { SenseiSprite } from "./Sensei";
+import { MascotSprite } from "./Mascot";
 import { playLessonComplete } from "./sound";
 import { useAppStore } from "./storeContext";
 
@@ -105,8 +105,8 @@ export function LessonScreen({
           </>
         ) : !showHints ? null : (
           <div className="pixel-panel p-4">
-            <div className="mb-2 flex items-center gap-2 font-mono text-sm font-black tracking-[0.2em] text-matcha">
-              <SenseiSprite size={28} /> 師範のひとこと
+            <div className="mb-2 flex items-center gap-2 font-mono text-sm font-black tracking-[0.2em] text-matcha-dim">
+              <MascotSprite size={28} /> モーション君のガイド
             </div>
             <p className="text-xl leading-relaxed text-cream-dim">
               {lesson.brief}
@@ -159,14 +159,14 @@ function LessonResult({
     <>
       <MedalHeadline attempt={info.attempt} />
       {info.isLastExercise && (
-        <div className="mt-3 flex items-center justify-center gap-2 font-mono font-black text-matcha">
-          <SenseiSprite mood="hype" size={40} />
-          {boss ? "ボス撃破!! 皆伝だ!!" : "レッスン皆伝!! よくやった!!"}
+        <div className="mt-3 flex items-center justify-center gap-2 font-mono font-black text-matcha-dim">
+          <MascotSprite mood="hype" size={40} />
+          {boss ? "ボスライド制覇!! すごい!!" : "ライド制覇!! やったね!!"}
         </div>
       )}
       <ResultFooter
         xpGained={xpGained}
-        primaryLabel={info.isLastExercise ? "ホームへ ▶" : "次のお題 ▶"}
+        primaryLabel={info.isLastExercise ? "パークへ ▶" : "次のお題 ▶"}
         onPrimary={onNext}
         onRetry={onRetry}
         extraChips={info.isLastExercise ? <StreakChip /> : undefined}

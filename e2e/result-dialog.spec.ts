@@ -15,7 +15,7 @@ test("Enter advances the result dialog; stray keys never edit the buffer", async
 }) => {
   await page.goto("/");
   await resetDatabase(page);
-  await page.getByRole("button", { name: /稽古をはじめる/ }).click();
+  await page.getByRole("button", { name: /乗りにいく/ }).click();
   await expect(page.locator(".editor-host .cm-content")).toBeVisible();
   await page.waitForTimeout(300);
 
@@ -23,7 +23,7 @@ test("Enter advances the result dialog; stray keys never edit the buffer", async
   // still in flight when the clear lands (real typing rhythm; the focus race
   // with CodeMirror only shows up without artificial delays).
   await pressKeys(page, ["x", "x", "x"], 0);
-  await expect(page.getByRole("dialog")).toContainText("一本");
+  await expect(page.getByRole("dialog")).toContainText("パーフェクトライド");
   // The two extra x's were in flight when the clear landed — they must have
   // been swallowed, not applied to the judged buffer.
   expect(await page.locator(".editor-host .cm-content").innerText()).toBe(
@@ -55,5 +55,5 @@ test("Enter advances the result dialog; stray keys never edit the buffer", async
   // The next exercise must be immediately playable from the keyboard.
   await page.waitForTimeout(300);
   await pressKeys(page, ["x"]);
-  await expect(page.getByRole("dialog")).toContainText("一本");
+  await expect(page.getByRole("dialog")).toContainText("パーフェクトライド");
 });

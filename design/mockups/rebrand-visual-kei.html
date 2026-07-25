@@ -22,7 +22,8 @@
         --font-ui:
           "Hiragino Mincho ProN", "Yu Mincho", Georgia, "Times New Roman", serif;
         --font-sans:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", sans-serif;
+          -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
+          sans-serif;
         --font-mono:
           ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
         --fs-sm: 13px;
@@ -33,79 +34,426 @@
         --drop: 6px 6px 0 rgba(0, 0, 0, 0.6);
         --drop-sm: 3px 3px 0 rgba(0, 0, 0, 0.6);
       }
-      * { margin: 0; padding: 0; box-sizing: border-box; }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
       body {
         background:
-          radial-gradient(700px 380px at 78% -6%, rgba(160, 107, 255, 0.18), transparent 70%),
+          radial-gradient(
+            700px 380px at 78% -6%,
+            rgba(160, 107, 255, 0.18),
+            transparent 70%
+          ),
           radial-gradient(900px 520px at 18% 0%, #1a1226, var(--bg-base) 68%);
         color: var(--text-primary);
         font-family: var(--font-ui);
         min-height: 100vh;
       }
-      .frame { max-width: 1440px; margin: 0 auto; }
-      .panel { background: var(--bg-surface); border: 3px solid var(--border-ink); box-shadow: var(--drop); }
-      .lace { height: 6px; background: repeating-linear-gradient(90deg, var(--border-bold) 0 8px, transparent 8px 14px); }
-      .header { display: flex; justify-content: space-between; align-items: center; padding: 18px 48px; border-bottom: 3px solid var(--border-ink); background: rgba(0, 0, 0, 0.3); }
-      .logo { display: flex; align-items: center; gap: 14px; }
-      .logo-rose { width: 40px; height: 40px; display: grid; place-items: center; font-size: 24px; background: linear-gradient(180deg, var(--rose), var(--rose-dark)); box-shadow: var(--drop-sm); clip-path: polygon(50% 0, 100% 30%, 84% 100%, 16% 100%, 0 30%); }
-      .logo-word { font-size: var(--fs-xl); font-weight: 700; letter-spacing: 0.3em; }
-      .logo-word .accent { color: var(--amethyst); }
-      .logo-sub { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.35em; color: var(--text-faint); }
-      .hud { display: flex; gap: 14px; font-family: var(--font-mono); }
-      .hud-box { display: flex; align-items: center; gap: 10px; padding: 10px 16px; background: var(--bg-raised); border: 3px solid var(--border-ink); box-shadow: var(--drop-sm); }
-      .hud-label { font-size: 10px; letter-spacing: 0.3em; color: var(--text-faint); }
-      .hud-value { font-size: var(--fs-lg); font-weight: 800; font-family: var(--font-ui); }
-      .era { color: var(--amethyst); }
-      .nights { color: var(--rose); }
+      .frame {
+        max-width: 1440px;
+        margin: 0 auto;
+      }
+      .panel {
+        background: var(--bg-surface);
+        border: 3px solid var(--border-ink);
+        box-shadow: var(--drop);
+      }
+      .lace {
+        height: 6px;
+        background: repeating-linear-gradient(
+          90deg,
+          var(--border-bold) 0 8px,
+          transparent 8px 14px
+        );
+      }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 48px;
+        border-bottom: 3px solid var(--border-ink);
+        background: rgba(0, 0, 0, 0.3);
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .logo-rose {
+        width: 40px;
+        height: 40px;
+        display: grid;
+        place-items: center;
+        font-size: 24px;
+        background: linear-gradient(180deg, var(--rose), var(--rose-dark));
+        box-shadow: var(--drop-sm);
+        clip-path: polygon(50% 0, 100% 30%, 84% 100%, 16% 100%, 0 30%);
+      }
+      .logo-word {
+        font-size: var(--fs-xl);
+        font-weight: 700;
+        letter-spacing: 0.3em;
+      }
+      .logo-word .accent {
+        color: var(--amethyst);
+      }
+      .logo-sub {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.35em;
+        color: var(--text-faint);
+      }
+      .hud {
+        display: flex;
+        gap: 14px;
+        font-family: var(--font-mono);
+      }
+      .hud-box {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 16px;
+        background: var(--bg-raised);
+        border: 3px solid var(--border-ink);
+        box-shadow: var(--drop-sm);
+      }
+      .hud-label {
+        font-size: 10px;
+        letter-spacing: 0.3em;
+        color: var(--text-faint);
+      }
+      .hud-value {
+        font-size: var(--fs-lg);
+        font-weight: 800;
+        font-family: var(--font-ui);
+      }
+      .era {
+        color: var(--amethyst);
+      }
+      .nights {
+        color: var(--rose);
+      }
       /* Hero */
-      .hero { margin: 28px 48px; padding: 40px 44px; position: relative; overflow: hidden; display: flex; gap: 40px; align-items: center; }
-      .moonlight { position: absolute; top: -50px; right: 8%; width: 120px; height: 120px; border-radius: 50%; background: radial-gradient(circle, rgba(232, 226, 245, 0.35), transparent 70%); }
-      .petal { position: absolute; width: 10px; height: 14px; background: var(--rose); clip-path: polygon(50% 0, 100% 40%, 78% 100%, 22% 100%, 0 40%); opacity: 0.8; }
-      .petal.p1 { top: 30px; left: 44%; transform: rotate(20deg); }
-      .petal.p2 { top: 90px; left: 62%; transform: rotate(-30deg); opacity: 0.5; }
-      .petal.p3 { top: 150px; left: 52%; transform: rotate(45deg); opacity: 0.65; }
+      .hero {
+        margin: 28px 48px;
+        padding: 40px 44px;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        gap: 40px;
+        align-items: center;
+      }
+      .moonlight {
+        position: absolute;
+        top: -50px;
+        right: 8%;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(232, 226, 245, 0.35),
+          transparent 70%
+        );
+      }
+      .petal {
+        position: absolute;
+        width: 10px;
+        height: 14px;
+        background: var(--rose);
+        clip-path: polygon(50% 0, 100% 40%, 78% 100%, 22% 100%, 0 40%);
+        opacity: 0.8;
+      }
+      .petal.p1 {
+        top: 30px;
+        left: 44%;
+        transform: rotate(20deg);
+      }
+      .petal.p2 {
+        top: 90px;
+        left: 62%;
+        transform: rotate(-30deg);
+        opacity: 0.5;
+      }
+      .petal.p3 {
+        top: 150px;
+        left: 52%;
+        transform: rotate(45deg);
+        opacity: 0.65;
+      }
       /* Vocalist sprite */
-      .vocalist { width: 150px; flex: none; text-align: center; }
-      .sprite { width: 110px; height: 132px; margin: 0 auto; position: relative; }
-      .px { position: absolute; }
-      .sprite .hair-back { left: 6px; top: 4px; width: 98px; height: 110px; background: #241a38; clip-path: polygon(20% 0, 80% 0, 100% 30%, 92% 100%, 74% 78%, 50% 100%, 26% 78%, 8% 100%, 0 30%); }
-      .sprite .face { left: 32px; top: 22px; width: 46px; height: 34px; background: #efe3da; }
-      .sprite .eye-l { left: 40px; top: 34px; width: 6px; height: 8px; background: #1a1226; }
-      .sprite .eye-r { left: 62px; top: 34px; width: 6px; height: 8px; background: #1a1226; }
-      .sprite .shadow-l { left: 38px; top: 30px; width: 10px; height: 3px; background: var(--amethyst); }
-      .sprite .shadow-r { left: 60px; top: 30px; width: 10px; height: 3px; background: var(--amethyst); }
-      .sprite .body { left: 26px; top: 56px; width: 58px; height: 52px; background: #1c1329; }
-      .sprite .frill { left: 44px; top: 56px; width: 22px; height: 40px; background: repeating-linear-gradient(180deg, var(--moon) 0 6px, #cfc3e4 6px 10px); }
-      .sprite .rose-hand { left: 88px; top: 66px; width: 14px; height: 14px; background: var(--rose); clip-path: polygon(50% 0, 100% 35%, 80% 100%, 20% 100%, 0 35%); }
-      .vocalist-name { margin-top: 10px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.3em; color: var(--text-faint); }
-      .speech { background: var(--moon); color: #241a38; padding: 14px 22px; font-weight: 700; font-size: var(--fs-md); box-shadow: var(--drop-sm); display: inline-block; margin-bottom: 18px; }
-      .speech .accent { color: var(--rose-dark); }
-      .next-label { font-family: var(--font-mono); font-size: var(--fs-sm); letter-spacing: 0.35em; color: var(--amethyst); margin-bottom: 8px; }
-      .next-title { font-size: var(--fs-hero); font-weight: 700; letter-spacing: 0.06em; text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5); margin-bottom: 22px; }
-      .cta { display: inline-flex; align-items: center; gap: 14px; background: linear-gradient(180deg, var(--rose), var(--rose-dark)); color: #fdf3f6; border: none; padding: 16px 36px; font-family: var(--font-ui); font-size: var(--fs-lg); font-weight: 700; letter-spacing: 0.3em; box-shadow: 0 6px 0 var(--rose-dark), var(--drop-sm); cursor: pointer; }
-      .cta-key { font-family: var(--font-mono); font-size: 12px; background: rgba(0, 0, 0, 0.3); padding: 3px 10px; letter-spacing: 0.1em; }
+      .vocalist {
+        width: 150px;
+        flex: none;
+        text-align: center;
+      }
+      .sprite {
+        width: 110px;
+        height: 132px;
+        margin: 0 auto;
+        position: relative;
+      }
+      .px {
+        position: absolute;
+      }
+      .sprite .hair-back {
+        left: 6px;
+        top: 4px;
+        width: 98px;
+        height: 110px;
+        background: #241a38;
+        clip-path: polygon(
+          20% 0,
+          80% 0,
+          100% 30%,
+          92% 100%,
+          74% 78%,
+          50% 100%,
+          26% 78%,
+          8% 100%,
+          0 30%
+        );
+      }
+      .sprite .face {
+        left: 32px;
+        top: 22px;
+        width: 46px;
+        height: 34px;
+        background: #efe3da;
+      }
+      .sprite .eye-l {
+        left: 40px;
+        top: 34px;
+        width: 6px;
+        height: 8px;
+        background: #1a1226;
+      }
+      .sprite .eye-r {
+        left: 62px;
+        top: 34px;
+        width: 6px;
+        height: 8px;
+        background: #1a1226;
+      }
+      .sprite .shadow-l {
+        left: 38px;
+        top: 30px;
+        width: 10px;
+        height: 3px;
+        background: var(--amethyst);
+      }
+      .sprite .shadow-r {
+        left: 60px;
+        top: 30px;
+        width: 10px;
+        height: 3px;
+        background: var(--amethyst);
+      }
+      .sprite .body {
+        left: 26px;
+        top: 56px;
+        width: 58px;
+        height: 52px;
+        background: #1c1329;
+      }
+      .sprite .frill {
+        left: 44px;
+        top: 56px;
+        width: 22px;
+        height: 40px;
+        background: repeating-linear-gradient(
+          180deg,
+          var(--moon) 0 6px,
+          #cfc3e4 6px 10px
+        );
+      }
+      .sprite .rose-hand {
+        left: 88px;
+        top: 66px;
+        width: 14px;
+        height: 14px;
+        background: var(--rose);
+        clip-path: polygon(50% 0, 100% 35%, 80% 100%, 20% 100%, 0 35%);
+      }
+      .vocalist-name {
+        margin-top: 10px;
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.3em;
+        color: var(--text-faint);
+      }
+      .speech {
+        background: var(--moon);
+        color: #241a38;
+        padding: 14px 22px;
+        font-weight: 700;
+        font-size: var(--fs-md);
+        box-shadow: var(--drop-sm);
+        display: inline-block;
+        margin-bottom: 18px;
+      }
+      .speech .accent {
+        color: var(--rose-dark);
+      }
+      .next-label {
+        font-family: var(--font-mono);
+        font-size: var(--fs-sm);
+        letter-spacing: 0.35em;
+        color: var(--amethyst);
+        margin-bottom: 8px;
+      }
+      .next-title {
+        font-size: var(--fs-hero);
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
+        margin-bottom: 22px;
+      }
+      .cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
+        background: linear-gradient(180deg, var(--rose), var(--rose-dark));
+        color: #fdf3f6;
+        border: none;
+        padding: 16px 36px;
+        font-family: var(--font-ui);
+        font-size: var(--fs-lg);
+        font-weight: 700;
+        letter-spacing: 0.3em;
+        box-shadow:
+          0 6px 0 var(--rose-dark),
+          var(--drop-sm);
+        cursor: pointer;
+      }
+      .cta-key {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        background: rgba(0, 0, 0, 0.3);
+        padding: 3px 10px;
+        letter-spacing: 0.1em;
+      }
       /* Program */
-      .program { margin: 0 48px 40px; padding: 30px 36px; }
-      .prog-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 22px; }
-      .prog-title { font-size: var(--fs-lg); font-weight: 700; letter-spacing: 0.3em; }
-      .prog-note { font-family: var(--font-mono); font-size: var(--fs-sm); color: var(--text-faint); }
-      .prog-row { display: flex; align-items: center; gap: 18px; margin-bottom: 20px; }
-      .act-card { width: 170px; flex: none; text-align: center; padding: 10px 0; background: var(--bg-raised); border: 3px solid var(--border-ink); font-weight: 700; font-size: var(--fs-sm); box-shadow: var(--drop-sm); letter-spacing: 0.15em; }
-      .act-card small { display: block; font-weight: 400; color: var(--text-secondary); font-size: 12px; letter-spacing: 0.05em; }
-      .songs { display: flex; gap: 10px; flex-wrap: wrap; }
-      .song-cell { display: flex; flex-direction: column; align-items: center; }
-      .song { width: 46px; height: 46px; display: grid; place-items: center; font-family: var(--font-mono); font-weight: 900; border: 3px solid var(--border-bold); box-shadow: var(--drop-sm); }
-      .song.done { border-color: var(--amethyst); color: var(--amethyst); background: #170f26; }
-      .song.next { border-color: var(--rose); color: var(--rose); background: #1c0a12; }
-      .song.rest { border-style: dashed; color: var(--text-faint); box-shadow: none; }
-      .song-label { font-family: var(--font-mono); font-size: var(--fs-sm); color: var(--text-secondary); margin-top: 4px; }
-      .shouts { display: flex; gap: 18px; margin: 0 48px 48px; }
-      .shout { flex: 1; text-align: center; padding: 18px; }
-      .shout-word { font-size: var(--fs-xl); font-weight: 700; letter-spacing: 0.2em; }
-      .shout.gold .shout-word { color: var(--gold); text-shadow: 3px 3px 0 var(--rose-dark); }
-      .shout.silver .shout-word { color: var(--moon); }
-      .shout.bronze .shout-word { color: var(--text-secondary); }
-      .shout-note { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); margin-top: 6px; letter-spacing: 0.15em; }
+      .program {
+        margin: 0 48px 40px;
+        padding: 30px 36px;
+      }
+      .prog-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 22px;
+      }
+      .prog-title {
+        font-size: var(--fs-lg);
+        font-weight: 700;
+        letter-spacing: 0.3em;
+      }
+      .prog-note {
+        font-family: var(--font-mono);
+        font-size: var(--fs-sm);
+        color: var(--text-faint);
+      }
+      .prog-row {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        margin-bottom: 20px;
+      }
+      .act-card {
+        width: 170px;
+        flex: none;
+        text-align: center;
+        padding: 10px 0;
+        background: var(--bg-raised);
+        border: 3px solid var(--border-ink);
+        font-weight: 700;
+        font-size: var(--fs-sm);
+        box-shadow: var(--drop-sm);
+        letter-spacing: 0.15em;
+      }
+      .act-card small {
+        display: block;
+        font-weight: 400;
+        color: var(--text-secondary);
+        font-size: 12px;
+        letter-spacing: 0.05em;
+      }
+      .songs {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .song-cell {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .song {
+        width: 46px;
+        height: 46px;
+        display: grid;
+        place-items: center;
+        font-family: var(--font-mono);
+        font-weight: 900;
+        border: 3px solid var(--border-bold);
+        box-shadow: var(--drop-sm);
+      }
+      .song.done {
+        border-color: var(--amethyst);
+        color: var(--amethyst);
+        background: #170f26;
+      }
+      .song.next {
+        border-color: var(--rose);
+        color: var(--rose);
+        background: #1c0a12;
+      }
+      .song.rest {
+        border-style: dashed;
+        color: var(--text-faint);
+        box-shadow: none;
+      }
+      .song-label {
+        font-family: var(--font-mono);
+        font-size: var(--fs-sm);
+        color: var(--text-secondary);
+        margin-top: 4px;
+      }
+      .shouts {
+        display: flex;
+        gap: 18px;
+        margin: 0 48px 48px;
+      }
+      .shout {
+        flex: 1;
+        text-align: center;
+        padding: 18px;
+      }
+      .shout-word {
+        font-size: var(--fs-xl);
+        font-weight: 700;
+        letter-spacing: 0.2em;
+      }
+      .shout.gold .shout-word {
+        color: var(--gold);
+        text-shadow: 3px 3px 0 var(--rose-dark);
+      }
+      .shout.silver .shout-word {
+        color: var(--moon);
+      }
+      .shout.bronze .shout-word {
+        color: var(--text-secondary);
+      }
+      .shout-note {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        color: var(--text-faint);
+        margin-top: 6px;
+        letter-spacing: 0.15em;
+      }
     </style>
   </head>
   <body>
@@ -119,14 +467,22 @@
           </div>
         </div>
         <div class="hud">
-          <div class="hud-box"><span class="hud-label">活動</span><span class="hud-value era">インディーズ</span></div>
-          <div class="hud-box"><span class="hud-label">連夜公演</span><span class="hud-value nights">12</span><span class="hud-label">夜</span></div>
+          <div class="hud-box">
+            <span class="hud-label">活動</span
+            ><span class="hud-value era">インディーズ</span>
+          </div>
+          <div class="hud-box">
+            <span class="hud-label">連夜公演</span
+            ><span class="hud-value nights">12</span
+            ><span class="hud-label">夜</span>
+          </div>
         </div>
       </header>
 
       <section class="hero panel">
         <div class="moonlight"></div>
-        <span class="petal p1"></span><span class="petal p2"></span><span class="petal p3"></span>
+        <span class="petal p1"></span><span class="petal p2"></span
+        ><span class="petal p3"></span>
         <div class="vocalist">
           <div class="sprite">
             <span class="px hair-back"></span><span class="px face"></span>
@@ -138,42 +494,84 @@
           <div class="vocalist-name">Vo. 麗-Rei-</div>
         </div>
         <div>
-          <div class="speech">ようこそ…今宵も<span class="accent">指先で世界を編集</span>しましょう</div>
+          <div class="speech">
+            ようこそ…今宵も<span class="accent">指先で世界を編集</span
+            >しましょう
+          </div>
           <div class="next-label">▶ 今宵の一曲</div>
           <div class="next-title">V d p — 行を切って移動</div>
-          <button type="button" class="cta">開演する <span class="cta-key">Enter</span></button>
+          <button type="button" class="cta">
+            開演する <span class="cta-key">Enter</span>
+          </button>
         </div>
       </section>
 
       <section class="program panel">
         <div class="prog-head">
-          <div class="prog-title">🌙 公演プログラム — 全曲を披露し、伝説になる</div>
-          <div class="prog-note">✓ 披露済 / ▶ 今宵の曲 / ? 未披露(いつでも歌える)</div>
+          <div class="prog-title">
+            🌙 公演プログラム — 全曲を披露し、伝説になる
+          </div>
+          <div class="prog-note">
+            ✓ 披露済 / ▶ 今宵の曲 / ? 未披露(いつでも歌える)
+          </div>
         </div>
         <div class="prog-row">
           <div class="act-card">第一章<small>基本移動</small></div>
           <div class="songs">
-            <div class="song-cell"><div class="song done">✓</div><div class="song-label">x</div></div>
-            <div class="song-cell"><div class="song done">✓</div><div class="song-label">h l</div></div>
-            <div class="song-cell"><div class="song next">▶</div><div class="song-label">j k</div></div>
-            <div class="song-cell"><div class="song rest">?</div><div class="song-label">w</div></div>
-            <div class="song-cell"><div class="song rest">?</div><div class="song-label">b</div></div>
+            <div class="song-cell">
+              <div class="song done">✓</div>
+              <div class="song-label">x</div>
+            </div>
+            <div class="song-cell">
+              <div class="song done">✓</div>
+              <div class="song-label">h l</div>
+            </div>
+            <div class="song-cell">
+              <div class="song next">▶</div>
+              <div class="song-label">j k</div>
+            </div>
+            <div class="song-cell">
+              <div class="song rest">?</div>
+              <div class="song-label">w</div>
+            </div>
+            <div class="song-cell">
+              <div class="song rest">?</div>
+              <div class="song-label">b</div>
+            </div>
           </div>
         </div>
         <div class="prog-row">
           <div class="act-card">第七章<small>ビジュアルの型</small></div>
           <div class="songs">
-            <div class="song-cell"><div class="song rest">?</div><div class="song-label">v</div></div>
-            <div class="song-cell"><div class="song rest">?</div><div class="song-label">V</div></div>
-            <div class="song-cell"><div class="song rest">?</div><div class="song-label">Ctrl-v</div></div>
+            <div class="song-cell">
+              <div class="song rest">?</div>
+              <div class="song-label">v</div>
+            </div>
+            <div class="song-cell">
+              <div class="song rest">?</div>
+              <div class="song-label">V</div>
+            </div>
+            <div class="song-cell">
+              <div class="song rest">?</div>
+              <div class="song-label">Ctrl-v</div>
+            </div>
           </div>
         </div>
       </section>
 
       <section class="shouts">
-        <div class="shout panel gold"><div class="shout-word">麗!!</div><div class="shout-note">パー以内 = 完璧な美</div></div>
-        <div class="shout panel silver"><div class="shout-word">優美</div><div class="shout-note">銀 = 美しい所作</div></div>
-        <div class="shout panel bronze"><div class="shout-word">未完の美</div><div class="shout-note">銅 = それもまた美学</div></div>
+        <div class="shout panel gold">
+          <div class="shout-word">麗!!</div>
+          <div class="shout-note">パー以内 = 完璧な美</div>
+        </div>
+        <div class="shout panel silver">
+          <div class="shout-word">優美</div>
+          <div class="shout-note">銀 = 美しい所作</div>
+        </div>
+        <div class="shout panel bronze">
+          <div class="shout-word">未完の美</div>
+          <div class="shout-note">銅 = それもまた美学</div>
+        </div>
       </section>
       <div class="lace" style="margin: 0 48px 48px"></div>
     </div>

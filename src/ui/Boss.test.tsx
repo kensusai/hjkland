@@ -27,21 +27,21 @@ describe("BossPanel", () => {
   it("stays worried while the easy gold band is still open", () => {
     // easy: gold <= floor(10 * 1.4) = 14, so 12 keys is still a gold pace
     render(<BossPanel exercise={exercise} keystrokes={12} difficulty="easy" />);
-    expect(screen.getByText(/無駄のない打鍵/)).toBeTruthy();
-    expect(screen.queryByText(/パーは守れなかった/)).toBeNull();
+    expect(screen.getByText(/無駄のない操作/)).toBeTruthy();
+    expect(screen.queryByText(/パーは逃した/)).toBeNull();
   });
 
   it("turns smug once the gold line is crossed at normal", () => {
     render(
       <BossPanel exercise={exercise} keystrokes={12} difficulty="normal" />,
     );
-    expect(screen.getByText(/パーは守れなかった/)).toBeTruthy();
+    expect(screen.getByText(/パーは逃した/)).toBeTruthy();
   });
 
   it("laughs only past the difficulty's silver line", () => {
     // easy: silver <= ceil(10 * 2) = 20 → 18 keys is still smug, not laughing
     render(<BossPanel exercise={exercise} keystrokes={18} difficulty="easy" />);
-    expect(screen.getByText(/まだ銀はくれてやる/)).toBeTruthy();
-    expect(screen.queryByText(/手数が多いぞ/)).toBeNull();
+    expect(screen.getByText(/まだ銀は間に合う/)).toBeTruthy();
+    expect(screen.queryByText(/手数多め/)).toBeNull();
   });
 });

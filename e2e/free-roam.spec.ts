@@ -13,7 +13,7 @@ test("a fresh profile can jump straight into a stage-7 lesson", async ({
 }) => {
   await page.goto("/");
   await resetDatabase(page);
-  await expect(page.getByText("WORLD MAP")).toBeVisible();
+  await expect(page.getByText("PARK MAP")).toBeVisible();
 
   // Not the recommended lesson — three stages ahead of it.
   await page.getByLabel("Ctrl-v (upcoming)").click();
@@ -23,5 +23,5 @@ test("a fresh profile can jump straight into a stage-7 lesson", async ({
   // And it actually plays: clear exercise 1 (delete the X column).
   await page.waitForTimeout(300);
   await pressKeys(page, ["Control+v", "j", "j", "d"]);
-  await expect(page.getByRole("dialog")).toContainText("一本");
+  await expect(page.getByRole("dialog")).toContainText("パーフェクトライド");
 });

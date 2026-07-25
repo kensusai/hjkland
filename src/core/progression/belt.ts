@@ -1,16 +1,17 @@
 /**
- * Belt ranks (docs/domain.md 用語集: 帯 `Belt`). A flavorful label for the
- * player's level — the martial-arts progression from white to black belt.
- * Pure mapping from level; XP/level rules live in xp.ts.
+ * Passport tiers (docs/domain.md 用語集: 帯 `Belt` — display renamed in the
+ * hjkland rebrand). A flavorful label for the player's level, from a one-day
+ * pass up to the legend pass. Pure mapping from level; XP/level rules live
+ * in xp.ts. Code name Belt is kept so stored data and tests stay stable.
  */
 const BELTS = [
-  "白帯", // 1-2
-  "黄帯", // 3-4
-  "橙帯", // 5-6
-  "緑帯", // 7-8
-  "青帯", // 9-10
-  "茶帯", // 11-14
-  "黒帯", // 15+
+  "ワンデーパス", // 1-2
+  "ウィークパス", // 3-4
+  "マンスリーパス", // 5-6
+  "シーズンパス", // 7-8
+  "年間パス", // 9-10
+  "プレミア年パス", // 11-14
+  "レジェンドパス", // 15+
 ] as const;
 
 const THRESHOLDS = [1, 3, 5, 7, 9, 11, 15];

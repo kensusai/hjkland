@@ -1,16 +1,16 @@
 import { describe, expect, it } from "vitest";
 import { beltForLevel } from "./belt";
 
-// 帯 (Belt): flavor label derived from level — boundaries per belt.ts.
+// Passport tier (code name Belt): flavor label derived from level.
 describe("beltForLevel", () => {
-  it("maps the documented level boundaries to their belts", () => {
-    expect(beltForLevel(1)).toBe("白帯");
-    expect(beltForLevel(2)).toBe("白帯");
-    expect(beltForLevel(3)).toBe("黄帯");
-    expect(beltForLevel(9)).toBe("青帯");
-    expect(beltForLevel(11)).toBe("茶帯");
-    expect(beltForLevel(14)).toBe("茶帯");
-    expect(beltForLevel(15)).toBe("黒帯");
-    expect(beltForLevel(99)).toBe("黒帯");
+  it("maps the documented level boundaries to their passport tiers", () => {
+    expect(beltForLevel(1)).toBe("ワンデーパス");
+    expect(beltForLevel(2)).toBe("ワンデーパス");
+    expect(beltForLevel(3)).toBe("ウィークパス");
+    expect(beltForLevel(9)).toBe("年間パス");
+    expect(beltForLevel(11)).toBe("プレミア年パス");
+    expect(beltForLevel(14)).toBe("プレミア年パス");
+    expect(beltForLevel(15)).toBe("レジェンドパス");
+    expect(beltForLevel(99)).toBe("レジェンドパス");
   });
 });

@@ -19,11 +19,11 @@ await page.goto(BASE);
 await resetDatabase(page);
 
 // --- Home screen ------------------------------------------------------------
-await page.waitForSelector("text=WORLD MAP", { timeout: 10_000 });
+await page.waitForSelector("text=PARK MAP", { timeout: 10_000 });
 await shot("m6-01-home");
-const senseiVisible = await page.locator("text=SHIHAN").isVisible();
+const senseiVisible = await page.locator("text=モーション君").isVisible();
 log("home shows sensei board:", senseiVisible);
-const cta = page.getByRole("button", { name: /稽古をはじめる/ });
+const cta = page.getByRole("button", { name: /乗りにいく/ });
 log("next-lesson CTA present:", await cta.isVisible());
 await cta.click();
 
@@ -45,11 +45,11 @@ await page.waitForSelector('[role="dialog"]', { timeout: 5000 });
 const finalModal = await page.locator("[role=dialog]").innerText();
 log("lesson1 complete modal:", finalModal.replace(/\n/g, " | "));
 await shot("m6-03-lesson-complete");
-if (!/皆伝/.test(finalModal)) throw new Error("expected lesson-complete text");
-await page.getByRole("button", { name: /ホームへ/ }).click();
+if (!/制覇/.test(finalModal)) throw new Error("expected ride-complete text");
+await page.getByRole("button", { name: /パークへ/ }).click();
 
 // --- Back home: lesson 1 should be cleared, lesson 2 current ----------------
-await page.waitForSelector("text=WORLD MAP", { timeout: 5000 });
+await page.waitForSelector("text=PARK MAP", { timeout: 5000 });
 await page.waitForTimeout(300);
 await shot("m6-04-home-after");
 const hud = await page.locator("header").innerText();

@@ -66,7 +66,7 @@ export function DailyScreen() {
           className="btn-chunky border-b-[6px] border-shu-dark bg-shu px-8 py-3 font-black text-[#fff6ec]"
           onClick={() => navigate({ screen: "home" })}
         >
-          ホームへ
+          パークへ
         </button>
       </main>
     );
@@ -99,7 +99,7 @@ export function DailyScreen() {
             ← MAP
           </button>
           <span className="border-2 border-ink px-2 text-[0.625rem] tracking-widest text-gold">
-            TODAY&apos;S QUEST · {record.date}
+            TODAY&apos;S RIDE · {record.date}
           </span>
         </>
       }
@@ -141,7 +141,7 @@ function DailyResult({
       </p>
       <ResultFooter
         xpGained={xpGained}
-        primaryLabel="ホームへ ▶"
+        primaryLabel="パークへ ▶"
         onPrimary={onHome}
         onRetry={onRetry}
         retryLabel="ベスト更新を狙う"

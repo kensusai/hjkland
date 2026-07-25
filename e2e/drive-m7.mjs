@@ -14,7 +14,7 @@ const log = (...a) => console.log("[m7]", ...a);
 
 await page.goto(BASE);
 await resetDatabase(page);
-await page.waitForSelector("text=WORLD MAP", { timeout: 10_000 });
+await page.waitForSelector("text=PARK MAP", { timeout: 10_000 });
 
 // Fresh player: no daily yet (nothing unlocked), lesson CTA shown.
 const dailyBefore = await page.locator("text=TODAY'S QUEST").count();
@@ -23,7 +23,7 @@ if (dailyBefore !== 0)
   throw new Error("daily should be locked for fresh player");
 
 // Clear lesson 1 (two exercises, x each).
-await page.getByRole("button", { name: /稽古をはじめる/ }).click();
+await page.getByRole("button", { name: /乗りにいく/ }).click();
 await page.waitForSelector(".editor-host .cm-content", { timeout: 10_000 });
 await focusEditor(page);
 await pressKeys(page, ["x"]);
@@ -33,8 +33,8 @@ await page.waitForTimeout(300);
 await focusEditor(page);
 await pressKeys(page, ["x"]);
 await page.waitForSelector('[role="dialog"]');
-await page.getByRole("button", { name: /ホームへ/ }).click();
-await page.waitForSelector("text=WORLD MAP");
+await page.getByRole("button", { name: /パークへ/ }).click();
+await page.waitForSelector("text=PARK MAP");
 await page.waitForTimeout(500);
 
 // Daily quest hero should now be visible (x unlocked → f-jump template... needs f!)
@@ -47,7 +47,7 @@ log(
 // Unlock enough for templates: clear lessons up to w (l2 hl, l3 jk, l4 w).
 // Lesson 2 (h l): two exercises.
 async function playLesson(solvers) {
-  await page.getByRole("button", { name: /稽古をはじめる/ }).click();
+  await page.getByRole("button", { name: /乗りにいく/ }).click();
   await page.waitForSelector(".editor-host .cm-content", { timeout: 10_000 });
   for (let i = 0; i < solvers.length; i++) {
     await page.waitForTimeout(300);
@@ -56,11 +56,11 @@ async function playLesson(solvers) {
     await page.waitForSelector('[role="dialog"]');
     const btn =
       i === solvers.length - 1
-        ? page.getByRole("button", { name: /ホームへ/ })
+        ? page.getByRole("button", { name: /パークへ/ })
         : page.getByRole("button", { name: /次のお題/ });
     await btn.click();
   }
-  await page.waitForSelector("text=WORLD MAP");
+  await page.waitForSelector("text=PARK MAP");
   await page.waitForTimeout(400);
 }
 
@@ -99,13 +99,13 @@ const modal = await page.locator('[role="dialog"]').innerText();
 log("daily result:", modal.replace(/\n/g, " | ").slice(0, 120));
 if (!/XP/.test(modal)) throw new Error("daily clear granted no XP line");
 await page.screenshot({ path: `${SHOTS}/m7-daily-clear.png` });
-await page.getByRole("button", { name: /ホームへ/ }).click();
-await page.waitForSelector("text=WORLD MAP");
+await page.getByRole("button", { name: /パークへ/ }).click();
+await page.waitForSelector("text=PARK MAP");
 await page.waitForTimeout(400);
 
 // R13/R15: after reload the daily shows as cleared with the same exercise.
 await page.reload();
-await page.waitForSelector("text=WORLD MAP");
+await page.waitForSelector("text=PARK MAP");
 await page.waitForTimeout(500);
 const clearedBadge = await page.locator("text=本日クリア済").count();
 log("daily marked cleared after reload (expect 1):", clearedBadge);

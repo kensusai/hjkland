@@ -95,7 +95,7 @@ export function QuizScreen() {
             onClick={() => navigate({ screen: "home" })}
             className="btn-chunky mt-6 w-full border-b-[6px] border-shu-dark bg-shu py-4 text-lg font-black text-[#fff6ec]"
           >
-            ホームへ
+            パークへ
           </button>
         </div>
       </Shell>
@@ -118,7 +118,7 @@ export function QuizScreen() {
       <p className="mb-3 flex items-center gap-1 font-mono text-[0.625rem] text-cream-faint">
         <span className="bg-gold px-1 text-ink">■</span> = カーソル位置
       </p>
-      <div className="mb-2 rounded border-2 border-ink bg-editor p-3 font-mono text-sm">
+      <div className="mb-2 rounded border-2 border-ink bg-editor p-3 font-mono text-sm text-editor-text">
         <div className="mb-1 text-[0.625rem] tracking-widest text-cream-faint">
           BEFORE
         </div>

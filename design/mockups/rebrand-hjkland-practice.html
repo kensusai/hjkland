@@ -36,84 +36,380 @@
         --drop: 6px 6px 0 rgba(43, 58, 74, 0.35);
         --drop-sm: 3px 3px 0 rgba(43, 58, 74, 0.35);
       }
-      * { margin: 0; padding: 0; box-sizing: border-box; }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
       body {
-        background: linear-gradient(180deg, var(--sky-deep), var(--bg-base) 45%);
+        background: linear-gradient(
+          180deg,
+          var(--sky-deep),
+          var(--bg-base) 45%
+        );
         color: var(--text-primary);
         font-family: var(--font-ui);
         min-height: 100vh;
       }
-      .frame { max-width: 1440px; margin: 0 auto; }
-      .panel { background: var(--bg-surface); border: 3px solid var(--border-ink); box-shadow: var(--drop); border-radius: 14px; }
-      .header { display: flex; justify-content: space-between; align-items: center; padding: 14px 48px; font-family: var(--font-mono); }
-      .back { font-weight: 900; color: var(--text-secondary); }
-      .area-chip { background: var(--pop-purple); color: #fff; border: 3px solid var(--border-ink); border-radius: 999px; padding: 4px 14px; font-size: 12px; font-weight: 900; box-shadow: var(--drop-sm); }
-      .ride-progress { display: flex; align-items: center; gap: 6px; }
-      .ride-progress .label { font-size: 11px; letter-spacing: 0.24em; color: var(--text-secondary); margin-right: 8px; }
-      .car { width: 18px; height: 18px; border: 3px solid var(--border-ink); border-radius: 6px; background: #fff; }
-      .car.done { background: var(--pop-green); }
-      .car.now { background: var(--pop-yellow); }
+      .frame {
+        max-width: 1440px;
+        margin: 0 auto;
+      }
+      .panel {
+        background: var(--bg-surface);
+        border: 3px solid var(--border-ink);
+        box-shadow: var(--drop);
+        border-radius: 14px;
+      }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 14px 48px;
+        font-family: var(--font-mono);
+      }
+      .back {
+        font-weight: 900;
+        color: var(--text-secondary);
+      }
+      .area-chip {
+        background: var(--pop-purple);
+        color: #fff;
+        border: 3px solid var(--border-ink);
+        border-radius: 999px;
+        padding: 4px 14px;
+        font-size: 12px;
+        font-weight: 900;
+        box-shadow: var(--drop-sm);
+      }
+      .ride-progress {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .ride-progress .label {
+        font-size: 11px;
+        letter-spacing: 0.24em;
+        color: var(--text-secondary);
+        margin-right: 8px;
+      }
+      .car {
+        width: 18px;
+        height: 18px;
+        border: 3px solid var(--border-ink);
+        border-radius: 6px;
+        background: #fff;
+      }
+      .car.done {
+        background: var(--pop-green);
+      }
+      .car.now {
+        background: var(--pop-yellow);
+      }
       /* Coaster gauge strip */
-      .gauge-strip { display: flex; align-items: center; justify-content: center; gap: 28px; padding: 14px 48px; font-family: var(--font-mono); }
-      .keys { display: flex; align-items: baseline; gap: 10px; }
-      .keys .label { font-size: 11px; letter-spacing: 0.24em; color: var(--text-secondary); }
-      .keys .value { font-size: 34px; font-weight: 900; color: var(--pop-green-dark); }
-      .coaster-track { position: relative; width: 300px; height: 22px; border: 3px solid var(--border-ink); border-radius: 999px; background: #fff; overflow: hidden; }
-      .track-fill { position: absolute; inset: 0; width: 34%; background: linear-gradient(90deg, var(--pop-green), var(--pop-yellow)); }
-      .track-camera { position: absolute; top: -4px; left: 62%; width: 4px; height: 30px; background: var(--coaster-red); }
-      .track-car { position: absolute; top: 2px; left: 30%; width: 20px; height: 14px; background: var(--coaster-red); border: 2px solid var(--border-ink); border-radius: 4px; }
-      .gauge-hint { font-size: var(--fs-sm); font-weight: 900; color: var(--pop-green-dark); }
-      .par-chip { font-size: var(--fs-md); color: var(--text-secondary); font-weight: 700; }
+      .gauge-strip {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 28px;
+        padding: 14px 48px;
+        font-family: var(--font-mono);
+      }
+      .keys {
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+      }
+      .keys .label {
+        font-size: 11px;
+        letter-spacing: 0.24em;
+        color: var(--text-secondary);
+      }
+      .keys .value {
+        font-size: 34px;
+        font-weight: 900;
+        color: var(--pop-green-dark);
+      }
+      .coaster-track {
+        position: relative;
+        width: 300px;
+        height: 22px;
+        border: 3px solid var(--border-ink);
+        border-radius: 999px;
+        background: #fff;
+        overflow: hidden;
+      }
+      .track-fill {
+        position: absolute;
+        inset: 0;
+        width: 34%;
+        background: linear-gradient(90deg, var(--pop-green), var(--pop-yellow));
+      }
+      .track-camera {
+        position: absolute;
+        top: -4px;
+        left: 62%;
+        width: 4px;
+        height: 30px;
+        background: var(--coaster-red);
+      }
+      .track-car {
+        position: absolute;
+        top: 2px;
+        left: 30%;
+        width: 20px;
+        height: 14px;
+        background: var(--coaster-red);
+        border: 2px solid var(--border-ink);
+        border-radius: 4px;
+      }
+      .gauge-hint {
+        font-size: var(--fs-sm);
+        font-weight: 900;
+        color: var(--pop-green-dark);
+      }
+      .par-chip {
+        font-size: var(--fs-md);
+        color: var(--text-secondary);
+        font-weight: 700;
+      }
       /* Quest banner */
-      .quest { display: flex; align-items: flex-end; justify-content: space-between; padding: 18px 48px 8px; }
-      .quest h1 { font-size: 34px; font-weight: 900; text-shadow: 3px 3px 0 rgba(255, 255, 255, 0.85); }
-      .quest .tag { font-family: var(--font-mono); font-size: var(--fs-sm); font-weight: 900; letter-spacing: 0.2em; color: var(--coaster-red); margin-right: 12px; }
-      .quest .goal-note { font-family: var(--font-mono); font-size: var(--fs-sm); color: var(--text-secondary); padding-bottom: 6px; }
+      .quest {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        padding: 18px 48px 8px;
+      }
+      .quest h1 {
+        font-size: 34px;
+        font-weight: 900;
+        text-shadow: 3px 3px 0 rgba(255, 255, 255, 0.85);
+      }
+      .quest .tag {
+        font-family: var(--font-mono);
+        font-size: var(--fs-sm);
+        font-weight: 900;
+        letter-spacing: 0.2em;
+        color: var(--coaster-red);
+        margin-right: 12px;
+      }
+      .quest .goal-note {
+        font-family: var(--font-mono);
+        font-size: var(--fs-sm);
+        color: var(--text-secondary);
+        padding-bottom: 6px;
+      }
       /* Main grid */
-      .main { display: grid; grid-template-columns: 1fr 460px; gap: 24px; padding: 16px 48px 28px; }
-      .editor-shell { overflow: hidden; display: flex; flex-direction: column; border-radius: 14px; }
-      .editor-head { display: flex; justify-content: space-between; padding: 8px 16px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.22em; background: var(--bg-raised); border-bottom: 3px solid var(--border-ink); color: var(--text-secondary); font-weight: 900; }
-      .editor-body { flex: 1; min-height: 220px; padding: 18px; font-family: var(--font-mono); font-size: 22px; line-height: 2; }
-      .editor-body.dark { background: var(--editor-dark); color: var(--editor-dark-text); }
-      .editor-body.light { background: var(--editor-light); color: var(--editor-light-text); }
-      .cursor-cell { background: var(--pop-green); color: #10321b; }
-      .editor-foot { display: flex; justify-content: space-between; align-items: center; padding: 6px 16px; font-family: var(--font-mono); font-size: 13px; background: var(--bg-raised); border-top: 3px solid var(--border-ink); }
-      .mode-chip { background: var(--pop-green); color: #10321b; font-weight: 900; padding: 2px 12px; border-radius: 6px; letter-spacing: 0.2em; }
-      .brand-foot { color: var(--text-faint); font-weight: 700; }
+      .main {
+        display: grid;
+        grid-template-columns: 1fr 460px;
+        gap: 24px;
+        padding: 16px 48px 28px;
+      }
+      .editor-shell {
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        border-radius: 14px;
+      }
+      .editor-head {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 16px;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: 0.22em;
+        background: var(--bg-raised);
+        border-bottom: 3px solid var(--border-ink);
+        color: var(--text-secondary);
+        font-weight: 900;
+      }
+      .editor-body {
+        flex: 1;
+        min-height: 220px;
+        padding: 18px;
+        font-family: var(--font-mono);
+        font-size: 22px;
+        line-height: 2;
+      }
+      .editor-body.dark {
+        background: var(--editor-dark);
+        color: var(--editor-dark-text);
+      }
+      .editor-body.light {
+        background: var(--editor-light);
+        color: var(--editor-light-text);
+      }
+      .cursor-cell {
+        background: var(--pop-green);
+        color: #10321b;
+      }
+      .editor-foot {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 6px 16px;
+        font-family: var(--font-mono);
+        font-size: 13px;
+        background: var(--bg-raised);
+        border-top: 3px solid var(--border-ink);
+      }
+      .mode-chip {
+        background: var(--pop-green);
+        color: #10321b;
+        font-weight: 900;
+        padding: 2px 12px;
+        border-radius: 6px;
+        letter-spacing: 0.2em;
+      }
+      .brand-foot {
+        color: var(--text-faint);
+        font-weight: 700;
+      }
       /* Side panels */
-      .side { display: flex; flex-direction: column; gap: 18px; }
-      .side-panel { padding: 18px; }
-      .side-title { display: flex; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: var(--fs-sm); font-weight: 900; letter-spacing: 0.2em; color: var(--pop-green-dark); margin-bottom: 10px; }
-      .guide-cat { width: 30px; height: 30px; position: relative; flex: none; }
-      .guide-cat .head { position: absolute; left: 2px; top: 6px; width: 24px; height: 18px; background: #ffb84d; border-radius: 6px; }
-      .guide-cat .ear-l { position: absolute; left: 4px; top: 0; width: 8px; height: 8px; background: #ffb84d; clip-path: polygon(0 100%, 50% 0, 100% 100%); }
-      .guide-cat .ear-r { position: absolute; left: 16px; top: 0; width: 8px; height: 8px; background: #ffb84d; clip-path: polygon(0 100%, 50% 0, 100% 100%); }
-      .guide-cat .eye-l { position: absolute; left: 8px; top: 12px; width: 3px; height: 4px; background: var(--border-ink); }
-      .guide-cat .eye-r { position: absolute; left: 17px; top: 12px; width: 3px; height: 4px; background: var(--border-ink); }
-      .guide-text { font-size: var(--fs-lg); line-height: 1.7; color: var(--text-primary); }
-      .guide-point { margin-top: 10px; padding-left: 12px; border-left: 4px solid var(--pop-green); font-size: var(--fs-lg); font-weight: 700; }
-      .target-pre { background: var(--editor-dark); color: var(--editor-dark-text); border: 3px solid var(--border-ink); border-radius: 10px; padding: 12px 16px; font-family: var(--font-mono); font-size: var(--fs-lg); line-height: 1.9; }
-      .target-pre.light { background: var(--editor-light); color: var(--editor-light-text); }
-      .retry { text-align: center; padding: 14px; background: #fff; border: 3px solid var(--border-ink); border-radius: 999px; font-family: var(--font-mono); font-weight: 900; color: var(--text-secondary); box-shadow: var(--drop-sm); }
+      .side {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+      .side-panel {
+        padding: 18px;
+      }
+      .side-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-family: var(--font-mono);
+        font-size: var(--fs-sm);
+        font-weight: 900;
+        letter-spacing: 0.2em;
+        color: var(--pop-green-dark);
+        margin-bottom: 10px;
+      }
+      .guide-cat {
+        width: 30px;
+        height: 30px;
+        position: relative;
+        flex: none;
+      }
+      .guide-cat .head {
+        position: absolute;
+        left: 2px;
+        top: 6px;
+        width: 24px;
+        height: 18px;
+        background: #ffb84d;
+        border-radius: 6px;
+      }
+      .guide-cat .ear-l {
+        position: absolute;
+        left: 4px;
+        top: 0;
+        width: 8px;
+        height: 8px;
+        background: #ffb84d;
+        clip-path: polygon(0 100%, 50% 0, 100% 100%);
+      }
+      .guide-cat .ear-r {
+        position: absolute;
+        left: 16px;
+        top: 0;
+        width: 8px;
+        height: 8px;
+        background: #ffb84d;
+        clip-path: polygon(0 100%, 50% 0, 100% 100%);
+      }
+      .guide-cat .eye-l {
+        position: absolute;
+        left: 8px;
+        top: 12px;
+        width: 3px;
+        height: 4px;
+        background: var(--border-ink);
+      }
+      .guide-cat .eye-r {
+        position: absolute;
+        left: 17px;
+        top: 12px;
+        width: 3px;
+        height: 4px;
+        background: var(--border-ink);
+      }
+      .guide-text {
+        font-size: var(--fs-lg);
+        line-height: 1.7;
+        color: var(--text-primary);
+      }
+      .guide-point {
+        margin-top: 10px;
+        padding-left: 12px;
+        border-left: 4px solid var(--pop-green);
+        font-size: var(--fs-lg);
+        font-weight: 700;
+      }
+      .target-pre {
+        background: var(--editor-dark);
+        color: var(--editor-dark-text);
+        border: 3px solid var(--border-ink);
+        border-radius: 10px;
+        padding: 12px 16px;
+        font-family: var(--font-mono);
+        font-size: var(--fs-lg);
+        line-height: 1.9;
+      }
+      .target-pre.light {
+        background: var(--editor-light);
+        color: var(--editor-light-text);
+      }
+      .retry {
+        text-align: center;
+        padding: 14px;
+        background: #fff;
+        border: 3px solid var(--border-ink);
+        border-radius: 999px;
+        font-family: var(--font-mono);
+        font-weight: 900;
+        color: var(--text-secondary);
+        box-shadow: var(--drop-sm);
+      }
       /* Variant labels */
-      .variant-label { margin: 26px 48px 10px; font-family: var(--font-mono); font-weight: 900; font-size: var(--fs-md); letter-spacing: 0.2em; color: var(--text-secondary); }
-      .variant-label b { color: var(--coaster-red); }
+      .variant-label {
+        margin: 26px 48px 10px;
+        font-family: var(--font-mono);
+        font-weight: 900;
+        font-size: var(--fs-md);
+        letter-spacing: 0.2em;
+        color: var(--text-secondary);
+      }
+      .variant-label b {
+        color: var(--coaster-red);
+      }
     </style>
   </head>
   <body>
     <div class="frame">
-      <div class="variant-label">案A: エディタは<b>ダークのまま</b>(額縁だけポップ — ターミナルの手触りを残す)</div>
+      <div class="variant-label">
+        案A: エディタは<b>ダークのまま</b>(額縁だけポップ —
+        ターミナルの手触りを残す)
+      </div>
       <header class="header">
         <div class="back">← PARK MAP</div>
         <div class="area-chip">ビジュアル遊覧エリア · V d p</div>
         <div class="ride-progress">
           <span class="label">RIDE</span>
-          <span class="car done"></span><span class="car done"></span><span class="car now"></span><span class="car"></span><span class="car"></span>
+          <span class="car done"></span><span class="car done"></span
+          ><span class="car now"></span><span class="car"></span
+          ><span class="car"></span>
           <span class="label">3/5</span>
         </div>
       </header>
-      <div class="gauge-strip panel" style="margin: 0 48px; border-radius: 999px">
-        <div class="keys"><span class="label">KEYS</span><span class="value">3</span></div>
+      <div
+        class="gauge-strip panel"
+        style="margin: 0 48px; border-radius: 999px"
+      >
+        <div class="keys">
+          <span class="label">KEYS</span><span class="value">3</span>
+        </div>
         <div class="coaster-track">
           <div class="track-fill"></div>
           <div class="track-camera"></div>
@@ -124,43 +420,71 @@
       </div>
       <div class="quest">
         <h1><span class="tag">▶ RIDE</span>2行を入れ替えよ</h1>
-        <div class="goal-note">バッファを GOAL と同じ形にすればパーフェクトライド!</div>
+        <div class="goal-note">
+          バッファを GOAL と同じ形にすればパーフェクトライド!
+        </div>
       </div>
       <main class="main">
         <section class="editor-shell panel">
-          <div class="editor-head"><span>BUFFER</span><span>VIM EMULATION</span></div>
-          <div class="editor-body dark"><span class="cursor-cell">s</span>econd<br />first</div>
-          <div class="editor-foot"><span class="mode-chip">NORMAL</span><span class="brand-foot">hjkland</span></div>
+          <div class="editor-head">
+            <span>BUFFER</span><span>VIM EMULATION</span>
+          </div>
+          <div class="editor-body dark">
+            <span class="cursor-cell">s</span>econd<br />first
+          </div>
+          <div class="editor-foot">
+            <span class="mode-chip">NORMAL</span
+            ><span class="brand-foot">hjkland</span>
+          </div>
         </section>
         <aside class="side">
           <div class="side-panel panel">
             <div class="side-title">
-              <span class="guide-cat"><span class="head"></span><span class="ear-l"></span><span class="ear-r"></span><span class="eye-l"></span><span class="eye-r"></span></span>
+              <span class="guide-cat"
+                ><span class="head"></span><span class="ear-l"></span
+                ><span class="ear-r"></span><span class="eye-l"></span
+                ><span class="eye-r"></span
+              ></span>
               モーション君のガイド
             </div>
-            <div class="guide-text">V で行をまるごと選んで、d で切り取り。そのまま p で下に貼れば、行が入れ替わるよ!</div>
+            <div class="guide-text">
+              V で行をまるごと選んで、d で切り取り。そのまま p
+              で下に貼れば、行が入れ替わるよ!
+            </div>
             <div class="guide-point">🎯 V→d→p の3手でパーフェクト!</div>
           </div>
           <div class="side-panel panel">
             <div class="side-title">🏁 GOAL — この形にしよう</div>
-            <pre class="target-pre">first
+            <pre class="target-pre">
+first
 second</pre>
           </div>
           <div class="retry">もう一回乗る</div>
         </aside>
       </main>
 
-      <div class="variant-label">案B: エディタも<b>明るいクリーム地</b>(全面ポップ — 紙のノートに書く感覚)</div>
+      <div class="variant-label">
+        案B: エディタも<b>明るいクリーム地</b>(全面ポップ —
+        紙のノートに書く感覚)
+      </div>
       <main class="main" style="padding-top: 0">
         <section class="editor-shell panel">
-          <div class="editor-head"><span>BUFFER</span><span>VIM EMULATION</span></div>
-          <div class="editor-body light"><span class="cursor-cell">s</span>econd<br />first</div>
-          <div class="editor-foot"><span class="mode-chip">NORMAL</span><span class="brand-foot">hjkland</span></div>
+          <div class="editor-head">
+            <span>BUFFER</span><span>VIM EMULATION</span>
+          </div>
+          <div class="editor-body light">
+            <span class="cursor-cell">s</span>econd<br />first
+          </div>
+          <div class="editor-foot">
+            <span class="mode-chip">NORMAL</span
+            ><span class="brand-foot">hjkland</span>
+          </div>
         </section>
         <aside class="side">
           <div class="side-panel panel">
             <div class="side-title">🏁 GOAL — この形にしよう</div>
-            <pre class="target-pre light">first
+            <pre class="target-pre light">
+first
 second</pre>
           </div>
         </aside>

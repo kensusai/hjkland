@@ -23,8 +23,16 @@ import {
 import type { VimMode } from "../core/ports";
 import { levelProgress } from "../core/progression/xp";
 import { configFor, type Difficulty } from "../core/difficulty";
-import { SenseiHintPanel } from "./Sensei";
-import { isMuted, playClear, toggleMuted } from "./sound";
+import { GuideHintPanel } from "./Mascot";
+import {
+  isBgmMuted,
+  isMuted,
+  playClear,
+  startBgm,
+  stopBgm,
+  toggleBgm,
+  toggleMuted,
+} from "./sound";
 import { useAppStore } from "./storeContext";
 import {
   createVimEngine,
@@ -32,9 +40,9 @@ import {
 } from "../vim/codeMirrorVimEngine";
 
 export const MEDAL_WORD: Record<Medal, string> = {
-  gold: "一本!!",
-  silver: "技あり!",
-  bronze: "有効",
+  gold: "パーフェクトライド!!",
+  silver: "ナイスライド!",
+  bronze: "完走",
 };
 export const MEDAL_ICON: Record<Medal, string> = {
   gold: "🥇",
@@ -180,6 +188,13 @@ export function PracticePlayer({
     startExercise();
   }, [startExercise]);
 
+  // Park BGM for the whole practice session (its own toggle, next to SFX).
+  // Mount follows a navigation click, so the AudioContext may start.
+  useEffect(() => {
+    startBgm();
+    return stopBgm;
+  }, []);
+
   // Enter must ALWAYS fire the dialog's primary action. autoFocus covers the
   // normal case, but any neutral click (the dark backdrop, the 答え合わせ
   // text) drops focus to <body> and Enter would go nowhere — owner bug
@@ -239,14 +254,15 @@ export function PracticePlayer({
 
   return (
     <div className="mx-auto flex min-h-screen max-w-[1440px] flex-col">
-      <header className="flex items-center justify-between border-b-3 border-ink bg-black/25 px-12 py-3 font-mono">
+      <header className="flex items-center justify-between border-b-3 border-ink bg-white/40 px-12 py-3 font-mono">
         <div className="flex items-center gap-4">
           {headerLeft}
           <SoundToggle />
+          <BgmToggle />
         </div>
         <div className="flex items-center gap-1" aria-label="進行">
           <span className="mr-2 text-[0.625rem] tracking-widest text-cream-faint">
-            ROUND
+            RIDE
           </span>
           {results.map((r, i) => (
             <span
@@ -266,7 +282,7 @@ export function PracticePlayer({
         </div>
       </header>
 
-      <div className="flex items-center justify-center gap-8 border-b-3 border-ink bg-black/35 py-3 font-mono">
+      <div className="flex items-center justify-center gap-8 border-b-3 border-ink bg-white/55 py-3 font-mono">
         <div className="flex items-baseline gap-2">
           <span className="text-[0.625rem] tracking-widest text-cream-faint">
             KEYS
@@ -276,7 +292,7 @@ export function PracticePlayer({
             initial={{ scale: keystrokes > 0 ? 1.35 : 1 }}
             animate={{ scale: 1 }}
             transition={{ type: "spring", stiffness: 700, damping: 22 }}
-            className={`inline-block text-3xl font-black ${zoneText} [text-shadow:3px_3px_0_rgb(0_0_0/0.5)]`}
+            className={`inline-block text-3xl font-black ${zoneText} [text-shadow:3px_3px_0_rgb(43_58_74/0.4)]`}
           >
             {keystrokes}
           </motion.span>
@@ -288,7 +304,7 @@ export function PracticePlayer({
             initial={{ scale: zone === "gold" ? 1 : 1.08 }}
             animate={{ scale: 1 }}
             transition={{ type: "spring", stiffness: 500, damping: 18 }}
-            className="relative h-[18px] w-[280px] border-3 border-ink-bold bg-black"
+            className="relative h-[18px] w-[280px] border-3 border-ink-bold bg-white"
           >
             <div
               className={`absolute inset-y-0 left-0 ${zoneColor} transition-[width] duration-150`}
@@ -308,17 +324,17 @@ export function PracticePlayer({
         <div className="text-sm text-cream-dim">PAR {exercise.par}</div>
       </div>
 
-      {/* Quest banner: the お題 is the star of the screen (playtest feedback:
+      {/* Quest banner: the ride title is the star of the screen (playtest feedback:
           it was buried in the header, small and hard to notice). */}
       <div className="flex items-end justify-between gap-6 px-12 pt-6">
-        <h1 className="text-3xl font-black tracking-wide [text-shadow:4px_4px_0_rgb(0_0_0/0.45)]">
+        <h1 className="text-3xl font-black tracking-wide [text-shadow:3px_3px_0_rgb(255_255_255/0.85)]">
           <span className="mr-3 align-middle font-mono text-sm font-black tracking-[0.3em] text-gold">
-            ▶ お題
+            ▶ RIDE
           </span>
           {exercise.title}
         </h1>
         <p className="whitespace-nowrap pb-1 font-mono text-xs text-cream-dim">
-          バッファを TARGET と同じ形にすれば「一本」だ
+          バッファを GOAL と同じ形にすればパーフェクトライド!
         </p>
       </div>
 
@@ -333,7 +349,7 @@ export function PracticePlayer({
             <span className="bg-matcha px-3 font-black tracking-widest text-[#17260a]">
               {mode.toUpperCase()}
             </span>
-            <span className="text-cream-faint">vim-dojo</span>
+            <span className="text-cream-faint">hjkland</span>
           </div>
         </section>
 
@@ -346,13 +362,13 @@ export function PracticePlayer({
                 difficulty,
               })
             : sidePanel) ??
-            (aids.showHints ? <SenseiHintPanel hint={exercise.hint} /> : null)}
+            (aids.showHints ? <GuideHintPanel hint={exercise.hint} /> : null)}
 
           <div className="pixel-panel p-4">
             <div className="mb-2 font-mono text-sm font-black tracking-[0.2em] text-cream-dim">
-              TARGET — この形にせよ
+              GOAL — この形にしよう
             </div>
-            <pre className="overflow-x-auto border-2 border-ink bg-editor p-3 font-mono text-lg leading-9">
+            <pre className="overflow-x-auto rounded-lg border-2 border-ink bg-editor p-3 font-mono text-lg leading-9 text-editor-text">
               {exercise.targetBuffer}
             </pre>
           </div>
@@ -380,7 +396,7 @@ export function PracticePlayer({
             onClick={retry}
             className="btn-chunky border-2 border-b-[5px] border-ink-bold bg-raised py-2.5 font-mono font-extrabold text-cream-dim"
           >
-            やり直す
+            もう一回乗る
           </button>
         </aside>
       </main>
@@ -428,7 +444,7 @@ export function ResultFooter({
   primaryLabel,
   onPrimary,
   onRetry,
-  retryLabel = "やり直す",
+  retryLabel = "もう一回乗る",
   extraChips,
 }: {
   xpGained: number;
@@ -444,11 +460,11 @@ export function ResultFooter({
     <>
       <div className="mt-4 flex justify-center gap-3 font-mono font-extrabold">
         {xpGained > 0 && (
-          <span className="border-2 border-ink bg-black/40 px-3 py-1 text-gold">
+          <span className="border-2 border-ink bg-raised px-3 py-1 text-gold">
             +{xpGained} XP
           </span>
         )}
-        <span className="border-2 border-ink bg-black/40 px-3 py-1">
+        <span className="border-2 border-ink bg-raised px-3 py-1">
           Lv.{level} {intoLevel}/{neededForNext}
         </span>
         {extraChips}
@@ -493,7 +509,7 @@ function SolutionReveal({
     <div className="mt-5 border-t-2 border-ink pt-4 text-left">
       <div className="mb-2 font-mono text-sm font-black tracking-[0.2em] text-cream-dim">
         答え合わせ — 模範解答({exercise.par} キー)
-        {beat ? " / 模範と互角以上だ!!" : ` / あなた: ${keystrokes} キー`}
+        {beat ? " / お手本と互角以上!!" : ` / あなた: ${keystrokes} キー`}
       </div>
       <div className="flex flex-wrap gap-1.5">
         {solution.map((key, i) => (
@@ -527,11 +543,26 @@ function SoundToggle() {
   );
 }
 
+/** Toggle for the park BGM (independent of the SFX mute). */
+function BgmToggle() {
+  const [muted, setMuted] = useState(isBgmMuted());
+  return (
+    <button
+      type="button"
+      aria-label={muted ? "BGMをオンにする" : "BGMをオフにする"}
+      onClick={() => setMuted(toggleBgm())}
+      className={`text-sm ${muted ? "text-cream-faint opacity-50" : "text-cream-faint"} hover:text-cream`}
+    >
+      🎵
+    </button>
+  );
+}
+
 /** Streak chip for the result footer (shown when the day's activity landed). */
 export function StreakChip() {
   const profile = useAppStore((s) => s.profile);
   return (
-    <span className="border-2 border-ink bg-black/40 px-3 py-1 text-shu">
+    <span className="border-2 border-ink bg-raised px-3 py-1 text-shu">
       🔥 {profile.streak.current}日
     </span>
   );
@@ -542,7 +573,7 @@ export function MedalHeadline({ attempt }: { attempt: Attempt }) {
   if (!attempt.medal) return null;
   return (
     <>
-      <div className="ippon-pop text-6xl font-black tracking-wider text-gold [text-shadow:5px_5px_0_var(--color-shu-dark),8px_8px_0_rgb(0_0_0/0.6)]">
+      <div className="ippon-pop text-6xl font-black tracking-wider text-gold [text-shadow:5px_5px_0_var(--color-shu-dark),8px_8px_0_rgb(43_58_74/0.35)]">
         {MEDAL_WORD[attempt.medal]}
       </div>
       <div className="mt-2 text-4xl">{MEDAL_ICON[attempt.medal]}</div>

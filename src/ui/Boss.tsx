@@ -1,5 +1,5 @@
 /**
- * The boss (a pixel oni) for 皆伝試験 lessons: flinches on every keystroke
+ * The boss (a pixel oni) for boss-ride lessons: flinches on every keystroke
  * and shifts expression/taunts by medal zone (playtest request: ボスが
  * キー入力にリアクションしてほしい). Purely presentational — zones come from
  * core's medalThresholds, the same lines the gauge and the judgment use.
@@ -124,19 +124,21 @@ export function BossPanel({
           : "laughing";
   const taunt =
     mood === "idle"
-      ? "来たな小僧…この俺を、最少の手数で編集できるかな!?"
+      ? "ようこそ絶叫ライドへ!! 最少の手数で乗りこなせるかな!?"
       : mood === "worried"
-        ? "ぬぅ…!? 無駄のない打鍵…やるな…!!"
+        ? "おっ…!? 無駄のない操作…やるね…!!"
         : mood === "smug"
-          ? "フン、パーは守れなかったな。まだ銀はくれてやる。"
-          : "フハハハ!! 手数が多いぞ!! それでも倒せはするがな!!";
+          ? "ふふ、パーは逃したね。まだ銀は間に合うよ。"
+          : "あはは!! 手数多め!! それでもゴールはできるよ!!";
   const chance = Math.max(0, goldMax - keystrokes);
 
   return (
     <div className="pixel-panel border-shu-dark p-4">
       <div className="mb-2 flex items-center justify-between font-mono text-xs font-black tracking-[0.2em] text-shu">
-        <span>👹 BOSS — 皆伝試験</span>
-        <span className="text-[0.625rem] text-cream-faint">EDIT-ONI</span>
+        <span>👹 BOSS RIDE — 絶叫マシン</span>
+        <span className="text-[0.625rem] text-cream-faint">
+          EDIT-ONI COASTER
+        </span>
       </div>
       <div className="flex items-center gap-3">
         {/* re-mounts every keystroke → the oni flinches at each key */}

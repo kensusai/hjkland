@@ -15,11 +15,11 @@ test("boot → lesson 1 → clear → unlock → streak persists", async ({ page
   await resetDatabase(page);
 
   // Home renders with the sensei and the world map.
-  await expect(page.getByText("WORLD MAP")).toBeVisible();
-  await expect(page.getByText("SHIHAN")).toBeVisible();
+  await expect(page.getByText("PARK MAP")).toBeVisible();
+  await expect(page.getByText(/モーション君/)).toBeVisible();
 
   // Start the first lesson (x — delete a character).
-  await page.getByRole("button", { name: /稽古をはじめる/ }).click();
+  await page.getByRole("button", { name: /乗りにいく/ }).click();
   await expect(page.locator(".editor-host .cm-content")).toBeVisible();
 
   // Lesson 1 exercises are all solved with x presses. The session auto-
@@ -29,7 +29,7 @@ test("boot → lesson 1 → clear → unlock → streak persists", async ({ page
   for (const [index, solution] of solutions.entries()) {
     await page.waitForTimeout(300);
     await pressKeys(page, solution);
-    await expect(page.getByRole("dialog")).toContainText("一本"); // gold at par
+    await expect(page.getByRole("dialog")).toContainText("パーフェクトライド"); // gold at par
     if (index === 0) {
       // Regression: stray keys while the result dialog is open must not
       // reach the judged buffer behind it (playtest bug).
@@ -44,18 +44,18 @@ test("boot → lesson 1 → clear → unlock → streak persists", async ({ page
       await page.getByRole("button", { name: /次のお題/ }).click();
     }
   }
-  await expect(page.getByRole("dialog")).toContainText("レッスン皆伝");
+  await expect(page.getByRole("dialog")).toContainText("ライド制覇");
   await expect(page.getByRole("dialog")).toContainText("+30 XP"); // gold 10 + lesson 20
-  await page.getByRole("button", { name: /ホームへ/ }).click();
+  await page.getByRole("button", { name: /パークへ/ }).click();
 
   // Back home: lesson 1 cleared, lesson 2 is current, streak recorded.
-  await expect(page.getByText("WORLD MAP")).toBeVisible();
+  await expect(page.getByText("PARK MAP")).toBeVisible();
   await expect(page.getByLabel("x (cleared)")).toBeVisible();
   await expect(page.getByLabel("h l (current)")).toBeVisible();
 
   // Persistence: everything survives a reload (IndexedDB).
   await page.reload();
-  await expect(page.getByText("WORLD MAP")).toBeVisible();
+  await expect(page.getByText("PARK MAP")).toBeVisible();
   await expect(page.getByLabel("x (cleared)")).toBeVisible();
-  await expect(page.locator("header")).toContainText("STREAK");
+  await expect(page.locator("header")).toContainText("連続来園");
 });

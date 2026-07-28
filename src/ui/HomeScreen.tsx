@@ -178,7 +178,7 @@ export function HomeScreen() {
           <div className="relative flex flex-none flex-col items-center">
             <MascotSprite mood="hype" size={140} />
             <div className="mt-2 font-mono text-[0.625rem] tracking-[0.2em] text-cream-faint">
-              案内係 モーション君
+              案内係 ヤンク
             </div>
           </div>
           <div className="relative flex-1">

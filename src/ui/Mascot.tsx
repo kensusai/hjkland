@@ -1,9 +1,9 @@
 /**
- * The pixel-art park guide "モーション君" — a cat with a balloon
- * (design/mockups/rebrand-hjkland.html) — and its speech bubble. A cheerful
- * guide who shows players around; lines are picked by the caller (home
- * greeting, clear celebration). Replaced the dojo sensei in the hjkland
- * rebrand; the mood API is unchanged.
+ * The park guide "ヤンク" — a smooth-vector cat named after vim's yank
+ * (design/mockups/mascot-candidates.html 案C) — and its speech bubble. A
+ * cheerful guide who shows players around; lines are picked by the caller
+ * (home greeting, clear celebration). Replaced the pixel-art モーション君
+ * (owner feedback: マイクラぽい絵はやめる); the mood API is unchanged.
  */
 export type MascotMood = "normal" | "hype" | "stern";
 
@@ -14,58 +14,122 @@ export function MascotSprite({
   mood?: MascotMood;
   size?: number;
 }) {
-  // Mouth opens for hype; a flat brow line for stern (thinking hard).
-  const mouth =
-    mood === "hype" ? (
-      <rect x="8" y="9" width="3" height="2" fill="#c22f3d" />
-    ) : mood === "stern" ? (
-      <rect x="8" y="10" width="3" height="1" fill="#8a5a2b" />
-    ) : (
-      <rect x="8" y="9" width="2" height="1" fill="#8a5a2b" />
-    );
   return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 20 20"
-      style={{ imageRendering: "pixelated" }}
-      aria-hidden="true"
-    >
-      {/* balloon on a string (raised paw when hyped) */}
+    <svg width={size} height={size} viewBox="0 0 100 100" aria-hidden="true">
+      <ellipse cx="50" cy="92" rx="24" ry="5" fill="rgb(43 58 74 / 0.15)" />
+      {/* the balloon comes out when celebrating */}
       {mood === "hype" && (
         <>
-          <rect x="15" y="1" width="3" height="4" fill="#ff5a5a" />
-          <rect x="16" y="5" width="1" height="4" fill="#2b3a4a" />
-          <rect x="14" y="9" width="2" height="2" fill="#ffb84d" />
+          <circle
+            cx="78"
+            cy="16"
+            r="9"
+            fill="#ff5a5a"
+            stroke="#2b3a4a"
+            strokeWidth="2.4"
+          />
+          <path
+            d="M78 25 Q78 36 70 42"
+            stroke="#2b3a4a"
+            strokeWidth="2"
+            fill="none"
+          />
         </>
       )}
       {/* ears */}
-      <rect x="5" y="2" width="2" height="2" fill="#ffb84d" />
-      <rect x="12" y="2" width="2" height="2" fill="#ffb84d" />
-      {/* head */}
-      <rect x="4" y="4" width="11" height="7" fill="#ffb84d" />
-      {/* eyes (a lowered brow for stern) */}
-      {mood === "stern" && (
+      <path
+        d="M26 34 Q21 12 41 20 Z"
+        fill="#ffb84d"
+        stroke="#2b3a4a"
+        strokeWidth="2.6"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M74 34 Q79 12 59 20 Z"
+        fill="#ffb84d"
+        stroke="#2b3a4a"
+        strokeWidth="2.6"
+        strokeLinejoin="round"
+      />
+      <path d="M29 29 Q26 19 37 23 Z" fill="#ff9d9d" />
+      <path d="M71 29 Q74 19 63 23 Z" fill="#ff9d9d" />
+      {/* head + muzzle */}
+      <ellipse
+        cx="50"
+        cy="52"
+        rx="30"
+        ry="28"
+        fill="#ffb84d"
+        stroke="#2b3a4a"
+        strokeWidth="3"
+      />
+      <ellipse cx="50" cy="64" rx="17" ry="12" fill="#fff2dd" />
+      {/* whiskers */}
+      <path
+        d="M18 50 L30 52 M18 58 L30 57 M82 50 L70 52 M82 58 L70 57"
+        stroke="#2b3a4a"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+      {/* face by mood */}
+      {mood === "hype" ? (
         <>
-          <rect x="6" y="5" width="2" height="1" fill="#8a5a2b" />
-          <rect x="11" y="5" width="2" height="1" fill="#8a5a2b" />
+          <path
+            d="M35 44 Q40 39 45 44"
+            stroke="#2b3a4a"
+            strokeWidth="3"
+            fill="none"
+            strokeLinecap="round"
+          />
+          <path
+            d="M56 44 Q61 39 66 44"
+            stroke="#2b3a4a"
+            strokeWidth="3"
+            fill="none"
+            strokeLinecap="round"
+          />
+          <ellipse
+            cx="50"
+            cy="58"
+            rx="5"
+            ry="6"
+            fill="#c22f3d"
+            stroke="#2b3a4a"
+            strokeWidth="2"
+          />
+        </>
+      ) : (
+        <>
+          {mood === "stern" && (
+            <path
+              d="M34 38 L45 41 M66 38 L55 41"
+              stroke="#2b3a4a"
+              strokeWidth="2.6"
+              strokeLinecap="round"
+            />
+          )}
+          <circle cx="40" cy="46" r="4.5" fill="#2b3a4a" />
+          <circle cx="61" cy="46" r="4.5" fill="#2b3a4a" />
+          <circle cx="41.4" cy="44.6" r="1.4" fill="#fff" />
+          <circle cx="62.4" cy="44.6" r="1.4" fill="#fff" />
+          {mood === "stern" ? (
+            <path
+              d="M46 58 L54 58"
+              stroke="#2b3a4a"
+              strokeWidth="2.6"
+              strokeLinecap="round"
+            />
+          ) : (
+            <path
+              d="M47 58 Q50 61 53 58"
+              stroke="#2b3a4a"
+              strokeWidth="2.6"
+              fill="none"
+              strokeLinecap="round"
+            />
+          )}
         </>
       )}
-      <rect x="6" y="6" width="2" height="2" fill="#253244" />
-      <rect x="11" y="6" width="2" height="2" fill="#253244" />
-      {mouth}
-      {/* whiskers */}
-      <rect x="2" y="7" width="2" height="1" fill="#e59a2f" />
-      <rect x="15" y="7" width="2" height="1" fill="#e59a2f" />
-      {/* body + stripe */}
-      <rect x="5" y="11" width="9" height="5" fill="#ffd9a1" />
-      <rect x="5" y="12" width="9" height="1" fill="#ffb84d" />
-      {/* paws */}
-      <rect x="5" y="16" width="3" height="3" fill="#ffb84d" />
-      <rect x="11" y="16" width="3" height="3" fill="#ffb84d" />
-      {/* tail */}
-      <rect x="14" y="12" width="2" height="2" fill="#ffb84d" />
-      <rect x="15" y="10" width="2" height="2" fill="#ffb84d" />
     </svg>
   );
 }
@@ -87,7 +151,7 @@ export function GuideHintPanel({ hint }: { hint?: string | undefined }) {
   return (
     <div className="pixel-panel p-4">
       <div className="mb-2 flex items-center gap-2 font-mono text-sm font-black tracking-[0.2em] text-matcha-dim">
-        <MascotSprite size={28} /> モーション君のガイド
+        <MascotSprite size={28} /> ヤンクのガイド
       </div>
       <p className="text-xl leading-relaxed text-cream-dim">
         {hint ??

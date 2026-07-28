@@ -26,6 +26,6 @@ jobs:
           curl -fsS \
             -H "Title: hjkland" \
             -H "Tags: ferris_wheel" \
-            -d "今日はどれに乗る? モーション君がパークで待ってるよ → https://kensusai.github.io/hjkland/?mode=quiz" \
+            -d "今日はどれに乗る? ヤンクがパークで待ってるよ → https://kensusai.github.io/hjkland/?mode=quiz" \
             "https://ntfy.sh/$NTFY_TOPIC" > /dev/null
           echo "Reminder sent."

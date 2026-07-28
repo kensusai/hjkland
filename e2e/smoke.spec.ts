@@ -16,7 +16,7 @@ test("boot → lesson 1 → clear → unlock → streak persists", async ({ page
 
   // Home renders with the sensei and the world map.
   await expect(page.getByText("PARK MAP")).toBeVisible();
-  await expect(page.getByText(/モーション君/)).toBeVisible();
+  await expect(page.getByText(/ヤンク/)).toBeVisible();
 
   // Start the first lesson (x — delete a character).
   await page.getByRole("button", { name: /乗りにいく/ }).click();

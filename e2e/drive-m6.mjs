@@ -21,7 +21,7 @@ await resetDatabase(page);
 // --- Home screen ------------------------------------------------------------
 await page.waitForSelector("text=PARK MAP", { timeout: 10_000 });
 await shot("m6-01-home");
-const senseiVisible = await page.locator("text=モーション君").isVisible();
+const senseiVisible = await page.locator("text=ヤンク").isVisible();
 log("home shows sensei board:", senseiVisible);
 const cta = page.getByRole("button", { name: /乗りにいく/ });
 log("next-lesson CTA present:", await cta.isVisible());

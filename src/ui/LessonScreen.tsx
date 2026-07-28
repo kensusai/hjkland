@@ -106,7 +106,7 @@ export function LessonScreen({
         ) : !showHints ? null : (
           <div className="pixel-panel p-4">
             <div className="mb-2 flex items-center gap-2 font-mono text-sm font-black tracking-[0.2em] text-matcha-dim">
-              <MascotSprite size={28} /> モーション君のガイド
+              <MascotSprite size={28} /> ヤンクのガイド
             </div>
             <p className="text-xl leading-relaxed text-cream-dim">
               {lesson.brief}

@@ -305,3 +305,78 @@ describe("stage 7: visual mode (v / V / <C-v>)", () => {
     expect(engine.currentBuffer()).toBe("aab\nccd");
   });
 });
+
+describe("stage 5 candidates: efficiency ops (A I r R J ct/dt ~)", () => {
+  it("A appends at end of line, I inserts at first non-blank", () => {
+    engine.reset("abc");
+    keys(["A"]);
+    engine.typeText("!");
+    keys(["<Esc>"]);
+    expect(engine.currentBuffer()).toBe("abc!");
+    keys(["I"]);
+    engine.typeText(">");
+    keys(["<Esc>"]);
+    expect(engine.currentBuffer()).toBe(">abc!");
+  });
+
+  it("r replaces one char in place", () => {
+    // NOTE: R (overtype) works only via real key events — typeText inserts
+    // instead of overtyping. Verified in the browser by e2e/drive-content.mjs.
+    engine.reset("cat");
+    keys(["r", "b"]);
+    expect(engine.currentBuffer()).toBe("bat");
+  });
+
+  it("J joins the next line with a space", () => {
+    engine.reset("foo\nbar");
+    keys(["J"]);
+    expect(engine.currentBuffer()).toBe("foo bar");
+  });
+
+  it("ct) / dt, stop before the target char", () => {
+    engine.reset("fn(old)");
+    keys(["f", "(", "l", "c", "t", ")"]);
+    engine.typeText("new");
+    keys(["<Esc>"]);
+    expect(engine.currentBuffer()).toBe("fn(new)");
+    engine.reset("aaa, bbb");
+    keys(["d", "t", ","]);
+    expect(engine.currentBuffer()).toBe(", bbb");
+  });
+
+  it("~ toggles case and advances", () => {
+    engine.reset("abc");
+    keys(["~", "~"]);
+    expect(engine.currentBuffer()).toBe("ABc");
+  });
+});
+
+describe("stage 6 candidates: search (/ ? n N * # ; ,)", () => {
+  it("* searches the word under the cursor; n/N repeat", () => {
+    engine.reset("foo bar\nfoo baz\nfoo qux");
+    keys(["*", "x"]); // jump to next "foo", delete its f
+    expect(engine.currentBuffer()).toBe("foo bar\noo baz\nfoo qux");
+    keys(["n", "x"]);
+    expect(engine.currentBuffer()).toBe("foo bar\noo baz\noo qux");
+  });
+
+  it("# searches backwards for the word under the cursor", () => {
+    engine.reset("foo a\nfoo b\nfoo c");
+    keys(["G"]); // last line's foo
+    keys(["#", "x"]);
+    expect(engine.currentBuffer()).toBe("foo a\noo b\nfoo c");
+  });
+
+  it("; and , repeat the last f jump forwards/backwards", () => {
+    engine.reset("aXbXc");
+    keys(["f", "X", ";", "x"]);
+    expect(engine.currentBuffer()).toBe("aXbc");
+    engine.reset("aXbXc");
+    keys(["f", "X", ";", ",", "x"]);
+    expect(engine.currentBuffer()).toBe("abXc");
+  });
+
+  // NOTE: / and ? open the search dialog, which sendKey cannot drive — the
+  // typed pattern would execute as normal-mode commands. Search lessons are
+  // verified with real key events in e2e/drive-content.mjs.
+});

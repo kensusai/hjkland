@@ -1635,7 +1635,7 @@ const stage4Lessons: Lesson[] = [
         "\u898b\u51fa\u3057\u3092\u672b\u5c3e\u306b2\u3064\u8907\u88fd",
         "# Title\nbody\nmore",
         "# Title\nbody\nmore\n# Title\n# Title",
-        12,
+        11,
         ['"ayy'],
         '"ayy \u3067\u898b\u51fa\u3057\u3092\u63a7\u3048\u3001"ap \u30922\u56de\u3002',
       ),
@@ -1683,21 +1683,445 @@ const stage4: Stage = {
   lessons: stage4Lessons,
 };
 
-// Roadmap stubs (titles set; content authored in future turns). Shown on the
-// map so the journey doesn't look like it ends at 4 (owner: 4は少ない).
-// Empty stages count as cleared for gating (R7), so stage 7 opens right
-// after stage 4 until these are authored.
+// Stage 5 (効率化の型): insert variants, replace, join, till-motions, case.
+const stage5Lessons: Lesson[] = [
+  {
+    id: lessonId("s5-l1-AI"),
+    title: "A I — 行頭・行末から書く",
+    brief:
+      "A は行末に追記、I は行頭(最初の文字)から挿入。行のどこにいても一発で書き始められる。",
+    unlocks: [commandId("A"), commandId("I")],
+    exercises: [
+      ex(
+        "s5-l1-e1",
+        "セミコロンを足せ",
+        "log",
+        "log;",
+        3,
+        ["A"],
+        "A で行末へ、; を打って Esc。",
+      ),
+      ex(
+        "s5-l1-e2",
+        "コメントにせよ",
+        "note",
+        "# note",
+        4,
+        ["I"],
+        "I で行頭へ、# とスペースを打って Esc。",
+      ),
+      ex(
+        "s5-l1-e3",
+        "代入を完成させよ",
+        "count",
+        "count = 0;",
+        7,
+        ["A"],
+        "A で行末へ「 = 0;」。",
+      ),
+      ex(
+        "s5-l1-e4",
+        "両端を飾れ",
+        "title",
+        "## title ##",
+        10,
+        ["I", "A"],
+        "I で頭に「## 」、Esc、A で尻に「 ##」。",
+      ),
+    ],
+  },
+  {
+    id: lessonId("s5-l2-rR"),
+    title: "r R — 置き換えの型",
+    brief:
+      "r は1文字だけその場で置き換え(挿入モードに入らない)。R は上書きモードで、Esc まで打った分だけ置き換わる。",
+    unlocks: [commandId("r"), commandId("R")],
+    exercises: [
+      ex(
+        "s5-l2-e1",
+        "1文字なおせ",
+        "cat",
+        "bat",
+        2,
+        ["r"],
+        "r→b。挿入モードには入らない。",
+      ),
+      ex(
+        "s5-l2-e2",
+        "バージョンを上げろ",
+        "v0.1",
+        "v0.9",
+        3,
+        ["r", "$"],
+        "$ で行末へ、r→9。",
+      ),
+      ex(
+        "s5-l2-e3",
+        "年号を書き換えろ",
+        "1999-01",
+        "2026-01",
+        6,
+        ["R"],
+        "R で上書きモード、2026 と打って Esc。",
+      ),
+      ex(
+        "s5-l2-e4",
+        "バージョンを刷新せよ",
+        "v1.0.0-beta",
+        "v2.4.1-beta",
+        8,
+        ["R"],
+        "R→v2.4.1→Esc。連続の置き換えは R が速い。",
+      ),
+    ],
+  },
+  {
+    id: lessonId("s5-l3-J"),
+    title: "J — 行をつなぐ",
+    brief:
+      "J は下の行を今の行の末尾につなぐ(間にスペースが1つ入る)。数字を前置すると複数行を一気につなげる。",
+    unlocks: [commandId("J")],
+    exercises: [
+      ex("s5-l3-e1", "2行を1行に", "foo\nbar", "foo bar", 1, ["J"], "J 一発。"),
+      ex(
+        "s5-l3-e2",
+        "折れた式をつなげ",
+        "const x =\n1;",
+        "const x = 1;",
+        1,
+        ["J"],
+        "J。スペースは勝手に入る。",
+      ),
+      ex("s5-l3-e3", "3行を1行に", "a\nb\nc", "a b c", 2, ["J"], "J→J。"),
+      ex(
+        "s5-l3-e4",
+        "4行まとめてつなげ",
+        "one\ntwo\nthree\nfour",
+        "one two three four",
+        2,
+        ["J"],
+        "4J で4行を一気に。",
+      ),
+    ],
+  },
+  {
+    id: lessonId("s5-l4-ct"),
+    title: "ct( dt) — 目印の直前まで",
+    brief:
+      "t{文字} は目印の「直前」で止まる移動。c/d と組むと「〜の手前まで書き換え/削除」になる。f との違いは目印を含まないこと。",
+    unlocks: [commandId("ct"), commandId("dt")],
+    exercises: [
+      ex(
+        "s5-l4-e1",
+        "カンマの手前まで消せ",
+        "aaa, bbb",
+        ", bbb",
+        3,
+        ["dt"],
+        "dt, でカンマの直前まで削除。",
+      ),
+      ex(
+        "s5-l4-e2",
+        "カッコの中身を空に",
+        "(aaa)bbb",
+        "()bbb",
+        4,
+        ["dt", "l"],
+        "l で中へ、dt) で ) の手前まで削除。",
+      ),
+      ex(
+        "s5-l4-e3",
+        "TODO を DONE に",
+        "TODO fix the bug",
+        "DONE fix the bug",
+        9,
+        ["ct"],
+        "ctf(f の手前まで書き換え)→「DONE 」→Esc。",
+      ),
+      ex(
+        "s5-l4-e4",
+        "値だけ書き換えろ",
+        "wait(300)",
+        "wait(50)",
+        9,
+        ["ct", "f"],
+        "f( l で中へ、ct) →50→Esc。",
+      ),
+    ],
+  },
+  {
+    id: lessonId("s5-l5-tilde"),
+    title: "~ — 大小文字をひっくり返す",
+    brief:
+      "~ はカーソル位置の大文字/小文字を反転して右へ進む。数字を前置するとまとめて反転。",
+    unlocks: [commandId("~")],
+    exercises: [
+      ex("s5-l5-e1", "頭を大文字に", "hello", "Hello", 1, ["~"], "~ 一発。"),
+      ex(
+        "s5-l5-e2",
+        "全部大文字に",
+        "json",
+        "JSON",
+        2,
+        ["~"],
+        "4~ で4文字まとめて。",
+      ),
+      ex(
+        "s5-l5-e3",
+        "大小を正せ",
+        "mAC",
+        "Mac",
+        2,
+        ["~"],
+        "3~。反転なので Mac になる。",
+      ),
+      ex(
+        "s5-l5-e4",
+        "名前の頭を大文字に",
+        "o'reilly",
+        "O'Reilly",
+        4,
+        ["~", "f"],
+        "~ で O、fr で r へ飛んで ~。",
+      ),
+    ],
+  },
+];
+
 const stage5: Stage = {
   id: "stage-5",
   title: "STAGE 5",
   subtitle: "効率化の型",
-  lessons: [],
+  lessons: stage5Lessons,
 };
+
+// Stage 6 (検索の達人). / and ? drive the search dialog, which jsdom cannot
+// replay — those solutions are verified in a real browser (e2e/drive-content).
+const stage6Lessons: Lesson[] = [
+  {
+    id: lessonId("s6-l1-search"),
+    title: "/ ? — 検索でジャンプ",
+    brief:
+      "/{語}⏎ で次の一致へ、?{語}⏎ で手前の一致へ一気に飛ぶ。長いファイルでは行数を数えるより検索が最速。",
+    unlocks: [commandId("/"), commandId("?")],
+    exercises: [
+      ex(
+        "s6-l1-e1",
+        "delta へ飛んで頭を消せ",
+        "alpha\nbravo\ncharlie\ndelta\necho",
+        "alpha\nbravo\ncharlie\nelta\necho",
+        8,
+        ["/"],
+        "/delta⏎ で飛んで x。",
+      ),
+      ex(
+        "s6-l1-e2",
+        "fix を fax に",
+        "start here\nlorem ipsum\nfix me please\nmore text\nthe end",
+        "start here\nlorem ipsum\nfax me please\nmore text\nthe end",
+        8,
+        ["/", "r"],
+        "/fix⏎→l→ra。",
+      ),
+      ex(
+        "s6-l1-e3",
+        "ddd の行を消せ",
+        "aaa\nbbb\nccc\nddd\neee\nfff",
+        "aaa\nbbb\nccc\neee\nfff",
+        7,
+        ["/", "dd"],
+        "/ddd⏎→dd。",
+      ),
+      ex(
+        "s6-l1-e4",
+        "後方検索で戻れ",
+        "target a\nmiddle\nend here",
+        "arget a\nmiddle\nend here",
+        10,
+        ["?"],
+        "G で末尾へ、?target⏎ で戻って x。",
+      ),
+    ],
+  },
+  {
+    id: lessonId("s6-l2-nN"),
+    title: "n N — 検索を繰り返す",
+    brief:
+      "n で同じ検索の次の一致へ、N で逆方向へ。検索は1回打てば n/N で乗り継げる。",
+    unlocks: [commandId("n"), commandId("N")],
+    exercises: [
+      ex(
+        "s6-l2-e1",
+        "red を順に削れ",
+        "red blue\nred green\nred pink",
+        "red blue\ned green\ned pink",
+        8,
+        ["n", "/"],
+        "/red⏎→x→n→x。",
+      ),
+      ex(
+        "s6-l2-e2",
+        "tmp を全部削れ",
+        "tmp a\ntmp b\ntmp c\ntmp d",
+        "tmp a\nmp b\nmp c\nmp d",
+        10,
+        ["n", "/"],
+        "/tmp⏎→x→n→x→n→x。",
+      ),
+      ex(
+        "s6-l2-e3",
+        "行きすぎたら N で戻れ",
+        "one\nkey a\nkey b\nkey c",
+        "one\ney a\nkey b\nkey c",
+        8,
+        ["N", "/"],
+        "/key⏎→n→N(戻る)→x。",
+      ),
+      ex(
+        "s6-l2-e4",
+        "飛ばしながら削れ",
+        "log info\nlog warn\nlog error\nlog debug",
+        "log info\nog warn\nlog error\nog debug",
+        9,
+        ["n", "/"],
+        "/log⏎→x→n→n→x。",
+      ),
+    ],
+  },
+  {
+    id: lessonId("s6-l3-star"),
+    title: "* # — カーソルの単語で検索",
+    brief:
+      "* はカーソル下の単語を次から検索、# は手前から検索。打たずに検索できる最速ジャンプ。単語単位で一致する。",
+    unlocks: [commandId("*"), commandId("#")],
+    exercises: [
+      ex(
+        "s6-l3-e1",
+        "次の foo へ",
+        "foo bar\nfoo baz\nfoo qux",
+        "foo bar\noo baz\nfoo qux",
+        2,
+        ["*"],
+        "*→x。",
+      ),
+      ex(
+        "s6-l3-e2",
+        "さらに次へ",
+        "pin a\npin b\npin c\npin d",
+        "pin a\npin b\nin c\npin d",
+        3,
+        ["*", "n"],
+        "*→n→x で3つ目の pin。",
+      ),
+      ex(
+        "s6-l3-e3",
+        "手前へ戻る #",
+        "item a\nitem b\nitem c",
+        "item a\ntem b\nitem c",
+        3,
+        ["#", "G"],
+        "G で末尾へ、#→x。",
+      ),
+      ex(
+        "s6-l3-e4",
+        "単語単位の一致",
+        "in main\nin rain\nmain in",
+        "in main\nn rain\nmain in",
+        2,
+        ["*"],
+        "* は「単語として in」だけに一致(main は素通り)。",
+      ),
+    ],
+  },
+  {
+    id: lessonId("s6-l4-semi"),
+    title: "; , — f をリピート",
+    brief:
+      "; は直前の f/t ジャンプを次へリピート、, は逆方向へ。f を1回打てば ; で乗り継げる。",
+    unlocks: [commandId(";"), commandId(",")],
+    exercises: [
+      ex(
+        "s6-l4-e1",
+        "2つ目の X を消せ",
+        "aXbXc",
+        "aXbc",
+        4,
+        [";", "f"],
+        "fX→;→x。",
+      ),
+      ex(
+        "s6-l4-e2",
+        "行きすぎたら , で戻れ",
+        "aXbXc",
+        "abXc",
+        5,
+        [",", "f"],
+        "fX→;→,(戻る)→x。",
+      ),
+      ex(
+        "s6-l4-e3",
+        "3つ目のカンマを消せ",
+        "1,2,3,4",
+        "1,2,34",
+        5,
+        [";", "f"],
+        "f,→;→;→x。",
+      ),
+      ex(
+        "s6-l4-e4",
+        "最後のダッシュを消せ",
+        "-a-b-c-d",
+        "-a-b-cd",
+        5,
+        [";", "f"],
+        "f-→;→;→x。",
+      ),
+    ],
+  },
+  {
+    id: lessonId("s6-l5-boss"),
+    title: "総仕上げ — 検索の乱取り",
+    brief:
+      "検索・リピート・これまでの技を混ぜて使う。目当ての場所へは検索で飛び、編集はいつもの型で。",
+    unlocks: [],
+    boss: true,
+    exercises: [
+      ex(
+        "s6-l5-e1",
+        "err の行を両方消せ",
+        "ok line\nerr one\nok line2\nerr two",
+        "ok line\nok line2",
+        10,
+        ["/", "n", "dd"],
+        "/err⏎→dd→n→dd。",
+      ),
+      ex(
+        "s6-l5-e2",
+        "2つ目の flag を直せ",
+        "flag on\nflag off\nflag on",
+        "flag on\nFlag off\nflag on",
+        3,
+        ["*", "r"],
+        "*→rF。",
+      ),
+      ex(
+        "s6-l5-e3",
+        "3つ目のカッコの中身を",
+        "(a)(b)(c)",
+        "(a)(b)(X)",
+        7,
+        [";", "f", "r"],
+        "f(→;→;→l→rX。",
+      ),
+    ],
+  },
+];
+
 const stage6: Stage = {
   id: "stage-6",
   title: "STAGE 6",
   subtitle: "検索の達人",
-  lessons: [],
+  lessons: stage6Lessons,
 };
 
 // Stage 7 (ビジュアルの型): owner request 2026-07-23 — 複数行を V で切って
@@ -1940,11 +2364,160 @@ const stage7: Stage = {
   subtitle: "ビジュアルの型",
   lessons: stage7Lessons,
 };
+// Stage 8 (実戦 皆伝): every technique, on realistic buffers.
+const stage8Lessons: Lesson[] = [
+  {
+    id: lessonId("s8-l1-rename"),
+    title: "リネーム実戦 — 名前を直す",
+    brief:
+      "実務でいちばん多い編集は「名前の変更」。範囲に応じて :%s(全体)・:s(行内)・ciw(その場)を使い分ける。",
+    unlocks: [],
+    exercises: [
+      ex(
+        "s8-l1-e1",
+        "全体を一括リネーム",
+        "tmp = load()\nsend(tmp)\nprint(tmp)",
+        "buf = load()\nsend(buf)\nprint(buf)",
+        14,
+        [":%s"],
+        ":%s/tmp/buf/g。",
+      ),
+      ex(
+        "s8-l1-e2",
+        "この行だけ直す",
+        "x = x + gain\ntotal = x",
+        "y = y + gain\ntotal = x",
+        9,
+        [":s"],
+        ":s/x/y/g で今の行だけ。",
+      ),
+      ex(
+        "s8-l1-e3",
+        "その場の1語だけ",
+        "count += 1\ntotal = count",
+        "sum += 1\ntotal = count",
+        7,
+        ["ciw"],
+        "ciw→sum→Esc。",
+      ),
+    ],
+  },
+  {
+    id: lessonId("s8-l2-cleanup"),
+    title: "掃除実戦 — ノイズを消す",
+    brief:
+      "デバッグ行・空行・折り返しの掃除。:g で条件の行をまとめて消し、J でつなぎ直す。",
+    unlocks: [],
+    exercises: [
+      ex(
+        "s8-l2-e1",
+        "DEBUG 行を一掃",
+        "run()\nDEBUG a\nsave()\nDEBUG b\ndone()",
+        "run()\nsave()\ndone()",
+        11,
+        [":g"],
+        ":g/DEBUG/d。",
+      ),
+      ex(
+        "s8-l2-e2",
+        "空行を一掃",
+        "a,b\n\nc,d\n\ne,f",
+        "a,b\nc,d\ne,f",
+        8,
+        [":g"],
+        ":g/^$/d で空行だけ削除。",
+      ),
+      ex(
+        "s8-l2-e3",
+        "折れたSQLを1行に",
+        "SELECT *\nFROM users\nWHERE id = 1",
+        "SELECT * FROM users WHERE id = 1",
+        2,
+        ["J"],
+        "3J で3行を一気につなぐ。",
+      ),
+    ],
+  },
+  {
+    id: lessonId("s8-l3-shape"),
+    title: "整形実戦 — 組み替える",
+    brief:
+      "行の移動・複製・ケース修正。ビジュアルとレジスタ、これまでの型の総動員。",
+    unlocks: [],
+    exercises: [
+      ex(
+        "s8-l3-e1",
+        "footer を最後へ",
+        "footer\nheader\nbody",
+        "header\nbody\nfooter",
+        4,
+        ["V", "G", "p"],
+        "V→d→G→p。",
+      ),
+      ex(
+        "s8-l3-e2",
+        "行を複製して2に",
+        "item: one",
+        "item: one\nitem: two",
+        11,
+        ["yy", "ciw"],
+        "yy→p→$→ciw→two→Esc。",
+      ),
+      ex(
+        "s8-l3-e3",
+        "大文字小文字を正せ",
+        "wrong Case here",
+        "Wrong case here",
+        3,
+        ["~", "w"],
+        "~→w→~。",
+      ),
+    ],
+  },
+  {
+    id: lessonId("s8-l4-boss"),
+    title: "皆伝ボス — 実戦総合",
+    brief:
+      "総合実戦。ひとつのバッファに複数の直しどころ。どの技で最短を組むかはあなた次第。",
+    unlocks: [],
+    boss: true,
+    exercises: [
+      ex(
+        "s8-l4-e1",
+        "リネームして TODO を消せ",
+        "TODO fix name\nold = 1\nprint(old)\nprint(old)",
+        "val = 1\nprint(val)\nprint(val)",
+        18,
+        [":%s", "gg", "dd"],
+        ":%s/old/val/g→gg→dd。",
+      ),
+      ex(
+        "s8-l4-e2",
+        "並べ替えて1行に",
+        "b\na\nc",
+        "a b c",
+        7,
+        ["V", "p", "J"],
+        "V→d→p で入れ替え、gg→3J。",
+      ),
+      ex(
+        "s8-l4-e3",
+        "署名を末尾へコピー",
+        "sig: ---\nalpha\nbeta",
+        "sig: ---\nalpha\nbeta\nsig: ---",
+        8,
+        ['"ayy', '"ap', "G"],
+        '"ayy→G→"ap。',
+      ),
+    ],
+  },
+];
+
 const stage8: Stage = {
   id: "stage-8",
   title: "STAGE 8",
   subtitle: "実戦 皆伝",
-  lessons: [],
+  lessons: stage8Lessons,
 };
 
 export const stages: Stage[] = [

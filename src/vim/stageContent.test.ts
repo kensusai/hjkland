@@ -19,15 +19,27 @@ import { replaySolution } from "./replaySolution";
 
 beforeAll(installCodeMirrorDomStubs);
 
-/** Exercises whose solution needs j/k, which jsdom can't drive (no layout).
- * Verified in the browser instead (e2e/drive-m6.mjs for stage 1,
- * e2e/drive-stage7.mjs for stage 7 — visual-mode j is display-based too). */
+/** Exercises whose solution jsdom can't drive: j/k need layout, R overtypes
+ * only via real key events, and / ? go through the search dialog.
+ * All are verified in the browser by e2e/drive-content.mjs, which replays
+ * every authored solution with real key events. */
 const browserOnly = new Set([
   "s1-l3-e1",
   "s1-l3-e2",
   "s1-l3-e3",
   "s1-l3-e4",
   "s1-l3-e5",
+  "s5-l2-e3",
+  "s5-l2-e4",
+  "s6-l1-e1",
+  "s6-l1-e2",
+  "s6-l1-e3",
+  "s6-l1-e4",
+  "s6-l2-e1",
+  "s6-l2-e2",
+  "s6-l2-e3",
+  "s6-l2-e4",
+  "s6-l5-e1",
   "s7-l2-e2",
   "s7-l2-e3",
   "s7-l3-e3",

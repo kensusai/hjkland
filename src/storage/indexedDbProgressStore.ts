@@ -32,6 +32,12 @@ export async function openProgressStore(options?: {
   /** For tests: an alternative IndexedDB database name. */
   databaseName?: string;
 }): Promise<IndexedDbProgressStore> {
+  // One-time cleanup: the dojo-era database ("vim-dojo") was abandoned in the
+  // hjkland rebrand (owner accepted the progress reset, 2026-07-28). Deleting
+  // is fire-and-forget and harmless once it no longer exists.
+  if (!options?.databaseName && typeof indexedDB !== "undefined") {
+    indexedDB.deleteDatabase("vim-dojo");
+  }
   const db = await openDB(options?.databaseName ?? DB_NAME, DB_VERSION, {
     upgrade(database, oldVersion, newVersion, tx) {
       runMigrations(database, oldVersion, newVersion, tx);
@@ -101,7 +107,7 @@ class Store implements IndexedDbProgressStore {
     // exists — importJson rejects whole snapshots, so a bad export would
     // otherwise surface only when it is the last copy left.
     const snapshot = ExportSchema.parse({
-      app: "vim-dojo",
+      app: "hjkland",
       schemaVersion: SCHEMA_VERSION,
       exportedAt: new Date().toISOString(),
       profile: profile ?? fromCoreProfile(initialProfile),

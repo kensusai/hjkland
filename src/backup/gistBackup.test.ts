@@ -30,7 +30,7 @@ describe("pushBackup", () => {
       .mockResolvedValue({ ok: true, json: async () => ({ id: "gist123" }) });
     vi.stubGlobal("fetch", fetchMock);
 
-    const updated = await pushBackup('{"app":"vim-dojo"}');
+    const updated = await pushBackup('{"app":"hjkland"}');
 
     expect(updated.gistId).toBe("gist123");
     expect(loadBackupConfig()?.gistId).toBe("gist123");
@@ -124,7 +124,7 @@ describe("pullBackup", () => {
       vi.fn().mockResolvedValue({
         ok: true,
         json: async () => ({
-          files: { "vim-dojo-progress.json": { content: '{"restored":true}' } },
+          files: { "hjkland-progress.json": { content: '{"restored":true}' } },
         }),
       }),
     );

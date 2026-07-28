@@ -4,10 +4,10 @@
 
 ## 画面設計(デザインソースとの対応)
 
-| 画面   | デザインソース(正)                    | 実装                        |
-| ------ | ------------------------------------- | --------------------------- |
-| 演習   | `design/mockups/practice-c.html`(案C) | `src/ui/PracticeScreen.tsx` |
-| ホーム | `design/mockups/home-c.html`(案C)     | M6 で実装                   |
+| 画面   | デザインソース(正)                             | 実装                        |
+| ------ | ---------------------------------------------- | --------------------------- |
+| 演習   | `design/mockups/rebrand-hjkland-practice.html` | `src/ui/PracticeScreen.tsx` |
+| ホーム | `design/mockups/rebrand-hjkland.html`          | M6 で実装                   |
 
 - デザイントークンは `src/ui/index.css` の `@theme`(Tailwind v4)に定義。**モック HTML の `:root` と同期を保つ**(色・フォントを変えるときは両方更新)。
 - Figma を使う場合の手順は `design/mockups/README.md`。

@@ -21,7 +21,7 @@ export type Route =
   | { screen: "drill" }
   | { screen: "quiz" };
 
-const DIFFICULTY_KEY = "vim-dojo-difficulty";
+const DIFFICULTY_KEY = "hjkland-difficulty";
 function loadDifficulty(): Difficulty {
   const v =
     typeof localStorage !== "undefined"

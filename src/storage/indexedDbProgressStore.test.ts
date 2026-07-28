@@ -14,7 +14,7 @@ import { DB_VERSION, runMigrations } from "./migrations";
 
 let dbCounter = 0;
 const freshStore = () =>
-  openProgressStore({ databaseName: `vim-dojo-test-${++dbCounter}` });
+  openProgressStore({ databaseName: `hjkland-test-${++dbCounter}` });
 
 const sampleProfile: Profile = {
   xp: 230,
@@ -100,7 +100,7 @@ describe("IndexedDbProgressStore", () => {
     await store.saveProfile({ ...sampleProfile, xp: 100 });
     // Corrupt the record behind the schema's back.
     const raw = await import("idb");
-    const db = await raw.openDB(`vim-dojo-test-${dbCounter}`, 1);
+    const db = await raw.openDB(`hjkland-test-${dbCounter}`, 1);
     await db.put("profile", { key: "me", xp: "not-a-number" });
     db.close();
     await expect(store.loadProfile()).rejects.toThrow();
@@ -147,7 +147,7 @@ describe("IndexedDbProgressStore", () => {
     // Corrupt the record behind the schema's back — the export must fail NOW,
     // not years later when the only copy left is the corrupt backup.
     const raw = await import("idb");
-    const db = await raw.openDB(`vim-dojo-test-${dbCounter}`, 1);
+    const db = await raw.openDB(`hjkland-test-${dbCounter}`, 1);
     await db.put("profile", { key: "me", xp: "not-a-number" });
     db.close();
     await expect(store.exportJson()).rejects.toThrow();

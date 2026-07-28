@@ -74,7 +74,7 @@ export const DailyChallengeSchema = z.object({
 });
 
 export const ExportSchema = z.object({
-  app: z.literal("vim-dojo"),
+  app: z.literal("hjkland"),
   schemaVersion: z.number().int().positive(),
   exportedAt: IsoDateTime,
   profile: ProfileSchema,

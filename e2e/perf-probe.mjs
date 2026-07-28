@@ -53,7 +53,7 @@ console.log(`[warm] reload → interactive ${Date.now() - t1}ms (SW cache)`);
 await page.evaluate(
   () =>
     new Promise((r) => {
-      const q = indexedDB.deleteDatabase("vim-dojo");
+      const q = indexedDB.deleteDatabase("hjkland");
       q.onsuccess = q.onerror = q.onblocked = () => r();
     }),
 );

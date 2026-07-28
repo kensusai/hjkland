@@ -10,8 +10,8 @@
  */
 import { z } from "zod";
 
-const CONFIG_KEY = "vim-dojo-backup";
-const GIST_FILENAME = "vim-dojo-progress.json";
+const CONFIG_KEY = "hjkland-backup";
+const GIST_FILENAME = "hjkland-progress.json";
 const API = "https://api.github.com/gists";
 
 // Parse, don't cast: an id-less "success" response would otherwise store

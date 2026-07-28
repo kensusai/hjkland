@@ -5,7 +5,7 @@
  * can't interfere with typing (非機能要件: 演出は入力をブロックしない).
  * Mute preference is a UI setting, not progress → localStorage, not Profile.
  */
-const MUTE_KEY = "vim-dojo-muted";
+const MUTE_KEY = "hjkland-muted";
 let muted =
   typeof localStorage !== "undefined" && localStorage.getItem(MUTE_KEY) === "1";
 let context: AudioContext | null = null;
@@ -51,7 +51,7 @@ const NOTES = { C5: 523, E5: 659, G5: 784, C6: 1047, G4: 392, E4: 330 };
 export function playClear(medal: "gold" | "silver" | "bronze"): void {
   if (!ensureContext()) return;
   if (medal === "gold") {
-    // rising arpeggio — the 一本!! fanfare
+    // rising arpeggio — the perfect-ride fanfare
     beep(NOTES.C5, 0);
     beep(NOTES.E5, 0.08);
     beep(NOTES.G5, 0.16);
@@ -85,7 +85,7 @@ export function playUnlock(): void {
  * typing; scheduled one loop at a time with a setTimeout rescheduler.
  * BGM has its own mute (separate from SFX): music taste ≠ effects taste.
  */
-const BGM_KEY = "vim-dojo-bgm-muted";
+const BGM_KEY = "hjkland-bgm-muted";
 let bgmMuted =
   typeof localStorage !== "undefined" && localStorage.getItem(BGM_KEY) === "1";
 let bgmTimer: ReturnType<typeof setTimeout> | null = null;

@@ -1,5 +1,5 @@
 /**
- * Home screen (design/mockups/home-c.html): belt-rank HUD, sensei board with
+ * Home screen (design/mockups/rebrand-hjkland.html): passport HUD, guide board with
  * the day's greeting, and the world map of stages/lessons. All status is
  * derived from core (curriculum status, level, streak); this file renders it.
  */

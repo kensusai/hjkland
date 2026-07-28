@@ -7,7 +7,7 @@
  */
 import type { IDBPDatabase, IDBPTransaction } from "idb";
 
-export const DB_NAME = "vim-dojo";
+export const DB_NAME = "hjkland";
 export const DB_VERSION = 1;
 
 type Migration = (

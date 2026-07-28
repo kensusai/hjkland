@@ -16,7 +16,7 @@ import { App } from "./App";
 
 vi.mock("../backup/gistBackup", () => ({
   isBackupConfigured: () => true,
-  pullBackup: () => Promise.resolve('{"app":"vim-dojo"}'),
+  pullBackup: () => Promise.resolve('{"app":"hjkland"}'),
   pushBackup: () => Promise.resolve(),
   loadBackupConfig: () => null,
   saveBackupConfig: () => {},

@@ -27,7 +27,7 @@ export async function resetDatabase(page) {
   await page.evaluate(
     () =>
       new Promise((resolve) => {
-        const request = indexedDB.deleteDatabase("vim-dojo");
+        const request = indexedDB.deleteDatabase("hjkland");
         request.onsuccess =
           request.onerror =
           request.onblocked =

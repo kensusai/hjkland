@@ -1,4 +1,4 @@
-# 実装計画 — hjkland(旧名 vim-dojo)
+# 実装計画 — hjkland
 
 > **ステータス: M1〜M8 完了(2026-07-11)。** アプリは https://kensusai.github.io/hjkland/ で稼働中。残タスクはステージ2〜4のコンテンツ拡充(継続的に追加)。
 

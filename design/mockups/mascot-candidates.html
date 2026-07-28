@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>hjkland — マスコット候補(スムーズベクター)</title>
+    <style>
+      :root {
+        --bg-base: #bfe6f7;
+        --surface: #fffdf4;
+        --ink: #2b3a4a;
+        --text-secondary: #5b6b7d;
+        --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
+        --font-ui:
+          -apple-system, BlinkMacSystemFont, "Hiragino Sans", sans-serif;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body {
+        background: linear-gradient(180deg, #8fd0ee, var(--bg-base) 55%);
+        font-family: var(--font-ui); color: var(--ink);
+        padding: 40px; min-height: 100vh;
+      }
+      h1 { font-family: var(--font-mono); font-size: 22px; letter-spacing: 0.1em; margin-bottom: 24px; }
+      .row { display: flex; gap: 24px; }
+      .card {
+        flex: 1; background: var(--surface); border: 3px solid var(--ink);
+        border-radius: 16px; box-shadow: 6px 6px 0 rgba(43, 58, 74, 0.35);
+        padding: 24px; text-align: center;
+      }
+      .card h2 { font-size: 20px; margin-bottom: 4px; }
+      .card .origin { font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; }
+      .moods { display: flex; justify-content: center; gap: 18px; align-items: flex-end; }
+      .mood-label { font-family: var(--font-mono); font-size: 11px; color: var(--text-secondary); margin-top: 6px; }
+      .pick { margin-top: 14px; font-family: var(--font-mono); font-weight: 900; font-size: 13px; letter-spacing: 0.15em; }
+    </style>
+  </head>
+  <body>
+    <h1>MASCOT CANDIDATES — 案内係、次のすがた</h1>
+    <div class="row">
+      <!-- A: ジェイ(青い鳥) -->
+      <div class="card">
+        <h2>案A: ジェイ</h2>
+        <div class="origin">移動キー j × カケス(jay)= 青い鳥の案内係</div>
+        <div class="moods">
+          <div>
+            <svg width="120" height="120" viewBox="0 0 100 100">
+              <ellipse cx="50" cy="90" rx="26" ry="5" fill="rgba(43,58,74,.15)"/>
+              <path d="M18 46 Q14 34 24 30 Q20 42 28 44 Z" fill="#3f8fd0"/>
+              <circle cx="50" cy="52" r="30" fill="#57aae6" stroke="#2b3a4a" stroke-width="3"/>
+              <ellipse cx="50" cy="62" rx="18" ry="14" fill="#eaf6ff"/>
+              <path d="M28 54 Q18 62 26 72 Q34 68 36 58 Z" fill="#3f8fd0" stroke="#2b3a4a" stroke-width="2.5"/>
+              <path d="M46 22 Q44 12 52 10 Q50 18 56 20 Z" fill="#3f8fd0" stroke="#2b3a4a" stroke-width="2.5"/>
+              <circle cx="41" cy="46" r="5" fill="#2b3a4a"/>
+              <circle cx="60" cy="46" r="5" fill="#2b3a4a"/>
+              <circle cx="42.6" cy="44.4" r="1.6" fill="#fff"/>
+              <circle cx="61.6" cy="44.4" r="1.6" fill="#fff"/>
+              <path d="M47 54 L57 51 L49 60 Z" fill="#f5a623" stroke="#2b3a4a" stroke-width="2.4" stroke-linejoin="round"/>
+              <path d="M42 82 L42 90 M46 90 L38 90" stroke="#f5a623" stroke-width="2.6" stroke-linecap="round"/>
+              <path d="M58 82 L58 90 M62 90 L54 90" stroke="#f5a623" stroke-width="2.6" stroke-linecap="round"/>
+            </svg>
+            <div class="mood-label">normal</div>
+          </div>
+          <div>
+            <svg width="120" height="120" viewBox="0 0 100 100">
+              <ellipse cx="50" cy="92" rx="24" ry="5" fill="rgba(43,58,74,.15)"/>
+              <circle cx="50" cy="48" r="30" fill="#57aae6" stroke="#2b3a4a" stroke-width="3"/>
+              <ellipse cx="50" cy="58" rx="18" ry="14" fill="#eaf6ff"/>
+              <path d="M24 42 Q10 30 20 22 Q26 32 34 34 Z" fill="#3f8fd0" stroke="#2b3a4a" stroke-width="2.5"/>
+              <path d="M76 42 Q90 30 80 22 Q74 32 66 34 Z" fill="#3f8fd0" stroke="#2b3a4a" stroke-width="2.5"/>
+              <path d="M46 18 Q44 8 52 6 Q50 14 56 16 Z" fill="#3f8fd0" stroke="#2b3a4a" stroke-width="2.5"/>
+              <path d="M36 40 Q41 36 46 40" stroke="#2b3a4a" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <path d="M55 40 Q60 36 65 40" stroke="#2b3a4a" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <path d="M44 50 L58 46 Q56 58 47 58 Z" fill="#f5a623" stroke="#2b3a4a" stroke-width="2.4" stroke-linejoin="round"/>
+              <path d="M42 78 L42 88 M46 88 L38 88" stroke="#f5a623" stroke-width="2.6" stroke-linecap="round"/>
+              <path d="M58 78 L58 88 M62 88 L54 88" stroke="#f5a623" stroke-width="2.6" stroke-linecap="round"/>
+            </svg>
+            <div class="mood-label">hype(両翼あげ)</div>
+          </div>
+        </div>
+        <div class="pick">A</div>
+      </div>
+
+      <!-- B: バル(風船) -->
+      <div class="card">
+        <h2>案B: バル</h2>
+        <div class="origin">バルーン = ロゴの 🎈 がそのまま案内係に</div>
+        <div class="moods">
+          <div>
+            <svg width="120" height="120" viewBox="0 0 100 100">
+              <ellipse cx="50" cy="93" rx="20" ry="4" fill="rgba(43,58,74,.15)"/>
+              <path d="M50 66 Q49 78 44 88" stroke="#2b3a4a" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+              <ellipse cx="50" cy="40" rx="26" ry="29" fill="#ff5a5a" stroke="#2b3a4a" stroke-width="3"/>
+              <ellipse cx="40" cy="28" rx="7" ry="9" fill="#ff9d9d"/>
+              <path d="M45 66 L55 66 L52 72 L48 72 Z" fill="#c22f3d" stroke="#2b3a4a" stroke-width="2.4" stroke-linejoin="round"/>
+              <circle cx="42" cy="40" r="4.5" fill="#2b3a4a"/>
+              <circle cx="59" cy="40" r="4.5" fill="#2b3a4a"/>
+              <circle cx="43.4" cy="38.6" r="1.4" fill="#fff"/>
+              <circle cx="60.4" cy="38.6" r="1.4" fill="#fff"/>
+              <path d="M45 50 Q50 55 56 50" stroke="#2b3a4a" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <ellipse cx="34" cy="47" rx="4" ry="3" fill="rgba(255,157,157,.8)"/>
+              <ellipse cx="67" cy="47" rx="4" ry="3" fill="rgba(255,157,157,.8)"/>
+            </svg>
+            <div class="mood-label">normal</div>
+          </div>
+          <div>
+            <svg width="120" height="120" viewBox="0 0 100 100">
+              <ellipse cx="50" cy="95" rx="18" ry="4" fill="rgba(43,58,74,.12)"/>
+              <path d="M50 62 Q52 76 46 90" stroke="#2b3a4a" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+              <ellipse cx="50" cy="36" rx="26" ry="29" fill="#ff5a5a" stroke="#2b3a4a" stroke-width="3"/>
+              <ellipse cx="40" cy="24" rx="7" ry="9" fill="#ff9d9d"/>
+              <path d="M45 62 L55 62 L52 68 L48 68 Z" fill="#c22f3d" stroke="#2b3a4a" stroke-width="2.4" stroke-linejoin="round"/>
+              <path d="M37 34 L42 38 L37 42 M47 34 L42 38" stroke="none" fill="none"/>
+              <path d="M38 32 L46 40 M46 32 L38 40" stroke="#2b3a4a" stroke-width="3" stroke-linecap="round"/>
+              <path d="M56 32 L64 40 M64 32 L56 40" stroke="#2b3a4a" stroke-width="3" stroke-linecap="round"/>
+              <path d="M42 46 Q50 56 59 46" stroke="#2b3a4a" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <path d="M20 20 L24 24 M24 20 L20 24" stroke="#f5a623" stroke-width="2.4" stroke-linecap="round"/>
+              <path d="M78 16 L82 20 M82 16 L78 20" stroke="#f5a623" stroke-width="2.4" stroke-linecap="round"/>
+            </svg>
+            <div class="mood-label">hype(キラキラ目)</div>
+          </div>
+        </div>
+        <div class="pick">B</div>
+      </div>
+
+      <!-- C: 猫リメイク(スムーズ) -->
+      <div class="card">
+        <h2>案C: 猫のままスムーズ化</h2>
+        <div class="origin">キャラ据え置き・絵柄だけ丸く今風に(名前は要改名)</div>
+        <div class="moods">
+          <div>
+            <svg width="120" height="120" viewBox="0 0 100 100">
+              <ellipse cx="50" cy="92" rx="24" ry="5" fill="rgba(43,58,74,.15)"/>
+              <path d="M30 30 Q28 16 40 20 Z M70 30 Q72 16 60 20 Z" fill="#ffb84d" stroke="#2b3a4a" stroke-width="2.6" stroke-linejoin="round"/>
+              <ellipse cx="50" cy="52" rx="30" ry="28" fill="#ffb84d" stroke="#2b3a4a" stroke-width="3"/>
+              <ellipse cx="50" cy="64" rx="17" ry="12" fill="#fff2dd"/>
+              <circle cx="40" cy="46" r="4.5" fill="#2b3a4a"/>
+              <circle cx="61" cy="46" r="4.5" fill="#2b3a4a"/>
+              <path d="M47 56 Q50 59 53 56" stroke="#2b3a4a" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+              <path d="M20 50 L30 52 M20 58 L30 57" stroke="#2b3a4a" stroke-width="2" stroke-linecap="round"/>
+              <path d="M80 50 L70 52 M80 58 L70 57" stroke="#2b3a4a" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <div class="mood-label">normal</div>
+          </div>
+          <div>
+            <svg width="120" height="120" viewBox="0 0 100 100">
+              <ellipse cx="50" cy="92" rx="24" ry="5" fill="rgba(43,58,74,.15)"/>
+              <path d="M30 28 Q28 14 40 18 Z M70 28 Q72 14 60 18 Z" fill="#ffb84d" stroke="#2b3a4a" stroke-width="2.6" stroke-linejoin="round"/>
+              <ellipse cx="50" cy="50" rx="30" ry="28" fill="#ffb84d" stroke="#2b3a4a" stroke-width="3"/>
+              <ellipse cx="50" cy="62" rx="17" ry="12" fill="#fff2dd"/>
+              <path d="M35 44 Q40 39 45 44" stroke="#2b3a4a" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <path d="M56 44 Q61 39 66 44" stroke="#2b3a4a" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <ellipse cx="50" cy="57" rx="5" ry="6" fill="#c22f3d" stroke="#2b3a4a" stroke-width="2"/>
+              <circle cx="76" cy="20" r="9" fill="#ff5a5a" stroke="#2b3a4a" stroke-width="2.4"/>
+              <path d="M76 29 Q76 38 70 44" stroke="#2b3a4a" stroke-width="2" fill="none"/>
+            </svg>
+            <div class="mood-label">hype(風船つき)</div>
+          </div>
+        </div>
+        <div class="pick">C</div>
+      </div>
+    </div>
+  </body>
+</html>

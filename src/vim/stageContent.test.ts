@@ -19,43 +19,22 @@ import { replaySolution } from "./replaySolution";
 
 beforeAll(installCodeMirrorDomStubs);
 
-/** Exercises whose solution jsdom can't drive: j/k need layout, R overtypes
- * only via real key events, and / ? go through the search dialog.
- * All are verified in the browser by e2e/drive-content.mjs, which replays
- * every authored solution with real key events. */
-const browserOnly = new Set([
-  "s1-l3-e1",
-  "s1-l3-e2",
-  "s1-l3-e3",
-  "s1-l3-e4",
-  "s1-l3-e5",
-  "s5-l2-e3",
-  "s5-l2-e4",
-  "s6-l1-e1",
-  "s6-l1-e2",
-  "s6-l1-e3",
-  "s6-l1-e4",
-  "s6-l2-e1",
-  "s6-l2-e2",
-  "s6-l2-e3",
-  "s6-l2-e4",
-  "s6-l5-e1",
-  "s7-l2-e2",
-  "s7-l2-e3",
-  "s7-l3-e3",
-  "s7-l3-e4",
-  "s7-l4-e1",
-  "s7-l4-e2",
-  "s7-l4-e4",
-  "s7-l5-e1",
-  "s7-l5-e3",
-  "s7-l5-e4",
-]);
+/** Solutions jsdom can't replay faithfully: j/k and { } need layout, R
+ * overtypes only via real key events, / ? go through the search dialog, and
+ * a Visual :s needs the dialog's automatic '<,'> range. Detected from the
+ * solution tokens; ALL solutions are verified with real key events by
+ * e2e/drive-content.mjs, which is the authoritative check. */
+const needsRealBrowser = (solution: string[] | undefined): boolean =>
+  !!solution?.some(
+    (token) =>
+      ["j", "k", "/", "?", "R", "{", "}"].includes(token) ||
+      (token.startsWith(":") && solution.includes("V")),
+  );
 
 describe("authored content is solvable with correct pars", () => {
   for (const lesson of stages.flatMap((s) => s.lessons)) {
     for (const exercise of lesson.exercises) {
-      const run = browserOnly.has(exercise.id) ? it.skip : it;
+      const run = needsRealBrowser(exercise.solution) ? it.skip : it;
       run(`${exercise.id}: ${exercise.title}`, () => {
         const engine = createVimEngine(document.body);
         try {

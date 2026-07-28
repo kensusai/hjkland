@@ -132,7 +132,7 @@ function DailyResult({
     <>
       <MedalHeadline attempt={info.attempt} />
       <div className="mt-3 font-mono text-sm font-black text-matcha">
-        今日の修行、納め!! 🔥{profile.streak.current}日
+        今日のライド、完了!! 🔥{profile.streak.current}日
       </div>
       <p className="mt-2 text-xs text-cream-faint">
         自己ベスト:{" "}

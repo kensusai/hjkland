@@ -79,12 +79,12 @@ export function QuizScreen() {
       <Shell>
         <div className="text-center">
           <div className="ippon-pop text-5xl font-black text-gold [text-shadow:4px_4px_0_var(--color-shu-dark)]">
-            今日の一本!!
+            クイズ完走!!
           </div>
           <p className="mt-4 font-mono text-lg">
             {correctCount} / {questions.length} 正解
           </p>
-          <p className="mt-2 text-sm text-matcha">
+          <p className="mt-2 text-sm text-matcha-dim">
             🔥 {profile.streak.current}日 — 今日のストリーク、キープ!
           </p>
           <p className="mt-6 text-xs text-cream-faint">
@@ -122,7 +122,7 @@ export function QuizScreen() {
         <div className="mb-1 text-[0.625rem] tracking-widest text-cream-faint">
           BEFORE
         </div>
-        <CursorText text={question.before} className="text-cream-dim" />
+        <CursorText text={question.before} className="text-editor-text/70" />
         <div className="mb-1 mt-2 text-[0.625rem] tracking-widest text-cream-faint">
           AFTER
         </div>
@@ -146,11 +146,11 @@ export function QuizScreen() {
               onClick={() => pick(i)}
               className={`btn-chunky border-3 py-4 text-center font-mono text-lg font-black ${
                 state === "idle"
-                  ? "border-ink-bold bg-raised text-cream active:bg-ink"
+                  ? "border-ink-bold bg-raised text-cream active:bg-gold/40"
                   : state === "right"
                     ? "border-matcha bg-matcha-dim text-matcha"
                     : state === "wrong"
-                      ? "border-shu bg-[#241512] text-shu"
+                      ? "border-shu bg-[#ffe9e4] text-shu-dark"
                       : "border-ink bg-raised text-cream-faint opacity-50"
               }`}
             >
@@ -212,10 +212,10 @@ function Shell({ children }: { children: React.ReactNode }) {
   return (
     <div className="mx-auto min-h-screen w-full max-w-md px-4 py-6">
       <div className="mb-6 flex items-center gap-2 font-mono text-lg font-black tracking-widest">
-        <span className="flex h-8 w-8 items-center justify-center bg-shu text-paper">
-          道
+        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-shu">
+          🎈
         </span>
-        vim-dojo
+        HJKLAND
       </div>
       {children}
     </div>

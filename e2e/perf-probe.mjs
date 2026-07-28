@@ -1,7 +1,7 @@
 /** Performance probe (パフォーマンス重視: 計測してから判断). Not a test. */
 import { chromium } from "playwright";
 
-const URL = "https://kensusai.github.io/vim-dojo/";
+const URL = "https://kensusai.github.io/hjkland/";
 const browser = await chromium.launch();
 
 // --- 1. cold load (no cache/SW) ---------------------------------------------

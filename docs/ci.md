@@ -1,4 +1,4 @@
-# CI — vim-dojo
+# CI — hjkland
 
 最終更新: 2026-07-11
 
@@ -52,7 +52,7 @@
 
 ## デプロイトリガー(CD への接続点)
 
-- `main` push → `deploy.yml` がビルドして GitHub Pages へ公開(https://kensusai.github.io/vim-dojo/)。詳細は `docs/infrastructure.md`。
+- `main` push → `deploy.yml` がビルドして GitHub Pages へ公開(https://kensusai.github.io/hjkland/)。詳細は `docs/infrastructure.md`。
 - 通知 cron は `notify.yml`(毎日 11:00 UTC)。Secret `NTFY_TOPIC` 未設定なら何もしない。CI/デプロイ/通知は役割ごとに別ワークフロー。
 
 ## 失敗時の運用

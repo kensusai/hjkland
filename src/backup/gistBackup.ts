@@ -115,7 +115,7 @@ async function doPush(json: string): Promise<BackupConfig> {
   const config = loadBackupConfig();
   if (!config) throw new Error("バックアップが設定されていません");
   const body = JSON.stringify({
-    description: "vim-dojo progress backup",
+    description: "hjkland progress backup",
     public: false,
     files: { [GIST_FILENAME]: { content: json } },
   });

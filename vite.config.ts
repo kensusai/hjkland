@@ -5,7 +5,7 @@ import { defineConfig } from "vite";
 import { VitePWA } from "vite-plugin-pwa";
 
 export default defineConfig({
-  // GitHub Pages serves the app under /vim-dojo/; the deploy workflow sets
+  // GitHub Pages serves the app under /hjkland/; the deploy workflow sets
   // BASE_PATH. Local dev and tests stay at /.
   base: process.env.BASE_PATH ?? "/",
   plugins: [

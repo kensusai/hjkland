@@ -12,7 +12,7 @@ import { nextInt, pick } from "./rng";
 
 export interface GeneratedExercise {
   exercise: Exercise;
-  /** Author-solution keystrokes (see stageContent.test.ts token format). */
+  /** Author-solution keystrokes (see areaContent.test.ts token format). */
   solution: string[];
   /**
    * Optional layout-independent replay for headless verification, when the

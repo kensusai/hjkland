@@ -1,7 +1,7 @@
 /**
  * M6 verification drive: home screen → play lesson 1 → clear → verify the
  * next lesson unlocked and streak recorded. Also solves the j-based lesson 3
- * exercise that jsdom couldn't drive (stageContent.test.ts browserOnly).
+ * exercise that jsdom couldn't drive (areaContent.test.ts browserOnly).
  *
  * Run: npm run dev (another shell) then `node e2e/drive-m6.mjs`.
  */

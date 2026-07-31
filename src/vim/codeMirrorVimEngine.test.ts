@@ -2,7 +2,7 @@
 /**
  * Engine spike (PLAN M1 / ADR-0006): drives @replit/codemirror-vim headlessly
  * to verify the commands our curriculum needs. Each `describe` maps to a
- * curriculum stage; results are summarized in docs/vim-coverage.md — keep
+ * curriculum area; results are summarized in docs/vim-coverage.md — keep
  * that table in sync when adding cases here.
  */
 import { afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
@@ -116,7 +116,7 @@ describe("engine port basics", () => {
   });
 });
 
-describe("stage 1: basic motions and mode switching", () => {
+describe("area 1: basic motions and mode switching", () => {
   // NOTE: j/k (and / search below) depend on DOM layout / the search dialog
   // and cannot be driven headlessly — they are browser-verification items in
   // docs/vim-coverage.md. Line jumps here use logical motions (2G, G, gg).
@@ -171,7 +171,7 @@ describe("stage 1: basic motions and mode switching", () => {
   });
 });
 
-describe("stage 2: operators and text objects", () => {
+describe("area 2: operators and text objects", () => {
   it("dw / dd / x delete", () => {
     engine.reset("foo bar\nsecond");
     keys(["d", "w"]);
@@ -195,6 +195,18 @@ describe("stage 2: operators and text objects", () => {
     engine.reset('say "hello world" end');
     keys(["f", '"', "d", "i", '"']);
     expect(engine.currentBuffer()).toBe('say "" end');
+  });
+
+  it('yi" yanks quoted content, seeking forward from before the quote', () => {
+    engine.reset('msg = "hi" end');
+    keys(["y", "i", '"', "$", "p"]);
+    expect(engine.currentBuffer()).toBe('msg = "hi" endhi');
+  });
+
+  it('vi" + p pastes over the quoted content', () => {
+    engine.reset('"a" and "b"');
+    keys(["y", "i", '"', "f", "b", "v", "i", '"', "p"]);
+    expect(engine.currentBuffer()).toBe('"a" and "a"');
   });
 
   it("yy / p yank and paste linewise", () => {
@@ -225,7 +237,7 @@ describe("stage 2: operators and text objects", () => {
   });
 });
 
-describe("stage 3: search and substitute", () => {
+describe("area 3: search and substitute", () => {
   // "/" and "n" go through the vim search dialog (a real DOM input) and
   // cannot be driven via Vim.handleKey — browser-verification items in
   // docs/vim-coverage.md. Regex behavior itself is covered by :s and :g.
@@ -244,7 +256,7 @@ describe("stage 3: search and substitute", () => {
   });
 });
 
-describe("stage 4: registers", () => {
+describe("area 4: registers", () => {
   it('named registers "ayy and "ap survive other yanks', () => {
     engine.reset("first\nsecond");
     keys(['"', "a", "y", "y"]); // yank "first" into register a
@@ -254,11 +266,11 @@ describe("stage 4: registers", () => {
   });
 });
 
-describe("stage 7: visual mode (v / V / <C-v>)", () => {
+describe("area 7: visual mode (v / V / <C-v>)", () => {
   // NOTE: j/k inside visual mode are display-line motions and cannot be
   // driven headlessly (same jsdom limit as s1-l3) — headless verification
   // uses logical motions (2G, G); the j-based play solutions are verified
-  // in a real browser (e2e/drive-stage7.mjs).
+  // in a real browser (e2e/drive-content.mjs).
   it("v + motion selects charwise and d deletes the selection", () => {
     engine.reset("foo bar baz");
     keys(["v", "e", "d"]);
@@ -306,7 +318,7 @@ describe("stage 7: visual mode (v / V / <C-v>)", () => {
   });
 });
 
-describe("stage 5 candidates: efficiency ops (A I r R J ct/dt ~)", () => {
+describe("area 5 candidates: efficiency ops (A I r R J ct/dt ~)", () => {
   it("A appends at end of line, I inserts at first non-blank", () => {
     engine.reset("abc");
     keys(["A"]);
@@ -351,7 +363,7 @@ describe("stage 5 candidates: efficiency ops (A I r R J ct/dt ~)", () => {
   });
 });
 
-describe("stage 6 candidates: search (/ ? n N * # ; ,)", () => {
+describe("area 6 candidates: search (/ ? n N * # ; ,)", () => {
   it("* searches the word under the cursor; n/N repeat", () => {
     engine.reset("foo bar\nfoo baz\nfoo qux");
     keys(["*", "x"]); // jump to next "foo", delete its f

@@ -15,7 +15,7 @@ afterEach(cleanup);
 
 const exercise: Exercise = {
   id: exerciseId("boss-ex"),
-  title: "皆伝試験",
+  title: "メインアトラクション",
   hint: "",
   initialBuffer: "foo bar",
   targetBuffer: "bar",

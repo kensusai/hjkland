@@ -9,9 +9,9 @@ import {
   recordLearningActivity,
 } from "../core/applyProgress";
 import { markLessonCleared } from "../core/curriculum/markLessonCleared";
-import { stages } from "../core/curriculum/stages";
+import { areas } from "../core/curriculum/areas";
 import {
-  MedalHeadline,
+  StampHeadline,
   PracticePlayer,
   ResultFooter,
   StreakChip,
@@ -23,10 +23,10 @@ import { playLessonComplete } from "./sound";
 import { useAppStore } from "./storeContext";
 
 export function LessonScreen({
-  stageIndex,
+  areaIndex,
   lessonIndex,
 }: {
-  stageIndex: number;
+  areaIndex: number;
   lessonIndex: number;
 }) {
   const store = useAppStore((s) => s.store);
@@ -37,7 +37,7 @@ export function LessonScreen({
   const profileRef = useRef(profile);
   profileRef.current = profile;
 
-  const lesson = stages[stageIndex]?.lessons[lessonIndex];
+  const lesson = areas[areaIndex]?.lessons[lessonIndex];
   if (!lesson || lesson.exercises.length === 0) {
     return (
       <div className="flex min-h-screen items-center justify-center font-mono text-cream-faint">
@@ -83,7 +83,8 @@ export function LessonScreen({
             ← MAP
           </button>
           <span className="border-2 border-ink px-2 text-[0.625rem] tracking-widest text-cream-faint">
-            {stages[stageIndex]?.title} · {lesson.title.split(" — ")[0]}
+            {areas[areaIndex]?.name.split(" — ")[0]} ·{" "}
+            {lesson.title.split(" — ")[0]}
           </span>
         </>
       }
@@ -157,7 +158,7 @@ function LessonResult({
 }) {
   return (
     <>
-      <MedalHeadline attempt={info.attempt} />
+      <StampHeadline attempt={info.attempt} />
       {info.isLastExercise && (
         <div className="mt-3 flex items-center justify-center gap-2 font-mono font-black text-matcha-dim">
           <MascotSprite mood="hype" size={40} />

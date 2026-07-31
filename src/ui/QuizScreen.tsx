@@ -8,7 +8,7 @@ import { useRef, useState } from "react";
 import { recordLearningActivity } from "../core/applyProgress";
 import { CURSOR, generateQuiz } from "../core/quiz";
 import { seededRandom } from "../core/generation/rng";
-import { stages } from "../core/curriculum/stages";
+import { areas } from "../core/curriculum/areas";
 import { playClear, playLessonComplete } from "./sound";
 import { useAppStore } from "./storeContext";
 
@@ -27,7 +27,7 @@ export function QuizScreen() {
   const [questions] = useState(() =>
     generateQuiz(
       profileRef.current,
-      stages,
+      areas,
       seededRandom(`quiz-${clockRef.current.now().getTime()}`),
       3,
     ),

@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
 import { commandId, lessonId } from "../ids";
 import { initialProfile, type Profile } from "../profile";
-import { stageLessonStatuses, unlockedCommands } from "./curriculum";
+import { areaLessonStatuses, unlockedCommands } from "./curriculum";
 import { markLessonCleared } from "./markLessonCleared";
-import { stages } from "./stages";
+import { areas } from "./areas";
 
 const clearLessons = (...ids: string[]): Profile => ({
   ...initialProfile,
@@ -13,9 +13,9 @@ const clearLessons = (...ids: string[]): Profile => ({
 });
 
 // R7: statuses are guidance, never a gate — every lesson is always playable.
-describe("stageLessonStatuses (R7)", () => {
+describe("areaLessonStatuses (R7)", () => {
   it("recommends the first uncleared lesson; the rest are upcoming", () => {
-    const statuses = stageLessonStatuses(initialProfile, stages, 0);
+    const statuses = areaLessonStatuses(initialProfile, areas, 0);
     expect(statuses[0]).toBe("current");
     expect(statuses[1]).toBe("upcoming");
     expect(statuses.at(-1)).toBe("upcoming");
@@ -23,23 +23,23 @@ describe("stageLessonStatuses (R7)", () => {
 
   it("advances the recommendation as lessons are cleared", () => {
     const profile = clearLessons("s1-l1-x", "s1-l2-hl");
-    const statuses = stageLessonStatuses(profile, stages, 0);
+    const statuses = areaLessonStatuses(profile, areas, 0);
     expect(statuses[0]).toBe("cleared");
     expect(statuses[1]).toBe("cleared");
     expect(statuses[2]).toBe("current");
     expect(statuses[3]).toBe("upcoming");
   });
 
-  it("keeps the single recommendation in the earliest incomplete stage", () => {
-    // Stage 1 is incomplete → stage 2 has no "current", only upcoming ones.
-    const statuses = stageLessonStatuses(clearLessons("s1-l1-x"), stages, 1);
+  it("keeps the single recommendation in the earliest incomplete area", () => {
+    // Area 1 is incomplete → area 2 has no "current", only upcoming ones.
+    const statuses = areaLessonStatuses(clearLessons("s1-l1-x"), areas, 1);
     expect(statuses.every((s) => s === "upcoming")).toBe(true);
   });
 
-  it("shows out-of-order clears as cleared even in later stages", () => {
-    // Free roam: a stage-2 lesson cleared while stage 1 is unfinished still
+  it("shows out-of-order clears as cleared even in later areas", () => {
+    // Free roam: an area-2 lesson cleared while area 1 is unfinished still
     // reads as cleared on the map (and its commands unlock via R5).
-    const statuses = stageLessonStatuses(clearLessons("s2-l1-dw"), stages, 1);
+    const statuses = areaLessonStatuses(clearLessons("s2-l1-dw"), areas, 1);
     expect(statuses[0]).toBe("cleared");
     expect(statuses[1]).toBe("upcoming");
   });
@@ -47,9 +47,9 @@ describe("stageLessonStatuses (R7)", () => {
 
 describe("unlockedCommands (R5)", () => {
   it("is empty initially and grows with cleared lessons", () => {
-    expect(unlockedCommands(initialProfile, stages).size).toBe(0);
+    expect(unlockedCommands(initialProfile, areas).size).toBe(0);
     const profile = clearLessons("s1-l1-x", "s1-l2-hl");
-    const unlocked = unlockedCommands(profile, stages);
+    const unlocked = unlockedCommands(profile, areas);
     expect(unlocked.has(commandId("x"))).toBe(true);
     expect(unlocked.has(commandId("h"))).toBe(true);
     expect(unlocked.has(commandId("l"))).toBe(true);

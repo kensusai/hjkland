@@ -1,15 +1,15 @@
 /**
  * Curriculum content (code-managed static data, docs/database.md).
- * Stage 1 is fully authored; later stages are stubs filled in future
+ * Area 1 is fully authored; later areas are stubs filled in future
  * milestones. Every exercise must be solvable with only the commands unlocked
  * by this lesson or earlier ones (R6), and its par equals the author's
- * verified best solution (domain.md P4) — see src/vim/stageContent.test.ts,
+ * verified best solution (domain.md P4) — see src/vim/areaContent.test.ts,
  * which replays a recorded solution for each exercise and asserts it clears
  * in exactly `par`.
  */
 import { commandId, exerciseId, lessonId } from "../ids";
 import type { Exercise } from "../practice/exercise";
-import type { Lesson, Stage } from "./curriculum";
+import type { Lesson, Area } from "./curriculum";
 import { SOLUTIONS } from "./solutions";
 
 const ex = (
@@ -31,7 +31,7 @@ const ex = (
   ...(SOLUTIONS[id] !== undefined ? { solution: SOLUTIONS[id] } : {}),
 });
 
-const stage1Lessons: Lesson[] = [
+const area1Lessons: Lesson[] = [
   {
     id: lessonId("s1-l1-x"),
     title: "x \u2014 \u4e00\u6587\u5b57\u3092\u6d88\u3059",
@@ -687,14 +687,13 @@ const stage1Lessons: Lesson[] = [
   },
 ];
 
-const stage1: Stage = {
-  id: "stage-1",
-  title: "STAGE 1",
-  subtitle: "基本移動",
-  lessons: stage1Lessons,
+const area1: Area = {
+  id: "area-1",
+  name: "🎈 エントランス広場 — 基本移動",
+  lessons: area1Lessons,
 };
 
-const stage2Lessons: Lesson[] = [
+const area2Lessons: Lesson[] = [
   {
     id: lessonId("s2-l1-dw"),
     title: "dw de \u2014 d + \u79fb\u52d5 = \u6d88\u3059",
@@ -1188,8 +1187,7 @@ const stage2Lessons: Lesson[] = [
   {
     id: lessonId("s2-l10-boss"),
     boss: true,
-    title:
-      "\u7dcf\u4ed5\u4e0a\u3052 \u2014 \u7de8\u96c6\u306e\u578b \u7686\u4f1d\u8a66\u9a13",
+    title: "メインアトラクション — 編集の型 総仕上げ",
     brief:
       '\u7fd2\u3063\u305f\u578b\u306e\u7d44\u307f\u5408\u308f\u305b\u3060\u3002\u52d5\u8a5e(d/c/y)+\u5bfe\u8c61(w/iw/i\\"/i()\u3092\u610f\u8b58\u3057\u3066\u3001\u6700\u77ed\u306e\u4e00\u624b\u3092\u9078\u3079\u3002',
     unlocks: [],
@@ -1234,14 +1232,13 @@ const stage2Lessons: Lesson[] = [
   },
 ];
 
-const stage2: Stage = {
-  id: "stage-2",
-  title: "STAGE 2",
-  subtitle: "編集の型",
-  lessons: stage2Lessons,
+const area2: Area = {
+  id: "area-2",
+  name: "🛠️ お直し工房 — 編集の型",
+  lessons: area2Lessons,
 };
 
-const stage3Lessons: Lesson[] = [
+const area3Lessons: Lesson[] = [
   {
     id: lessonId("s3-l1-s"),
     title: '":s \u2014 \u73fe\u5728\u884c\u3092\u7f6e\u63db',
@@ -1642,8 +1639,7 @@ const stage3Lessons: Lesson[] = [
   {
     id: lessonId("s3-l5-boss"),
     boss: true,
-    title:
-      "\u7dcf\u4ed5\u4e0a\u3052 \u2014 \u691c\u7d22\u7f6e\u63db \u7686\u4f1d\u8a66\u9a13",
+    title: "メインアトラクション — 検索置換 総仕上げ",
     brief:
       "\u7bc4\u56f2(%)\u30fb\u30d5\u30e9\u30b0(g)\u30fb\u30b0\u30ed\u30fc\u30d0\u30eb(:g)\u3092\u4f7f\u3044\u5206\u3051\u308d\u3002\u6700\u77ed\u306e\u4e00\u624b\u3067\u5168\u90e8\u7247\u4ed8\u3051\u308b\u3093\u3060\u3002",
     unlocks: [],
@@ -1688,7 +1684,7 @@ const stage3Lessons: Lesson[] = [
   },
 ];
 
-const stage4Lessons: Lesson[] = [
+const area4Lessons: Lesson[] = [
   {
     id: lessonId("s4-l1-named"),
     title:
@@ -1982,10 +1978,9 @@ const stage4Lessons: Lesson[] = [
   {
     id: lessonId("s4-l3-boss"),
     boss: true,
-    title:
-      "\u7dcf\u4ed5\u4e0a\u3052 \u2014 \u5965\u7fa9 \u7686\u4f1d\u8a66\u9a13",
+    title: "メインアトラクション — レジスタ総仕上げ",
     brief:
-      "\u30ec\u30b8\u30b9\u30bf\u3092\u64cd\u308a\u3001\u7121\u540d\u30ec\u30b8\u30b9\u30bf\u306b\u983c\u3089\u305a\u72d9\u3063\u305f\u884c\u3092\u72d9\u3063\u305f\u5834\u6240\u3078\u3002\u3053\u308c\u304c\u3067\u304d\u308c\u3070\u5965\u7fa9\u7686\u4f1d\u3060\u3002",
+      "\u30ec\u30b8\u30b9\u30bf\u3092\u64cd\u308a\u3001\u7121\u540d\u30ec\u30b8\u30b9\u30bf\u306b\u983c\u3089\u305a\u72d9\u3063\u305f\u884c\u3092\u72d9\u3063\u305f\u5834\u6240\u3078\u3002これができればレジスタ使いの達人だ。",
     unlocks: [],
     exercises: [
       ex(
@@ -2028,21 +2023,19 @@ const stage4Lessons: Lesson[] = [
   },
 ];
 
-const stage3: Stage = {
-  id: "stage-3",
-  title: "STAGE 3",
-  subtitle: "検索と置換",
-  lessons: stage3Lessons,
+const area3: Area = {
+  id: "area-3",
+  name: "🎭 へんしんハウス — 検索と置換",
+  lessons: area3Lessons,
 };
-const stage4: Stage = {
-  id: "stage-4",
-  title: "STAGE 4",
-  subtitle: "レジスタの奥義",
-  lessons: stage4Lessons,
+const area4: Area = {
+  id: "area-4",
+  name: "💎 たからもの倉庫 — レジスタ",
+  lessons: area4Lessons,
 };
 
-// Stage 5 (効率化の型): insert variants, replace, join, till-motions, case.
-const stage5Lessons: Lesson[] = [
+// Area 5 (効率化の型): insert variants, replace, join, till-motions, case.
+const area5Lessons: Lesson[] = [
   {
     id: lessonId("s5-l1-AI"),
     title: "A I — 行頭・行末から書く",
@@ -2410,16 +2403,15 @@ const stage5Lessons: Lesson[] = [
   },
 ];
 
-const stage5: Stage = {
-  id: "stage-5",
-  title: "STAGE 5",
-  subtitle: "効率化の型",
-  lessons: stage5Lessons,
+const area5: Area = {
+  id: "area-5",
+  name: "🎢 スピードコースター — 効率化の型",
+  lessons: area5Lessons,
 };
 
-// Stage 6 (検索の達人). / and ? drive the search dialog, which jsdom cannot
+// Area 6 (検索の達人). / and ? drive the search dialog, which jsdom cannot
 // replay — those solutions are verified in a real browser (e2e/drive-content).
-const stage6Lessons: Lesson[] = [
+const area6Lessons: Lesson[] = [
   {
     id: lessonId("s6-l1-search"),
     title: "/ ? — 検索でジャンプ",
@@ -2782,7 +2774,7 @@ const stage6Lessons: Lesson[] = [
   },
   {
     id: lessonId("s6-l5-boss"),
-    title: "総仕上げ — 検索の乱取り",
+    title: "メインアトラクション — 検索総仕上げ",
     brief:
       "検索・リピート・これまでの技を混ぜて使う。目当ての場所へは検索で飛び、編集はいつもの型で。",
     unlocks: [],
@@ -2819,19 +2811,18 @@ const stage6Lessons: Lesson[] = [
   },
 ];
 
-const stage6: Stage = {
-  id: "stage-6",
-  title: "STAGE 6",
-  subtitle: "検索の達人",
-  lessons: stage6Lessons,
+const area6: Area = {
+  id: "area-6",
+  name: "🌲 かくれんぼの森 — 検索の達人",
+  lessons: area6Lessons,
 };
 
-// Stage 7 (ビジュアルの型): owner request 2026-07-23 — 複数行を V で切って
+// Area 7 (ビジュアルの型): owner request 2026-07-23 — 複数行を V で切って
 // 移動、Ctrl-v の矩形コピー&ペーストを鍛えたい。Pars are the taught visual
 // solutions (P4 運用): an operator form can often shave a key, but the 模範
 // 解答 must demonstrate the lesson's technique. Blockwise insert (I/A) is not
 // supported by the emulator (docs/vim-coverage.md) — lessons stay on d/y/p.
-const stage7Lessons: Lesson[] = [
+const area7Lessons: Lesson[] = [
   {
     id: lessonId("s7-l1-v"),
     title: "v — 選んでから消す",
@@ -3240,14 +3231,13 @@ const stage7Lessons: Lesson[] = [
   },
 ];
 
-const stage7: Stage = {
-  id: "stage-7",
-  title: "STAGE 7",
-  subtitle: "ビジュアルの型",
-  lessons: stage7Lessons,
+const area7: Area = {
+  id: "area-7",
+  name: "🎬 スポットライト劇場 — ビジュアル",
+  lessons: area7Lessons,
 };
-// Stage 8 (実戦 皆伝): every technique, on realistic buffers.
-const stage8Lessons: Lesson[] = [
+// Area 8 (グランドパレード — 実戦総合): every technique, on realistic buffers.
+const area8Lessons: Lesson[] = [
   {
     id: lessonId("s8-l1-rename"),
     title: "リネーム実戦 — 名前を直す",
@@ -3561,8 +3551,116 @@ const stage8Lessons: Lesson[] = [
     ],
   },
   {
+    id: lessonId("s8-l11-carry"),
+    title: "単語運び実戦 — コピーして持っていく",
+    brief:
+      '毎日やる「1単語をコピーして指定の場所へ」。基本形は yiw→移動→p。既にある単語と置き換えるなら viwp。viwp は無名レジスタを上書きするので、続けて貼るときは "0p でヤンクを貼り直す。',
+    unlocks: [],
+    exercises: [
+      ex(
+        "s8-l11-e1",
+        "変数名を呼び出しへ運べ",
+        "const user = load()\nsave()",
+        "const user = load()\nsave(user)",
+        8,
+        ["yiw", "p", "f"],
+        "w→yiw→G→f(→p。p はカーソルの直後に貼る。",
+      ),
+      ex(
+        "s8-l11-e2",
+        "コピーで単語を置き換えろ",
+        "color: brand\nbg: default",
+        "color: brand\nbg: brand",
+        10,
+        ["yiw", "viw"],
+        "$→yiw→G→$→viwp。選択に被せて貼ると置き換えになる。",
+      ),
+      ex(
+        "s8-l11-e3",
+        "同じ単語を2か所へ配れ",
+        "name: alpha\ntag: beta\nid: ",
+        "name: alpha\ntag: alpha\nid: alpha",
+        16,
+        ["yiw", "viw", '"0p'],
+        '$→yiw→2G→$→viwp→G→$→"0p。viwp の後の p は beta が出るので "0p。',
+      ),
+    ],
+  },
+  {
+    id: lessonId("s8-l12-linemove"),
+    title: "行運び実戦 — dd で掴んで p で置く",
+    brief:
+      "行の引っ越しは dd(切り取り)→移動→p(下に貼る)。dd した行はレジスタに入っている。数字を前置けば 2dd で複数行まとめて掴める。",
+    unlocks: [],
+    exercises: [
+      ex(
+        "s8-l12-e1",
+        "結びの行を末尾へ",
+        "Best regards\nHi team\nUpdate done",
+        "Hi team\nUpdate done\nBest regards",
+        4,
+        ["dd", "G", "p"],
+        "dd→G→p。切り取った行は p で戻せる。",
+      ),
+      ex(
+        "s8-l12-e2",
+        "TODO を2行まとめて運べ",
+        "TODO a\nTODO b\ndone x\ndone y",
+        "done x\ndone y\nTODO a\nTODO b",
+        5,
+        ["dd", "p"],
+        "2dd→G→p。まとめて掴めばペーストも1回。",
+      ),
+      ex(
+        "s8-l12-e3",
+        "呼び出し順を直せ",
+        "a()\nc()\nb()",
+        "a()\nb()\nc()",
+        5,
+        ["dd", "G", "p"],
+        "2G→dd→p。dd の後カーソルは次の行に乗っている。",
+      ),
+    ],
+  },
+  {
+    id: lessonId("s8-l13-strcarry"),
+    title: '文字列運び実戦 — yi" で中身だけ',
+    brief:
+      'yi" はカーソルがクォートの手前でも、行内の文字列を見つけて中身だけヤンクする。空の "" へは f"→p、既にある文字列と替えるなら vi"p。その後にもう一度貼るなら "0p。',
+    unlocks: [commandId('yi"')],
+    exercises: [
+      ex(
+        "s8-l13-e1",
+        "メッセージを空文字列へ",
+        'msg = "hello"\nlog("")',
+        'msg = "hello"\nlog("hello")',
+        7,
+        ['yi"', "p", "f"],
+        'yi"→G→f"→p。行頭からでも yi" が文字列を見つける。',
+      ),
+      ex(
+        "s8-l13-e2",
+        "文字列を差し替えろ",
+        'name = "alice"\ngreet("bob")',
+        'name = "alice"\ngreet("alice")',
+        10,
+        ['yi"', 'vi"'],
+        'yi"→G→f"→vi"→p。選択に被せて貼れば差し替え。',
+      ),
+      ex(
+        "s8-l13-e3",
+        "同じ文字列を2か所へ",
+        'good = "ok"\nstate = "bad"\nlast = ""',
+        'good = "ok"\nstate = "ok"\nlast = "ok"',
+        17,
+        ['yi"', 'vi"', '"0p'],
+        'yi"→2G→f"→vi"p→G→f"→"0p。vi"p の後は "0p で貼り直す。',
+      ),
+    ],
+  },
+  {
     id: lessonId("s8-l4-boss"),
-    title: "皆伝ボス — 実戦総合",
+    title: "グランドフィナーレ — 実戦総合",
     brief:
       "総合実戦。ひとつのバッファに複数の直しどころ。どの技で最短を組むかはあなた次第。",
     unlocks: [],
@@ -3599,20 +3697,19 @@ const stage8Lessons: Lesson[] = [
   },
 ];
 
-const stage8: Stage = {
-  id: "stage-8",
-  title: "STAGE 8",
-  subtitle: "実戦 皆伝",
-  lessons: stage8Lessons,
+const area8: Area = {
+  id: "area-8",
+  name: "🎆 グランドパレード — 実戦総合",
+  lessons: area8Lessons,
 };
 
-export const stages: Stage[] = [
-  stage1,
-  stage2,
-  stage3,
-  stage4,
-  stage5,
-  stage6,
-  stage7,
-  stage8,
+export const areas: Area[] = [
+  area1,
+  area2,
+  area3,
+  area4,
+  area5,
+  area6,
+  area7,
+  area8,
 ];

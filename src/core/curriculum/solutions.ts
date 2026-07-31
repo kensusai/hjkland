@@ -1,7 +1,7 @@
 /**
  * 模範解答 (author solutions) for authored exercises, keyed by exercise id.
  * Single source of truth: ex() attaches these to the Exercise, the result
- * modal shows them as 答え合わせ, and stageContent.test.ts replays them
+ * modal shows them as 答え合わせ, and areaContent.test.ts replays them
  * through the real engine to prove solvability and par accuracy.
  */
 export const SOLUTIONS: Record<string, string[]> = {
@@ -270,9 +270,9 @@ export const SOLUTIONS: Record<string, string[]> = {
   "s1-l12-e3": ["2", "d", "d"],
   "s1-l12-e4": ["4", "x"],
   "s1-l12-e5": ["3", "d", "d"],
-  // Stage 7 (visual mode). j-based solutions replay in a real browser only
-  // (stageContent.test browserOnly + e2e/drive-stage7.mjs).
-  // Stage 5 (効率化の型). R solutions replay in a real browser only.
+  // Area 7 (visual mode). j-based solutions replay in a real browser only
+  // (areaContent.test browserOnly + e2e/drive-content.mjs).
+  // Area 5 (効率化の型). R solutions replay in a real browser only.
   "s5-l1-e1": ["A", ";", "<Esc>"],
   "s5-l1-e2": ["I", "#", " ", "<Esc>"],
   "s5-l1-e3": ["A", " ", "=", " ", "0", ";", "<Esc>"],
@@ -293,7 +293,7 @@ export const SOLUTIONS: Record<string, string[]> = {
   "s5-l5-e2": ["4", "~"],
   "s5-l5-e3": ["3", "~"],
   "s5-l5-e4": ["~", "f", "r", "~"],
-  // Stage 6 (検索の達人). / and ? solutions replay in a real browser only.
+  // Area 6 (検索の達人). / and ? solutions replay in a real browser only.
   "s6-l1-e1": ["/", "d", "e", "l", "t", "a", "<CR>", "x"],
   "s6-l1-e2": ["/", "f", "i", "x", "<CR>", "l", "r", "a"],
   "s6-l1-e3": ["/", "d", "d", "d", "<CR>", "d", "d"],
@@ -313,7 +313,7 @@ export const SOLUTIONS: Record<string, string[]> = {
   "s6-l5-e1": ["/", "e", "r", "r", "<CR>", "d", "d", "n", "d", "d"],
   "s6-l5-e2": ["*", "r", "F"],
   "s6-l5-e3": ["f", "(", ";", ";", "l", "r", "X"],
-  // Stage 3 additions (範囲・条件・空置換)
+  // Area 3 additions (範囲・条件・空置換)
   "s3-l6-e1": [":2,3s/a/b/"],
   "s3-l6-e2": [":1,2s/tmp/fix/"],
   "s3-l6-e3": [":2,3s/o/x/g"],
@@ -329,7 +329,7 @@ export const SOLUTIONS: Record<string, string[]> = {
   "s3-l10-e1": [":%s/src/lib/g"],
   "s3-l10-e2": [":%s/'/\"/g"],
   "s3-l10-e3": [":g/#/d"],
-  // Stage 4 additions (レジスタ応用)
+  // Area 4 additions (レジスタ応用)
   "s4-l4-e1": ['"', "a", "d", "d", "G", '"', "a", "p"],
   "s4-l4-e2": ["j", '"', "a", "d", "d", "G", '"', "a", "p"],
   "s4-l4-e3": ['"', "a", "d", "d", '"', "a", "p", '"', "a", "p"],
@@ -407,7 +407,7 @@ export const SOLUTIONS: Record<string, string[]> = {
     "a",
     "p",
   ],
-  // Stage 5 additions (C/D・cc・cf/df・indent・swap)
+  // Area 5 additions (C/D・cc・cf/df・indent・swap)
   "s5-l6-e1": ["w", "D"],
   "s5-l6-e2": ["f", "8", "C", "3", "0", "0", "0", "<Esc>"],
   "s5-l6-e3": ["f", "#", "D"],
@@ -423,7 +423,7 @@ export const SOLUTIONS: Record<string, string[]> = {
   "s5-l10-e1": ["l", "x", "p"],
   "s5-l10-e2": ["d", "d", "p"],
   "s5-l10-e3": ["f", "i", "x", "p"],
-  // Stage 6 additions (F/T・%・{}・^・検索リネーム)
+  // Area 6 additions (F/T・%・{}・^・検索リネーム)
   "s6-l6-e1": ["$", "F", "X", "x"],
   "s6-l6-e2": ["$", "T", "X", "x"],
   "s6-l6-e3": ["$", "F", "X", "x", ";", "x"],
@@ -484,7 +484,7 @@ export const SOLUTIONS: Record<string, string[]> = {
     "k",
     "<Esc>",
   ],
-  // Stage 7 additions (v+object・o・gU/gu・V>・V:s)
+  // Area 7 additions (v+object・o・gU/gu・V>・V:s)
   "s7-l6-e1": ["w", "v", "i", "w", "d"],
   "s7-l6-e2": ["f", "(", "v", "i", "(", "d"],
   "s7-l6-e3": ["f", '"', "v", "i", '"', "d"],
@@ -500,7 +500,7 @@ export const SOLUTIONS: Record<string, string[]> = {
   "s7-l10-e1": ["V", "j", ":s/a/b/g"],
   "s7-l10-e2": ["V", "j", ":s/x/y/"],
   "s7-l10-e3": ["j", "V", "j", ":s/foo/bar/"],
-  // Stage 8 additions (実戦)
+  // Area 8 additions (実戦)
   "s8-l5-e1": ["f", "(", "c", "i", "(", "x", "<Esc>"],
   "s8-l5-e2": ["f", "a", "x", "p"],
   "s8-l5-e3": ["f", "b", "r", "x"],
@@ -549,7 +549,7 @@ export const SOLUTIONS: Record<string, string[]> = {
   "s8-l10-e1": ["/", "e", "r", "r", "<CR>", "d", "d"],
   "s8-l10-e2": [":g/trace/d"],
   "s8-l10-e3": [":%s/eror/error/g"],
-  // Stage 8 (実戦 皆伝)
+  // Area 8 (実戦総合)
   "s8-l1-e1": [":%s/tmp/buf/g"],
   "s8-l1-e2": [":s/x/y/g"],
   "s8-l1-e3": ["c", "i", "w", "s", "u", "m", "<Esc>"],
@@ -559,6 +559,50 @@ export const SOLUTIONS: Record<string, string[]> = {
   "s8-l3-e1": ["V", "d", "G", "p"],
   "s8-l3-e2": ["y", "y", "p", "$", "c", "i", "w", "t", "w", "o", "<Esc>"],
   "s8-l3-e3": ["~", "w", "~"],
+  "s8-l11-e1": ["w", "y", "i", "w", "G", "f", "(", "p"],
+  "s8-l11-e2": ["$", "y", "i", "w", "G", "$", "v", "i", "w", "p"],
+  "s8-l11-e3": [
+    "$",
+    "y",
+    "i",
+    "w",
+    "2",
+    "G",
+    "$",
+    "v",
+    "i",
+    "w",
+    "p",
+    "G",
+    "$",
+    '"',
+    "0",
+    "p",
+  ],
+  "s8-l12-e1": ["d", "d", "G", "p"],
+  "s8-l12-e2": ["2", "d", "d", "G", "p"],
+  "s8-l12-e3": ["2", "G", "d", "d", "p"],
+  "s8-l13-e1": ["y", "i", '"', "G", "f", '"', "p"],
+  "s8-l13-e2": ["y", "i", '"', "G", "f", '"', "v", "i", '"', "p"],
+  "s8-l13-e3": [
+    "y",
+    "i",
+    '"',
+    "2",
+    "G",
+    "f",
+    '"',
+    "v",
+    "i",
+    '"',
+    "p",
+    "G",
+    "f",
+    '"',
+    '"',
+    "0",
+    "p",
+  ],
   "s8-l4-e1": [":%s/old/val/g", "g", "g", "d", "d"],
   "s8-l4-e2": ["V", "d", "p", "g", "g", "3", "J"],
   "s8-l4-e3": ['"', "a", "y", "y", "G", '"', "a", "p"],

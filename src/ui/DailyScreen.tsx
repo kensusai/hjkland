@@ -8,7 +8,7 @@ import { applyDailyAttempt, resolveDailyChallenge } from "../core/daily";
 import { localDateOf } from "../core/localDate";
 import type { DailyChallengeRecord } from "../core/ports";
 import {
-  MedalHeadline,
+  StampHeadline,
   PracticePlayer,
   ResultFooter,
   type FinishedInfo,
@@ -130,7 +130,7 @@ function DailyResult({
   const profile = useAppStore((s) => s.profile);
   return (
     <>
-      <MedalHeadline attempt={info.attempt} />
+      <StampHeadline attempt={info.attempt} />
       <div className="mt-3 font-mono text-sm font-black text-matcha">
         今日のライド、完了!! 🔥{profile.streak.current}日
       </div>

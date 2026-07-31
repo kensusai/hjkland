@@ -1,7 +1,7 @@
 /**
  * Full-content verification drive: replays EVERY authored exercise's 模範解答
  * in a real browser with REAL key events (page.keyboard), engine-direct.
- * This is the browser-side complement of src/vim/stageContent.test.ts —
+ * This is the browser-side complement of src/vim/areaContent.test.ts —
  * display-line j/k, R overtype and the / ? search dialog cannot be driven in
  * jsdom, so the browserOnly exercises are only provable here. Asserts, per
  * exercise: the solution reaches the target buffer and its keystroke count
@@ -25,8 +25,8 @@ await page.evaluate(async () => {
 });
 
 const exercises = await page.evaluate(async () => {
-  const { stages } = await import("/src/core/curriculum/stages.ts");
-  return stages.flatMap((s) =>
+  const { areas } = await import("/src/core/curriculum/areas.ts");
+  return areas.flatMap((s) =>
     s.lessons.flatMap((l) =>
       l.exercises.map((e) => ({
         id: e.id,

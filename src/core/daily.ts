@@ -4,7 +4,7 @@
  * these functions are pure.
  */
 import { unlockedCommands } from "./curriculum/curriculum";
-import { stages } from "./curriculum/stages";
+import { areas } from "./curriculum/areas";
 import { generateDailyChallenge } from "./generation/generate";
 import { localDateOf, type LocalDate } from "./localDate";
 import type { DailyChallengeRecord } from "./ports";
@@ -25,7 +25,7 @@ export function resolveDailyChallenge(
   profile: Profile,
 ): DailyChallengeRecord | null {
   if (existing && existing.date === date) return existing;
-  return generateDailyChallenge(date, unlockedCommands(profile, stages));
+  return generateDailyChallenge(date, unlockedCommands(profile, areas));
 }
 
 export interface DailyAttemptOutcome {

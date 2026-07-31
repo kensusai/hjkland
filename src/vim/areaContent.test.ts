@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 /**
- * Content verification (PLAN M6): every stage-1 exercise is solvable, and its
+ * Content verification (PLAN M6): every area-1 exercise is solvable, and its
  * par equals the recorded solution length (domain.md P4). This replays the
  * author's solution through the real vim engine and asserts:
  *   - the buffer reaches the target (solvable),
@@ -12,7 +12,7 @@ import { beforeAll, describe, expect, it } from "vitest";
 import { installCodeMirrorDomStubs } from "./cmDomStubs";
 import { commandId } from "../core/ids";
 import { unlockedCommands } from "../core/curriculum/curriculum";
-import { stages } from "../core/curriculum/stages";
+import { areas } from "../core/curriculum/areas";
 import { initialProfile } from "../core/profile";
 import { createVimEngine } from "./codeMirrorVimEngine";
 import { replaySolution } from "./replaySolution";
@@ -32,7 +32,7 @@ const needsRealBrowser = (solution: string[] | undefined): boolean =>
   );
 
 describe("authored content is solvable with correct pars", () => {
-  for (const lesson of stages.flatMap((s) => s.lessons)) {
+  for (const lesson of areas.flatMap((s) => s.lessons)) {
     for (const exercise of lesson.exercises) {
       const run = needsRealBrowser(exercise.solution) ? it.skip : it;
       run(`${exercise.id}: ${exercise.title}`, () => {
@@ -61,17 +61,17 @@ describe("authored content is solvable with correct pars", () => {
   }
 });
 
-describe("authored stages respect the unlock constraint (R6)", () => {
+describe("authored areas respect the unlock constraint (R6)", () => {
   it("each exercise only practices commands unlocked by its lesson or earlier", () => {
     // Walk lessons in order, growing the unlocked set as we clear each.
     const cleared = {
       ...initialProfile,
       lessonClears: {} as Record<string, { clearedAt: Date }>,
     };
-    for (const lesson of stages.flatMap((s) => s.lessons)) {
+    for (const lesson of areas.flatMap((s) => s.lessons)) {
       // Commands this lesson introduces are available to its own exercises.
       cleared.lessonClears[lesson.id] = { clearedAt: new Date() };
-      const available = unlockedCommands(cleared, stages);
+      const available = unlockedCommands(cleared, areas);
       for (const exercise of lesson.exercises) {
         for (const cmd of exercise.practicedCommands) {
           // counts (e.g. "3") are keystrokes, not gated commands; skip pure digits.

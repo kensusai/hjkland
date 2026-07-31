@@ -6,7 +6,7 @@
 import { achievementId, type AchievementId } from "../ids";
 import { DAILY_ID_PREFIX } from "../generation/generate";
 import type { Profile } from "../profile";
-import { stages } from "../curriculum/stages";
+import { areas } from "../curriculum/areas";
 import { isLessonCleared } from "../curriculum/curriculum";
 import { levelFromXp } from "./xp";
 
@@ -31,16 +31,16 @@ export const achievementDefs: AchievementDef[] = [
   },
   {
     id: achievementId("first-gold"),
-    icon: "🥇",
+    icon: "💮",
     name: "初パーフェクトライド",
-    description: "初めて金メダルを取る",
+    description: "初めて金スタンプを押す",
     isSatisfied: (p) => goldCount(p) >= 1,
   },
   {
     id: achievementId("golds-10"),
     icon: "💎",
     name: "パーフェクト×10",
-    description: "金メダルを10個集める",
+    description: "金スタンプを10個集める",
     isSatisfied: (p) => goldCount(p) >= 10,
   },
   {
@@ -58,16 +58,17 @@ export const achievementDefs: AchievementDef[] = [
     isSatisfied: (p) => p.streak.longest >= 30,
   },
   {
+    // Legacy id from the ステージ era — persisted in profiles, never rename.
     id: achievementId("stage1-master"),
     icon: "🗺",
-    name: "はじまり広場 制覇",
-    description: "STAGE 1 の全レッスンをクリアする",
+    name: "エントランス広場 制覇",
+    description: "エントランス広場の全レッスンをクリアする",
     isSatisfied: (p) => {
-      const stage1 = stages[0];
+      const area1 = areas[0];
       return (
-        !!stage1 &&
-        stage1.lessons.length > 0 &&
-        stage1.lessons.every((l) => isLessonCleared(p, l.id))
+        !!area1 &&
+        area1.lessons.length > 0 &&
+        area1.lessons.every((l) => isLessonCleared(p, l.id))
       );
     },
   },

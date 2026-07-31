@@ -1,16 +1,16 @@
 /**
  * Home screen (design/mockups/rebrand-hjkland.html): passport HUD, guide board with
- * the day's greeting, and the world map of stages/lessons. All status is
+ * the day's greeting, and the world map of areas/lessons. All status is
  * derived from core (curriculum status, level, streak); this file renders it.
  */
 import { useEffect, useState } from "react";
 import { weakCommands } from "../core/analytics/weakness";
 import { resolveDailyChallenge } from "../core/daily";
 import {
-  stageLessonStatuses,
+  areaLessonStatuses,
   type LessonStatus,
 } from "../core/curriculum/curriculum";
-import { stages } from "../core/curriculum/stages";
+import { areas } from "../core/curriculum/areas";
 import type { CommandId } from "../core/ids";
 import { localDateOf } from "../core/localDate";
 import type { DailyChallengeRecord } from "../core/ports";
@@ -53,16 +53,16 @@ export function HomeScreen() {
     // Load once per visit; profile changes while on screen don't re-resolve.
   }, [clock, store]);
 
-  // The next playable lesson (first "current" across stages), for the CTA.
+  // The next playable lesson (first "current" across areas), for the CTA.
   const next = (() => {
-    for (let stageIndex = 0; stageIndex < stages.length; stageIndex++) {
-      const statuses = stageLessonStatuses(profile, stages, stageIndex);
+    for (let areaIndex = 0; areaIndex < areas.length; areaIndex++) {
+      const statuses = areaLessonStatuses(profile, areas, areaIndex);
       const lessonIndex = statuses.indexOf("current");
       if (lessonIndex !== -1) {
         return {
-          stageIndex,
+          areaIndex,
           lessonIndex,
-          lesson: stages[stageIndex]!.lessons[lessonIndex]!,
+          lesson: areas[areaIndex]!.lessons[lessonIndex]!,
         };
       }
     }
@@ -224,7 +224,7 @@ export function HomeScreen() {
                         onClick={() =>
                           navigate({
                             screen: "lesson",
-                            stageIndex: next.stageIndex,
+                            areaIndex: next.areaIndex,
                             lessonIndex: next.lessonIndex,
                           })
                         }
@@ -261,7 +261,7 @@ export function HomeScreen() {
                           onClick={() =>
                             navigate({
                               screen: "lesson",
-                              stageIndex: next.stageIndex,
+                              areaIndex: next.areaIndex,
                               lessonIndex: next.lessonIndex,
                             })
                           }
@@ -287,7 +287,7 @@ export function HomeScreen() {
                   onClick={() =>
                     navigate({
                       screen: "lesson",
-                      stageIndex: next.stageIndex,
+                      areaIndex: next.areaIndex,
                       lessonIndex: next.lessonIndex,
                     })
                   }
@@ -361,24 +361,24 @@ export function HomeScreen() {
             </span>
           </div>
           <div className="flex flex-col gap-5">
-            {stages.map((stage, stageIndex) => {
-              const statuses = stageLessonStatuses(profile, stages, stageIndex);
-              const empty = stage.lessons.length === 0;
+            {areas.map((area, areaIndex) => {
+              const statuses = areaLessonStatuses(profile, areas, areaIndex);
+              const empty = area.lessons.length === 0;
               return (
                 <div
-                  key={stage.id}
+                  key={area.id}
                   className={`flex items-center gap-4 ${empty ? "opacity-50" : ""}`}
                 >
                   <div
-                    className={`w-[150px] flex-none border-3 py-2 text-center font-mono text-sm font-black shadow-[3px_3px_0_rgb(43_58_74/0.35)] ${
+                    className={`w-[190px] flex-none border-3 px-2 py-2 text-center font-mono text-sm font-black shadow-[3px_3px_0_rgb(43_58_74/0.35)] ${
                       statuses.every((s) => s === "cleared") && !empty
                         ? "border-matcha-dim text-matcha"
                         : "border-ink"
                     } bg-raised`}
                   >
-                    {stage.title}
+                    {area.name.split(" — ")[0]}
                     <span className="block text-xs font-normal text-cream-dim">
-                      {stage.subtitle}
+                      {area.name.split(" — ")[1]}
                     </span>
                   </div>
                   {empty ? (
@@ -387,17 +387,17 @@ export function HomeScreen() {
                     </span>
                   ) : (
                     <div className="flex flex-wrap items-center gap-y-3">
-                      {stage.lessons.map((lesson, lessonIndex) => (
+                      {area.lessons.map((lesson, lessonIndex) => (
                         <LessonNode
                           key={lesson.id}
                           label={nodeLabel(lesson.title)}
                           isBoss={lesson.boss ?? false}
                           status={statuses[lessonIndex] ?? "upcoming"}
-                          isLast={lessonIndex === stage.lessons.length - 1}
+                          isLast={lessonIndex === area.lessons.length - 1}
                           onClick={() =>
                             navigate({
                               screen: "lesson",
-                              stageIndex,
+                              areaIndex,
                               lessonIndex,
                             })
                           }
@@ -414,7 +414,7 @@ export function HomeScreen() {
         {/* Achievements */}
         <section className="pixel-panel p-8">
           <div className="mb-5 flex items-baseline gap-3 font-mono text-lg font-black tracking-widest">
-            MEDALS
+            スタンプ帳
             <span className="text-xs font-normal text-cream-faint">
               — 実績 {Object.keys(profile.achievements).length}/
               {achievementDefs.length}
@@ -426,17 +426,21 @@ export function HomeScreen() {
               return (
                 <div
                   key={def.id}
-                  className={`flex items-center gap-3 border-2 p-3 ${
-                    unlocked
-                      ? "border-gold bg-white/55"
-                      : "border-dashed border-ink-bold opacity-45"
-                  }`}
+                  className="flex flex-col items-center gap-2 p-3 text-center"
                   title={def.description}
                 >
-                  <span className="text-2xl">{unlocked ? def.icon : "❓"}</span>
-                  <div>
+                  <span
+                    className={`grid aspect-square w-16 place-items-center rounded-full border-[3px] text-3xl ${
+                      unlocked
+                        ? "-rotate-6 border-shu bg-white/55"
+                        : "border-dashed border-ink-bold opacity-40"
+                    }`}
+                  >
+                    {unlocked ? def.icon : "❓"}
+                  </span>
+                  <div className={unlocked ? "" : "opacity-45"}>
                     <div className="text-sm font-black">{def.name}</div>
-                    <div className="text-[0.625rem] text-cream-faint">
+                    <div className="text-xs text-cream-faint">
                       {def.description}
                     </div>
                   </div>

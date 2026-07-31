@@ -39,16 +39,41 @@ import {
   type CodeMirrorVimEngine,
 } from "../vim/codeMirrorVimEngine";
 
-export const MEDAL_WORD: Record<Medal, string> = {
+export const STAMP_WORD: Record<Medal, string> = {
   gold: "パーフェクトライド!!",
   silver: "ナイスライド!",
   bronze: "完走",
 };
-export const MEDAL_ICON: Record<Medal, string> = {
-  gold: "🥇",
-  silver: "🥈",
-  bronze: "🥉",
+const STAMP_KANJI: Record<Medal, string> = {
+  gold: "金",
+  silver: "銀",
+  bronze: "銅",
 };
+const STAMP_STYLE: Record<Medal, string> = {
+  gold: "border-gold text-gold",
+  silver: "border-silver text-silver",
+  bronze: "border-bronze text-bronze",
+};
+
+/**
+ * スタンプラリー風の丸スタンプ(金・銀・銅)。サイズは親の font-size を
+ * 継承する(em ベース)ので、text-4xl 等で包んで大きさを決める。
+ */
+export function Stamp({
+  medal,
+  className = "",
+}: {
+  medal: Medal;
+  className?: string;
+}) {
+  return (
+    <span
+      className={`inline-grid aspect-square -rotate-6 place-items-center rounded-full border-[0.12em] p-[0.28em] font-black leading-none ${STAMP_STYLE[medal]} ${className}`}
+    >
+      {STAMP_KANJI[medal]}
+    </span>
+  );
+}
 
 export interface FinishedInfo {
   attempt: Attempt;
@@ -245,12 +270,12 @@ export function PracticePlayer({
     silver: "text-silver",
     bronze: "text-bronze",
   }[zone];
-  const medalHint =
+  const stampHint =
     zone === "gold"
-      ? `🥇 まであと ${goldLine - keystrokes}`
+      ? `金スタンプまであと ${goldLine - keystrokes}`
       : zone === "silver"
-        ? `🥈 まであと ${silverLine - keystrokes}`
-        : "🥉 有効 — 何キーでもクリアはできる";
+        ? `銀スタンプまであと ${silverLine - keystrokes}`
+        : "銅スタンプ — 何キーでもクリアはできる";
 
   return (
     <div className="mx-auto flex min-h-screen max-w-[1440px] flex-col">
@@ -318,7 +343,7 @@ export function PracticePlayer({
           <span
             className={`text-xs font-extrabold ${zone === "gold" ? "text-gold" : zoneText}`}
           >
-            {medalHint}
+            {stampHint}
           </span>
         </div>
         <div className="text-sm text-cream-dim">PAR {exercise.par}</div>
@@ -568,15 +593,17 @@ export function StreakChip() {
   );
 }
 
-/** Shared medal headline for result modals. */
-export function MedalHeadline({ attempt }: { attempt: Attempt }) {
+/** Shared stamp headline for result modals. */
+export function StampHeadline({ attempt }: { attempt: Attempt }) {
   if (!attempt.medal) return null;
   return (
     <>
       <div className="ippon-pop text-6xl font-black tracking-wider text-gold [text-shadow:5px_5px_0_var(--color-shu-dark),8px_8px_0_rgb(43_58_74/0.35)]">
-        {MEDAL_WORD[attempt.medal]}
+        {STAMP_WORD[attempt.medal]}
       </div>
-      <div className="mt-2 text-4xl">{MEDAL_ICON[attempt.medal]}</div>
+      <div className="mt-2 text-4xl">
+        <Stamp medal={attempt.medal} />
+      </div>
       <div className="mt-2 font-mono text-cream-dim">
         {attempt.keystrokes} KEYS
       </div>

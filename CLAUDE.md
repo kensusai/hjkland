@@ -52,7 +52,7 @@ npm run build        # 型チェック + 本番ビルド
 - 明示的に依頼されない限り、広範なリファクタリングより小さく焦点を絞った変更を優先する。
 - **命名は `docs/domain.md` の用語集(ユビキタス言語)に従う**(例: `Exercise`, `Attempt`, `StreakFreeze`)。用語集に無い概念を導入する時は用語集を先に更新する。
 - **ディレクトリ構成は `docs/architecture.md`(ADR-0005)を正とする**: `src/core/`(ゲームのルール全部)+ `src/vim/` `src/storage/` `src/ui/`(shell)。守るルールは2つだけ — ①core は core 以外を import しない(ブラウザ API・`Date.now()`・`Math.random()` 禁止、外界は `core/ports.ts` 経由)。②ui は vim ライブラリを直接呼ばず `VimEngine` ポートを通す。それ以外はシンプルさ優先。
-- 業務ルールの計算・判定(メダル・ストリーク・XP 等)を ui / vim / storage に書かない。必ず core に置く。
+- 業務ルールの計算・判定(スタンプ・ストリーク・XP 等)を ui / vim / storage に書かない。必ず core に置く。
 - アーキテクチャに関わる変更は、実装前に `docs/adr/` へ ADR を書く(ルールは `docs/architecture.md` 参照)。
 
 ## 開発原則

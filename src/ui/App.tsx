@@ -115,8 +115,8 @@ function Router() {
     case "lesson":
       return (
         <LessonScreen
-          key={`${route.stageIndex}-${route.lessonIndex}`}
-          stageIndex={route.stageIndex}
+          key={`${route.areaIndex}-${route.lessonIndex}`}
+          areaIndex={route.areaIndex}
           lessonIndex={route.lessonIndex}
         />
       );

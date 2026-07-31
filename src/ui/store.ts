@@ -16,7 +16,7 @@ import {
 
 export type Route =
   | { screen: "home" }
-  | { screen: "lesson"; stageIndex: number; lessonIndex: number }
+  | { screen: "lesson"; areaIndex: number; lessonIndex: number }
   | { screen: "daily" }
   | { screen: "drill" }
   | { screen: "quiz" };

@@ -9,14 +9,15 @@ import {
   recordLearningActivity,
 } from "../core/applyProgress";
 import { unlockedCommands } from "../core/curriculum/curriculum";
-import { stages } from "../core/curriculum/stages";
+import { areas } from "../core/curriculum/areas";
 import { generateDrill } from "../core/generation/generate";
 import type { Exercise } from "../core/practice/exercise";
 import type { Medal } from "../core/practice/medal";
 import {
-  MedalHeadline,
   PracticePlayer,
   ResultFooter,
+  Stamp,
+  StampHeadline,
   StreakChip,
   type FinishedInfo,
 } from "./PracticePlayer";
@@ -46,7 +47,7 @@ export function DrillScreen() {
       if (cancelled) return;
       const exercises = generateDrill({
         seed: clock.now().getTime().toString(),
-        unlocked: unlockedCommands(profileRef.current, stages),
+        unlocked: unlockedCommands(profileRef.current, areas),
         weakCommands: weakCommands(attempts),
       });
       setBounty(exercises.map(() => null));
@@ -157,11 +158,7 @@ export function DrillScreen() {
                     )}
                     {result && (
                       <span className="ml-auto">
-                        {result === "gold"
-                          ? "🥇"
-                          : result === "silver"
-                            ? "🥈"
-                            : "🥉"}
+                        <Stamp medal={result} />
                       </span>
                     )}
                   </div>
@@ -209,24 +206,16 @@ function DrillResult({
 }) {
   return (
     <>
-      <MedalHeadline attempt={info.attempt} />
+      <StampHeadline attempt={info.attempt} />
       {info.isLastExercise && (
         <>
           <div className="mt-3 font-mono font-black text-matcha">
             5連続ライド、完走!! 記録:
           </div>
-          <div className="mt-1 text-2xl tracking-widest">
-            {bounty
-              .map((r) =>
-                r === "gold"
-                  ? "🥇"
-                  : r === "silver"
-                    ? "🥈"
-                    : r === "bronze"
-                      ? "🥉"
-                      : "💨",
-              )
-              .join(" ")}
+          <div className="mt-1 flex justify-center gap-2 text-2xl">
+            {bounty.map((r, i) =>
+              r ? <Stamp key={i} medal={r} /> : <span key={i}>💨</span>,
+            )}
           </div>
         </>
       )}

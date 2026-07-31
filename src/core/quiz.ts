@@ -16,7 +16,7 @@
  *   - motion items change nothing but the cursor, shown with the ▮ marker,
  *     so a motion is never presented as an edit.
  */
-import type { Stage } from "./curriculum/curriculum";
+import type { Area } from "./curriculum/curriculum";
 import { isLessonCleared } from "./curriculum/curriculum";
 import type { RandomSource } from "./ports";
 import type { Profile } from "./profile";
@@ -64,7 +64,7 @@ const PROMPT: Record<QuizCategory, string> = {
 
 /**
  * The bank, in teaching order (used as the top-up order for new players).
- * Each `command` matches a lesson label in src/core/curriculum/stages.ts —
+ * Each `command` matches a lesson label in src/core/curriculum/areas.ts —
  * exported so quiz.test.ts can enforce that invariant (a renamed lesson
  * would otherwise silently break cleared-lesson gating).
  */
@@ -189,9 +189,9 @@ export function commandLabel(title: string): string {
 }
 
 /** Command labels whose lesson the player has cleared (test what they know). */
-function clearedLabels(profile: Profile, stages: Stage[]): Set<string> {
+function clearedLabels(profile: Profile, areas: Area[]): Set<string> {
   const labels = new Set<string>();
-  for (const lesson of stages.flatMap((s) => s.lessons)) {
+  for (const lesson of areas.flatMap((s) => s.lessons)) {
     if (lesson.exercises.length > 0 && isLessonCleared(profile, lesson.id)) {
       labels.add(commandLabel(lesson.title));
     }
@@ -220,11 +220,11 @@ function shuffle<T>(rng: RandomSource, items: T[]): T[] {
  */
 export function generateQuiz(
   profile: Profile,
-  stages: Stage[],
+  areas: Area[],
   rng: RandomSource,
   count = 3,
 ): QuizQuestion[] {
-  const cleared = clearedLabels(profile, stages);
+  const cleared = clearedLabels(profile, areas);
   const eligible = BANK.filter((item) => cleared.has(item.command));
   const rest = BANK.filter((item) => !cleared.has(item.command));
   const pool = [...shuffle(rng, eligible), ...rest];

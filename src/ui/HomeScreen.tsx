@@ -207,7 +207,7 @@ export function HomeScreen() {
                 </h1>
                 <div className="mb-4 flex gap-2 font-mono text-xs font-extrabold">
                   <span className="border-2 border-ink bg-white/55 px-3 py-0.5">
-                    PAR {daily.exercise.par}
+                    お手本 {daily.exercise.par} キー
                   </span>
                   <span
                     className={`border-2 border-ink bg-white/55 px-3 py-0.5 ${daily.xpGranted ? "text-matcha" : "text-gold"}`}
@@ -311,7 +311,7 @@ export function HomeScreen() {
         {daily && (
           <section className="pixel-panel flex items-center gap-6 p-6">
             <div className="font-mono text-sm font-black tracking-[0.15em]">
-              🎯 スタンプラリー — 弱点ドリル
+              🎯 5連続ライド — 弱点ドリル
             </div>
             <div className="flex flex-1 flex-wrap gap-2">
               {weak.length > 0 ? (

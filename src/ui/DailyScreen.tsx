@@ -8,7 +8,7 @@ import { applyDailyAttempt, resolveDailyChallenge } from "../core/daily";
 import { localDateOf } from "../core/localDate";
 import type { DailyChallengeRecord } from "../core/ports";
 import {
-  StampHeadline,
+  ResultHeadline,
   PracticePlayer,
   ResultFooter,
   type FinishedInfo,
@@ -130,14 +130,14 @@ function DailyResult({
   const profile = useAppStore((s) => s.profile);
   return (
     <>
-      <StampHeadline attempt={info.attempt} />
+      <ResultHeadline attempt={info.attempt} />
       <div className="mt-3 font-mono text-sm font-black text-matcha">
         今日のライド、完了!! 🔥{profile.streak.current}日
       </div>
       <p className="mt-2 text-xs text-cream-faint">
         自己ベスト:{" "}
         {profile.exerciseBests[info.attempt.exerciseId]?.keystrokes ?? "—"}{" "}
-        キー。同じお題をより少ないキーでクリアすると「ベスト更新」だ。
+        キー。同じライドをより少ないキーでクリアすると「ベスト更新」だ。
       </p>
       <ResultFooter
         xpGained={xpGained}

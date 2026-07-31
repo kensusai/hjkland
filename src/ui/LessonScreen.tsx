@@ -11,7 +11,7 @@ import {
 import { markLessonCleared } from "../core/curriculum/markLessonCleared";
 import { areas } from "../core/curriculum/areas";
 import {
-  StampHeadline,
+  ResultHeadline,
   PracticePlayer,
   ResultFooter,
   StreakChip,
@@ -158,7 +158,7 @@ function LessonResult({
 }) {
   return (
     <>
-      <StampHeadline attempt={info.attempt} />
+      <ResultHeadline attempt={info.attempt} />
       {info.isLastExercise && (
         <div className="mt-3 flex items-center justify-center gap-2 font-mono font-black text-matcha-dim">
           <MascotSprite mood="hype" size={40} />
@@ -167,7 +167,7 @@ function LessonResult({
       )}
       <ResultFooter
         xpGained={xpGained}
-        primaryLabel={info.isLastExercise ? "パークへ ▶" : "次のお題 ▶"}
+        primaryLabel={info.isLastExercise ? "パークへ ▶" : "次のライド ▶"}
         onPrimary={onNext}
         onRetry={onRetry}
         extraChips={info.isLastExercise ? <StreakChip /> : undefined}

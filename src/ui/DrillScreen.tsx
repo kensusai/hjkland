@@ -16,8 +16,8 @@ import type { Medal } from "../core/practice/medal";
 import {
   PracticePlayer,
   ResultFooter,
-  Stamp,
-  StampHeadline,
+  RESULT_SHORT,
+  ResultHeadline,
   StreakChip,
   type FinishedInfo,
 } from "./PracticePlayer";
@@ -127,8 +127,8 @@ export function DrillScreen() {
         return (
           <div className="pixel-panel p-4">
             <div className="mb-3 font-mono text-xs font-black tracking-[0.2em] text-shu">
-              🎫 スタンプラリー — {bounty.filter(Boolean).length}/
-              {state.exercises.length} 個
+              🎫 ライドチケット — {bounty.filter(Boolean).length}/
+              {state.exercises.length} クリア
             </div>
             <div className="flex flex-col gap-2">
               {state.exercises.map((ex, i) => {
@@ -157,8 +157,8 @@ export function DrillScreen() {
                       </span>
                     )}
                     {result && (
-                      <span className="ml-auto">
-                        <Stamp medal={result} />
+                      <span className="ml-auto text-[0.625rem] font-black text-matcha">
+                        {RESULT_SHORT[result]}
                       </span>
                     )}
                   </div>
@@ -206,22 +206,36 @@ function DrillResult({
 }) {
   return (
     <>
-      <StampHeadline attempt={info.attempt} />
+      <ResultHeadline attempt={info.attempt} />
       {info.isLastExercise && (
         <>
           <div className="mt-3 font-mono font-black text-matcha">
             5連続ライド、完走!! 記録:
           </div>
-          <div className="mt-1 flex justify-center gap-2 text-2xl">
+          <div className="mt-2 flex justify-center gap-2 font-mono text-sm font-black">
             {bounty.map((r, i) =>
-              r ? <Stamp key={i} medal={r} /> : <span key={i}>💨</span>,
+              r ? (
+                <span
+                  key={i}
+                  className="border-2 border-matcha-dim px-2 py-0.5 text-matcha"
+                >
+                  {RESULT_SHORT[r]}
+                </span>
+              ) : (
+                <span
+                  key={i}
+                  className="border-2 border-ink-bold px-2 py-0.5 text-cream-faint"
+                >
+                  💨
+                </span>
+              ),
             )}
           </div>
         </>
       )}
       <ResultFooter
         xpGained={xpGained}
-        primaryLabel={info.isLastExercise ? "パークへ ▶" : "次のお題 ▶"}
+        primaryLabel={info.isLastExercise ? "パークへ ▶" : "次のライド ▶"}
         onPrimary={onNext}
         onRetry={onRetry}
         extraChips={info.isLastExercise ? <StreakChip /> : undefined}

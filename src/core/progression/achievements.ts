@@ -33,14 +33,14 @@ export const achievementDefs: AchievementDef[] = [
     id: achievementId("first-gold"),
     icon: "💮",
     name: "初パーフェクトライド",
-    description: "初めて金スタンプを押す",
+    description: "初めてパーフェクトライドを決める",
     isSatisfied: (p) => goldCount(p) >= 1,
   },
   {
     id: achievementId("golds-10"),
     icon: "💎",
     name: "パーフェクト×10",
-    description: "金スタンプを10個集める",
+    description: "パーフェクトライドを10回決める",
     isSatisfied: (p) => goldCount(p) >= 10,
   },
   {

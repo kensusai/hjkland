@@ -123,7 +123,7 @@ IndexedDB には NOT NULL / CHECK / FK が無い。不変条件は「keyPath の
 | デイリーチャレンジは1日1問         | R13              | `dailyChallenges` の keyPath = `date`(同日 put は上書きのみ) |
 | フリーズは 0〜2 個                 | R11              | zod `min(0).max(2)` + core の増減ロジック                    |
 | XP・キーストロークは非負整数       | R16, R2          | zod `int().nonnegative()`                                    |
-| スタンプは3値、結果は2値           | R3               | zod enum(判別可能ユニオンとして core に渡る)                 |
+| 評価は3値、結果は2値               | R3               | zod enum(判別可能ユニオンとして core に渡る)                 |
 | 未解放コマンド必須のお題を出さない | R6               | core/generation のロジック(保存時ではなく生成時に保証)       |
 | attempts は不変(追記のみ)          | 分析の原資・監査 | storage 層に update/delete API を作らない                    |
 

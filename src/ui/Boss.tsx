@@ -128,7 +128,7 @@ export function BossPanel({
       : mood === "worried"
         ? "おっ…!? 無駄のない操作…やるね…!!"
         : mood === "smug"
-          ? "ふふ、パーは逃したね。まだ銀は間に合うよ。"
+          ? "ふふ、パーフェクトは逃したね。まだナイスは間に合うよ。"
           : "あはは!! 手数多め!! それでもゴールはできるよ!!";
   const chance = Math.max(0, goldMax - keystrokes);
 
@@ -162,7 +162,7 @@ export function BossPanel({
       </div>
       <div className="mt-3">
         <div className="mb-1 flex justify-between font-mono text-[0.625rem] tracking-widest text-cream-faint">
-          <span>GOLD CHANCE</span>
+          <span>PERFECT CHANCE</span>
           <span>
             あと {chance} / {goldMax}
           </span>

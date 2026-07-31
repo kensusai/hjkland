@@ -16,7 +16,7 @@ const attempt = (overrides: Partial<Attempt>): Attempt => ({
   ...overrides,
 });
 
-// R4: スタンプ・ベストキーストロークはベスト記録で上書きされる(下がらない)
+// R4: 評価・ベストキーストロークはベスト記録で上書きされる(下がらない)
 describe("improveBest (R4)", () => {
   it("sets the first cleared attempt as the best", () => {
     expect(improveBest(undefined, attempt({}))).toEqual({

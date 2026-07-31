@@ -39,41 +39,18 @@ import {
   type CodeMirrorVimEngine,
 } from "../vim/codeMirrorVimEngine";
 
-export const STAMP_WORD: Record<Medal, string> = {
+/** 評価はアイコンを使わず言葉だけで見せる(疾走感優先、domain.md)。 */
+export const RESULT_WORD: Record<Medal, string> = {
   gold: "パーフェクトライド!!",
   silver: "ナイスライド!",
   bronze: "完走",
 };
-const STAMP_KANJI: Record<Medal, string> = {
-  gold: "金",
-  silver: "銀",
-  bronze: "銅",
+/** 一覧・記録用の短い評価ワード(チップ表示)。 */
+export const RESULT_SHORT: Record<Medal, string> = {
+  gold: "パーフェクト",
+  silver: "ナイス",
+  bronze: "完走",
 };
-const STAMP_STYLE: Record<Medal, string> = {
-  gold: "border-gold text-gold",
-  silver: "border-silver text-silver",
-  bronze: "border-bronze text-bronze",
-};
-
-/**
- * スタンプラリー風の丸スタンプ(金・銀・銅)。サイズは親の font-size を
- * 継承する(em ベース)ので、text-4xl 等で包んで大きさを決める。
- */
-export function Stamp({
-  medal,
-  className = "",
-}: {
-  medal: Medal;
-  className?: string;
-}) {
-  return (
-    <span
-      className={`inline-grid aspect-square -rotate-6 place-items-center rounded-full border-[0.12em] p-[0.28em] font-black leading-none ${STAMP_STYLE[medal]} ${className}`}
-    >
-      {STAMP_KANJI[medal]}
-    </span>
-  );
-}
 
 export interface FinishedInfo {
   attempt: Attempt;
@@ -270,12 +247,12 @@ export function PracticePlayer({
     silver: "text-silver",
     bronze: "text-bronze",
   }[zone];
-  const stampHint =
+  const resultHint =
     zone === "gold"
-      ? `金スタンプまであと ${goldLine - keystrokes}`
+      ? `パーフェクトまであと ${goldLine - keystrokes}`
       : zone === "silver"
-        ? `銀スタンプまであと ${silverLine - keystrokes}`
-        : "銅スタンプ — 何キーでもクリアはできる";
+        ? `ナイスまであと ${silverLine - keystrokes}`
+        : "完走確定 — 何キーでもクリアはできる";
 
   return (
     <div className="mx-auto flex min-h-screen max-w-[1440px] flex-col">
@@ -343,10 +320,10 @@ export function PracticePlayer({
           <span
             className={`text-xs font-extrabold ${zone === "gold" ? "text-gold" : zoneText}`}
           >
-            {stampHint}
+            {resultHint}
           </span>
         </div>
-        <div className="text-sm text-cream-dim">PAR {exercise.par}</div>
+        <div className="text-sm text-cream-dim">お手本 {exercise.par} キー</div>
       </div>
 
       {/* Quest banner: the ride title is the star of the screen (playtest feedback:
@@ -593,16 +570,13 @@ export function StreakChip() {
   );
 }
 
-/** Shared stamp headline for result modals. */
-export function StampHeadline({ attempt }: { attempt: Attempt }) {
+/** Shared result headline for result modals. */
+export function ResultHeadline({ attempt }: { attempt: Attempt }) {
   if (!attempt.medal) return null;
   return (
     <>
       <div className="ippon-pop text-6xl font-black tracking-wider text-gold [text-shadow:5px_5px_0_var(--color-shu-dark),8px_8px_0_rgb(43_58_74/0.35)]">
-        {STAMP_WORD[attempt.medal]}
-      </div>
-      <div className="mt-2 text-4xl">
-        <Stamp medal={attempt.medal} />
+        {RESULT_WORD[attempt.medal]}
       </div>
       <div className="mt-2 font-mono text-cream-dim">
         {attempt.keystrokes} KEYS

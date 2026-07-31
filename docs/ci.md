@@ -10,19 +10,22 @@
 
 ワークフロー: `.github/workflows/ci.yml`(2ジョブ)。
 
-- `check`: 下表の lint→format→型→テスト→ビルド(ローカルの `npm run check` と同一)。
-- `smoke`: 実ブラウザの E2E スモーク(`npm run e2e` = Playwright、`e2e/smoke.spec.ts` 1本)。起動→レッスン1クリア→解放→永続化を検証し、キーストローク計測(R2)の厳密なカウントもここで固定する。ユニットテストだけでは DOM 経路のバグを見逃した実績があるため(M5/M7)。ブラウザは actions/cache でキャッシュ。失敗時は trace を artifact に保存。
+- `check`: 下表の lint→format→型→テスト→ビルド。
+- `smoke`: 実ブラウザの E2E スモーク(`npm run e2e` = Playwright)。起動→レッスン1クリア→解放→永続化を検証し、キーストローク計測(R2)の厳密なカウントもここで固定する。ユニットテストだけでは DOM 経路のバグを見逃した実績があるため(M5/M7)。ブラウザは actions/cache でキャッシュ。失敗時は trace を artifact に保存。
 
-| 順序 | ステップ   | コマンド               | 落ちる条件                                       |
-| ---- | ---------- | ---------------------- | ------------------------------------------------ |
-| 1    | lint       | `npm run lint`         | ESLint エラー(core 純粋性違反 = ADR-0005 を含む) |
-| 2    | format     | `npm run format:check` | Prettier 未適用のファイルがある                  |
-| 3    | 型チェック | `npm run typecheck`    | `tsc --noEmit`(strict)のエラー                   |
-| 4    | テスト     | `npm test`             | Vitest の失敗                                    |
-| 5    | ビルド     | `npm run build`        | 型エラーまたは Vite ビルド失敗                   |
+| 順序 | ステップ   | コマンド               | 落ちる条件                                           |
+| ---- | ---------- | ---------------------- | ---------------------------------------------------- |
+| 1    | lint       | `npm run lint`         | ESLint エラー(core 純粋性違反 = ADR-0005 を含む)     |
+| 2    | format     | `npm run format:check` | Prettier 未適用のファイルがある                      |
+| 3    | 型チェック | `npm run typecheck`    | `tsc --noEmit`(strict)のエラー                       |
+| 4    | テスト     | `npm test`             | Vitest の失敗                                        |
+| 5    | ビルド     | `npm run build`        | 型エラーまたは Vite ビルド失敗                       |
+| 6    | e2e        | `npm run e2e`          | Playwright スペックの失敗(UI 文言変更の掃き漏らし等) |
+
+ローカルの `npm run check` は 1〜6 をすべて連結して実行する(CI では 1〜5 が `check` ジョブ、6 が `smoke` ジョブとして並列に走る)。e2e を check に含めるのは、UI 文言のリネームで e2e セレクタだけ古いまま CI が落ちた実績があるため(2026-08-01)。初回のみ `npx playwright install chromium` が必要。
 
 - **トリガー**: `main` への push とすべての pull request。タグトリガーは未使用(デプロイはインフラ構築フェーズで追加)。
-- **原則**: CI のコマンドはローカルと完全に同一(`npm run check` = 上記1〜5の連結)。CI 専用の隠しロジックを作らない。
+- **原則**: CI のコマンドはローカルと完全に同一(`npm run check` = 上記1〜6の連結)。CI 専用の隠しロジックを作らない。
 - **concurrency**: 同一ブランチ/PR の古い実行は新しい push でキャンセル(無料枠の節約)。
 
 ## 実行環境
@@ -64,7 +67,7 @@
 ## ローカルでの実行
 
 ```sh
-npm run check   # CI と同じ全チェック(lint → format → 型 → テスト → ビルド)
+npm run check   # CI と同じ全チェック(lint → format → 型 → テスト → ビルド → e2e)
 npm run format  # Prettier 一括適用(format:check が落ちたとき)
 ```
 

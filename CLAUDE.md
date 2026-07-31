@@ -29,7 +29,7 @@
 ```sh
 npm install          # 依存のインストール
 npm run dev          # 開発サーバー起動
-npm run check        # CI と同じ全チェック(lint → format → 型 → テスト → ビルド)
+npm run check        # CI と同じ全チェック(lint → format → 型 → テスト → ビルド → e2e)
 npm run lint         # ESLint(core 純粋性ルールを含む)
 npm run typecheck    # tsc --noEmit
 npm run test         # テスト一括実行

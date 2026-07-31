@@ -41,7 +41,7 @@ test("boot → lesson 1 → clear → unlock → streak persists", async ({ page
       await expect(page.getByRole("dialog")).toBeVisible();
     }
     if (index < solutions.length - 1) {
-      await page.getByRole("button", { name: /次のお題/ }).click();
+      await page.getByRole("button", { name: /次のライド/ }).click();
     }
   }
   await expect(page.getByRole("dialog")).toContainText("ライド制覇");

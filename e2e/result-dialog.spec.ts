@@ -47,7 +47,7 @@ test("Enter advances the result dialog; stray keys never edit the buffer", async
     "hello",
   );
 
-  // Enter = the dialog's primary action (次のお題), no mouse involved.
+  // Enter = the dialog's primary action (次のライド), no mouse involved.
   await page.keyboard.press("Enter");
   await expect(page.getByRole("dialog")).not.toBeVisible();
   await expect(page.getByText("2/5")).toBeVisible();

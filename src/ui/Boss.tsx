@@ -135,9 +135,9 @@ export function BossPanel({
   return (
     <div className="pixel-panel border-shu-dark p-4">
       <div className="mb-2 flex items-center justify-between font-mono text-xs font-black tracking-[0.2em] text-shu">
-        <span>👹 BOSS RIDE — 絶叫マシン</span>
+        <span>👹 ボスライド — 絶叫マシン</span>
         <span className="text-[0.625rem] text-cream-faint">
-          EDIT-ONI COASTER
+          エディット鬼コースター
         </span>
       </div>
       <div className="flex items-center gap-3">
@@ -162,7 +162,7 @@ export function BossPanel({
       </div>
       <div className="mt-3">
         <div className="mb-1 flex justify-between font-mono text-[0.625rem] tracking-widest text-cream-faint">
-          <span>PERFECT CHANCE</span>
+          <span>パーフェクトチャンス</span>
           <span>
             あと {chance} / {goldMax}
           </span>

@@ -61,14 +61,14 @@ describe("App boot recovery", () => {
   it("does not overwrite an abandoned-only local history with the backup", async () => {
     const { store, importJson } = fakeStore([abandonedAttempt]);
     render(<App openStore={() => Promise.resolve(store)} clock={clock} />);
-    await screen.findByText(/NEXT RIDE/);
+    await screen.findByText(/つぎのライド/);
     expect(importJson).not.toHaveBeenCalled();
   });
 
   it("still restores when the store is truly empty", async () => {
     const { store, importJson } = fakeStore([]);
     render(<App openStore={() => Promise.resolve(store)} clock={clock} />);
-    await screen.findByText(/NEXT RIDE/);
+    await screen.findByText(/つぎのライド/);
     expect(importJson).toHaveBeenCalledTimes(1);
   });
 });

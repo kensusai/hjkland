@@ -83,7 +83,7 @@ export function App({
     case "loading":
       return (
         <main className="flex min-h-screen items-center justify-center font-mono text-cream-faint">
-          LOADING<span className="blink">▮</span>
+          ローディング<span className="blink">▮</span>
         </main>
       );
     case "error":

@@ -14,10 +14,10 @@ const log = (...a) => console.log("[m7]", ...a);
 
 await page.goto(BASE);
 await resetDatabase(page);
-await page.waitForSelector("text=PARK MAP", { timeout: 10_000 });
+await page.waitForSelector("text=パークマップ", { timeout: 10_000 });
 
 // Fresh player: no daily yet (nothing unlocked), lesson CTA shown.
-const dailyBefore = await page.locator("text=TODAY'S QUEST").count();
+const dailyBefore = await page.locator("text=きょうのライド").count();
 log("daily before any lesson (expect 0):", dailyBefore);
 if (dailyBefore !== 0)
   throw new Error("daily should be locked for fresh player");
@@ -34,11 +34,11 @@ await focusEditor(page);
 await pressKeys(page, ["x"]);
 await page.waitForSelector('[role="dialog"]');
 await page.getByRole("button", { name: /パークへ/ }).click();
-await page.waitForSelector("text=PARK MAP");
+await page.waitForSelector("text=パークマップ");
 await page.waitForTimeout(500);
 
 // Daily quest hero should now be visible (x unlocked → f-jump template... needs f!)
-const dailyAfter = await page.locator("text=TODAY'S QUEST").count();
+const dailyAfter = await page.locator("text=きょうのライド").count();
 log(
   "daily after lesson 1 (x only; expect still 0 — no template fits):",
   dailyAfter,
@@ -60,7 +60,7 @@ async function playLesson(solvers) {
         : page.getByRole("button", { name: /次のお題/ });
     await btn.click();
   }
-  await page.waitForSelector("text=PARK MAP");
+  await page.waitForSelector("text=パークマップ");
   await page.waitForTimeout(400);
 }
 
@@ -74,7 +74,7 @@ await playLesson([
   ["w", "w", "x"],
 ]); // lesson 4: w
 
-const dailyNow = await page.locator("text=TODAY'S QUEST").count();
+const dailyNow = await page.locator("text=きょうのライド").count();
 log("daily after w unlocked (expect 1):", dailyNow);
 if (dailyNow !== 1) throw new Error("daily quest did not appear");
 await page.screenshot({ path: `${SHOTS}/m7-home-daily.png` });
@@ -100,12 +100,12 @@ log("daily result:", modal.replace(/\n/g, " | ").slice(0, 120));
 if (!/XP/.test(modal)) throw new Error("daily clear granted no XP line");
 await page.screenshot({ path: `${SHOTS}/m7-daily-clear.png` });
 await page.getByRole("button", { name: /パークへ/ }).click();
-await page.waitForSelector("text=PARK MAP");
+await page.waitForSelector("text=パークマップ");
 await page.waitForTimeout(400);
 
 // R13/R15: after reload the daily shows as cleared with the same exercise.
 await page.reload();
-await page.waitForSelector("text=PARK MAP");
+await page.waitForSelector("text=パークマップ");
 await page.waitForTimeout(500);
 const clearedBadge = await page.locator("text=本日クリア済").count();
 log("daily marked cleared after reload (expect 1):", clearedBadge);

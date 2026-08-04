@@ -53,7 +53,7 @@ export function DailyScreen() {
   if (state.status === "loading") {
     return (
       <main className="flex min-h-screen items-center justify-center font-mono text-cream-faint">
-        LOADING<span className="blink">▮</span>
+        ローディング<span className="blink">▮</span>
       </main>
     );
   }
@@ -96,10 +96,10 @@ export function DailyScreen() {
             onClick={() => navigate({ screen: "home" })}
             className="text-sm text-cream-faint hover:text-cream"
           >
-            ← MAP
+            ← マップ
           </button>
           <span className="border-2 border-ink px-2 text-[0.625rem] tracking-widest text-gold">
-            TODAY&apos;S RIDE · {record.date}
+            きょうのライド · {record.date}
           </span>
         </>
       }

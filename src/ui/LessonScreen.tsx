@@ -80,7 +80,7 @@ export function LessonScreen({
             onClick={() => navigate({ screen: "home" })}
             className="text-sm text-cream-faint hover:text-cream"
           >
-            ← MAP
+            ← マップ
           </button>
           <span className="border-2 border-ink px-2 text-[0.625rem] tracking-widest text-cream-faint">
             {areas[areaIndex]?.name.split(" — ")[0]} ·{" "}

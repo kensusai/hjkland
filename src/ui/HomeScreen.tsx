@@ -200,7 +200,7 @@ export function HomeScreen() {
             {daily ? (
               <>
                 <div className="mb-1 font-mono text-xs font-black tracking-[0.3em] text-gold">
-                  ▶ TODAY&apos;S RIDE — {daily.date}
+                  ▶ きょうのライド — {daily.date}
                 </div>
                 <h1 className="mb-3 text-3xl font-black [text-shadow:3px_3px_0_rgb(255_255_255/0.85)]">
                   {daily.exercise.title}
@@ -277,7 +277,7 @@ export function HomeScreen() {
             ) : next ? (
               <>
                 <div className="mb-1 font-mono text-xs font-black tracking-[0.3em] text-matcha">
-                  ▶ NEXT RIDE — おすすめのレッスン
+                  ▶ つぎのライド — おすすめのレッスン
                 </div>
                 <h1 className="mb-4 text-3xl font-black [text-shadow:3px_3px_0_rgb(255_255_255/0.85)]">
                   {next.lesson.title}
@@ -342,7 +342,7 @@ export function HomeScreen() {
         {/* World map */}
         <section className="pixel-panel p-8">
           <div className="mb-5 flex items-baseline gap-3 font-mono text-lg font-black tracking-widest">
-            PARK MAP
+            パークマップ
             <span className="text-xs font-normal text-cream-faint">
               — アトラクションを制覇して園内をまわろう
             </span>

@@ -264,7 +264,7 @@ export function PracticePlayer({
         </div>
         <div className="flex items-center gap-1" aria-label="進行">
           <span className="mr-2 text-[0.625rem] tracking-widest text-cream-faint">
-            RIDE
+            ライド
           </span>
           {results.map((r, i) => (
             <span
@@ -287,7 +287,7 @@ export function PracticePlayer({
       <div className="flex items-center justify-center gap-8 border-b-3 border-ink bg-white/55 py-3 font-mono">
         <div className="flex items-baseline gap-2">
           <span className="text-[0.625rem] tracking-widest text-cream-faint">
-            KEYS
+            キー
           </span>
           <motion.span
             key={keystrokes}
@@ -331,7 +331,7 @@ export function PracticePlayer({
       <div className="flex items-end justify-between gap-6 px-12 pt-6">
         <h1 className="text-3xl font-black tracking-wide [text-shadow:3px_3px_0_rgb(255_255_255/0.85)]">
           <span className="mr-3 align-middle font-mono text-sm font-black tracking-[0.3em] text-gold">
-            ▶ RIDE
+            ▶ ライド
           </span>
           {exercise.title}
         </h1>
@@ -343,8 +343,8 @@ export function PracticePlayer({
       <main className="grid flex-1 grid-cols-[1fr_500px] gap-6 px-12 pb-6 pt-4">
         <section className="pixel-panel flex flex-col overflow-hidden !bg-editor">
           <div className="flex items-center justify-between border-b-3 border-ink bg-raised px-4 py-1.5 font-mono text-[0.625rem] tracking-widest text-cream-faint">
-            <span>BUFFER</span>
-            <span>VIM EMULATION</span>
+            <span>バッファ</span>
+            <span>VIM エミュレーション</span>
           </div>
           <div ref={hostRef} className="editor-host min-h-[300px] flex-1" />
           <div className="flex items-center justify-between border-t-3 border-ink bg-raised px-4 py-1.5 font-mono text-xs">
@@ -579,7 +579,7 @@ export function ResultHeadline({ attempt }: { attempt: Attempt }) {
         {RESULT_WORD[attempt.medal]}
       </div>
       <div className="mt-2 font-mono text-cream-dim">
-        {attempt.keystrokes} KEYS
+        {attempt.keystrokes} キー
       </div>
     </>
   );

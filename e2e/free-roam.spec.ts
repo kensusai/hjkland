@@ -13,7 +13,7 @@ test("a fresh profile can jump straight into an area-7 lesson", async ({
 }) => {
   await page.goto("/");
   await resetDatabase(page);
-  await expect(page.getByText("PARK MAP")).toBeVisible();
+  await expect(page.getByText("パークマップ")).toBeVisible();
 
   // Not the recommended lesson — three areas ahead of it.
   await page.getByLabel("Ctrl-v (upcoming)").click();

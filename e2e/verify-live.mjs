@@ -4,7 +4,7 @@ const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
 await page.goto("https://kensusai.github.io/hjkland/", {
   waitUntil: "networkidle",
 });
-await page.waitForSelector("text=PARK MAP", { timeout: 15000 });
+await page.waitForSelector("text=パークマップ", { timeout: 15000 });
 console.log("[live] home rendered");
 // play lesson 1 exercise 1 on production
 await page.getByRole("button", { name: /乗りにいく/ }).click();

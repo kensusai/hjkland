@@ -15,7 +15,7 @@ test("boot → lesson 1 → clear → unlock → streak persists", async ({ page
   await resetDatabase(page);
 
   // Home renders with the sensei and the world map.
-  await expect(page.getByText("PARK MAP")).toBeVisible();
+  await expect(page.getByText("パークマップ")).toBeVisible();
   await expect(page.getByText(/ヤンク/)).toBeVisible();
 
   // Start the first lesson (x — delete a character).
@@ -49,13 +49,13 @@ test("boot → lesson 1 → clear → unlock → streak persists", async ({ page
   await page.getByRole("button", { name: /パークへ/ }).click();
 
   // Back home: lesson 1 cleared, lesson 2 is current, streak recorded.
-  await expect(page.getByText("PARK MAP")).toBeVisible();
+  await expect(page.getByText("パークマップ")).toBeVisible();
   await expect(page.getByLabel("x (cleared)")).toBeVisible();
   await expect(page.getByLabel("h l (current)")).toBeVisible();
 
   // Persistence: everything survives a reload (IndexedDB).
   await page.reload();
-  await expect(page.getByText("PARK MAP")).toBeVisible();
+  await expect(page.getByText("パークマップ")).toBeVisible();
   await expect(page.getByLabel("x (cleared)")).toBeVisible();
   await expect(page.locator("header")).toContainText("連続来園");
 });
